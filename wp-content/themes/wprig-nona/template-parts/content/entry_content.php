@@ -11,7 +11,7 @@ namespace WP_Rig\WP_Rig;
 
 <div class="entry-content">
 	<?php
-	if ( ! is_singular( getpost_type() ) && get_theme_mod( 'archives_use_excerpt' ) ) {
+	if ( ! is_singular( get_post_type() ) && wp_rig()->using_archive_excerpts() ) {
 		the_excerpt();
 	} else {
 		the_content(
