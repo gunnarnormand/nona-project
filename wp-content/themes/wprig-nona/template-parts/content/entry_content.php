@@ -11,20 +11,24 @@ namespace WP_Rig\WP_Rig;
 
 <div class="entry-content">
 	<?php
-	the_content(
-		sprintf(
-			wp_kses(
-				/* translators: %s: Name of current post. Only visible to screen readers */
-				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wp-rig' ),
-				[
-					'span' => [
-						'class' => [],
-					],
-				]
-			),
-			get_the_title()
-		)
-	);
+	if ( ! is_singular( getpost_type() ) && get_theme_mod( 'archives_use_excerpt' ) ) {
+		the_excerpt();
+	} else {
+		the_content(
+			sprintf(
+				wp_kses(
+					/* translators: %s: Name of current post. Only visible to screen readers */
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wp-rig' ),
+					[
+						'span' => [
+							'class' => [],
+						],
+					]
+				),
+				get_the_title()
+			)
+		);
+	}
 
 	wp_link_pages(
 		[
