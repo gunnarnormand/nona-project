@@ -104,6 +104,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			wp_enqueue_style( 'wp-rig-fonts', $google_fonts_url, [], null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		}
 
+		// Enqueue Typekit Web Fonts
+		$typekit_fonts_url = 'https://use.typekit.net/dgq8tbc.css';
+		if ( ! empty( $typekit_fonts_url ) ) {
+			wp_enqueue_style( 'wp-rig-typekit-fonts', $typekit_fonts_url, [], null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+		}
+
 		$css_uri = get_theme_file_uri( '/assets/css/' );
 		$css_dir = get_theme_file_path( '/assets/css/' );
 
@@ -357,8 +363,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		$google_fonts = [
-			'Roboto Condensed' => [ '400', '400i', '700', '700i' ],
-			'Crimson Text'     => [ '400', '400i', '600', '600i' ],
+			// not using google fonts so keeping empty
+			// 'Roboto Condensed' => [ '400', '400i', '700', '700i' ],
+			// 'Crimson Text'     => [ '400', '400i', '600', '600i' ],
 		];
 
 		/**
