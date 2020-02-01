@@ -71,7 +71,6 @@
 .page-header,
 .entry-header,
 .entry-footer,
-.site-info,
 .post-navigation,
 .page-navigation,
 .comments-area {
@@ -82,14 +81,12 @@
 }
 
 @media (--content-query) {
-
 	.page-content > *,
 	.entry-content > *,
 	.entry-summary > *,
 	.page-header,
 	.entry-header,
 	.entry-footer,
-	.site-info,
 	.post-navigation,
 	.page-navigation,
 	.comments-area {
@@ -133,12 +130,10 @@
 }
 
 @media (--content-query) {
-
 	.entry-footer {
 		padding-right: 0;
 		padding-left: 0;
 	}
-
 }
 
 /*--------------------------------------------------------------
