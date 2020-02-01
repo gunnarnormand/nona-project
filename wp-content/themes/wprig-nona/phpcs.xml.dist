@@ -53,6 +53,10 @@
 	#############################################################################
 	-->
 
+	<rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
+  	<type>warning</type>
+	</rule>
+
 	<!-- Verify that the text_domain is set to the desired text-domain.
 		 Multiple valid text domains can be provided as a comma-delimited list. -->
 	<rule ref="WordPress.WP.I18n">
