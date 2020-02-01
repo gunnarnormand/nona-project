@@ -104,7 +104,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			wp_enqueue_style( 'wp-rig-fonts', $google_fonts_url, [], null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 		}
 
-		// Enqueue Typekit Web Fonts
+		// Enqueue Typekit Web Fonts.
 		$typekit_fonts_url = 'https://use.typekit.net/dgq8tbc.css';
 		if ( ! empty( $typekit_fonts_url ) ) {
 			wp_enqueue_style( 'wp-rig-typekit-fonts', $typekit_fonts_url, [], null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
@@ -310,8 +310,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				},
 			],
 			'wp-rig-front-page' => [
-				'file' => 'front-page.min.css',
-				'preload_callback' => function() {
+				'file'              => 'front-page.min.css',
+				'preload_callback'  => function() {
 					global $template;
 					return 'front-page.php' === basename( $template );
 				},
@@ -362,11 +362,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			return $this->google_fonts;
 		}
 
-		$google_fonts = [
-			// not using google fonts so keeping empty
-			// 'Roboto Condensed' => [ '400', '400i', '700', '700i' ],
-			// 'Crimson Text'     => [ '400', '400i', '600', '600i' ],
-		];
+		$google_fonts = [];
 
 		/**
 		 * Filters default Google Fonts.
