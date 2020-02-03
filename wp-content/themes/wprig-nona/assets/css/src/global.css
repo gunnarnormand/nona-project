@@ -78,9 +78,10 @@
 
 @media (--sidebar-query) {
 	.has-sidebar .site {
-		margin: 0 1em;
+		/* margin: 0 1em; */
 		display: grid;
 		grid-template-columns: 3fr 1fr;
+		grid-template-rows: auto auto auto 768px;
 		grid-gap: 2rem;
 		justify-content: center;
 	}
@@ -90,12 +91,12 @@
 	}
 
 	.site-main {
-		grid-column: 1;
+		grid-column: span 2;
 		min-width: 0;
 	}
 
 	.primary-sidebar {
-		grid-column: 2;
+		grid-column: span 2;
 		min-width: 0;
 	}
 
@@ -575,9 +576,9 @@ select {
 	}
 }
 
-@media (--content-query) {
+@media (--sidebar-query) {
 	.site-footer {
-		height: 768px;
+		height: auto;
 	}
 }
 
@@ -585,6 +586,15 @@ select {
 	position: absolute;
 	bottom: 5px;
 	left: -2px;
+}
+
+@media (--sidebar-query) {
+	.footer-svg {
+		max-width: 1150px;
+		position: absolute;
+		bottom: 0;
+		left: -5px;
+	}
 }
 
 .footer-info {
