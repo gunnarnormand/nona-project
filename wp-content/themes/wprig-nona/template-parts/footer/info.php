@@ -7,8 +7,6 @@
 
 namespace WP_Rig\WP_Rig;
 
-use function __;
-
 ?>
 
 
