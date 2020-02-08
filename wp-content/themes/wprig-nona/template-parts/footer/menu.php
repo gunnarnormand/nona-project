@@ -13,6 +13,8 @@ if ( ! wp_rig()->is_primary_nav_menu_active() ) {
 
 ?>
 
-<div class="footer-primary-menu-container">
-	<?php wp_rig()->display_primary_nav_menu( [ 'menu_id' => 'primary-menu' ] ); ?>
-</div>
+<nav class="footer-navigation">
+	<div class="footer-primary-menu-container">
+		<?php wp_rig()->display_footer_nav_menu( [ 'menu_id' => 'footer-menu' ] ); ?>	
+	</div>
+</nav>
