@@ -16,3 +16,6 @@
 
 /* 960px */
 @custom-media --sidebar-query screen and (min-width: 60em);
+
+/* 1440px */
+@custom-media --desktop-query screen and (min-width: 90em);
