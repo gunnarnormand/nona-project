@@ -22,6 +22,32 @@ if ( 'loading' === document.readyState ) {
 function initNavigation() {
 	initNavToggleSubmenus();
 	initNavToggleSmall();
+	initNavToggleScrolledState();
+}
+
+/**
+ * Initiate the script to
+ */
+function initNavToggleScrolledState() {
+	const $header = document.querySelector( 'header#masthead' );
+
+	// check if header exists
+	if ( ! $header ) {
+		return;
+	}
+
+	const $headerBg = document.querySelector( '.site-branding' );
+	const headerHeight = $header.getBoundingClientRect().height;
+
+	function fixNav() {
+		if ( window.scrollY >= headerHeight ) {
+			$headerBg.classList.add( 'scrolled' );
+		} else {
+			$headerBg.classList.remove( 'scrolled' );
+		}
+	}
+
+	window.addEventListener( 'scroll', fixNav );
 }
 
 /**
