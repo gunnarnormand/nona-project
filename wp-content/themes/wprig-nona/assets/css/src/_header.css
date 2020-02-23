@@ -50,49 +50,13 @@
 	opacity: 1;
 }
 
-.header-image {
-	margin: 0 auto;
-}
-
-.header-image img {
-	display: block;
-	margin: 0 auto;
-}
-
-.custom-logo-link {
-	display: inline-block;
-	margin: 0 auto 1em;
-}
-
-.has-custom-logo {
-	text-align: center;
-	padding: 60px 0 1.75em;
-}
-
-.site-title {
-	margin: 0 1em;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 38px;
-	font-weight: 700;
-	line-height: 1.2;
-	color: var(--global-font-color);
-}
-
-.site-title a {
-	text-decoration: none;
-	color: inherit;
-}
-
+/*
+ * hide title and description
+ */
+.site-title,
 .site-description {
-	margin: 0.4375em 0 0;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 17px;
-	font-weight: inherit;
-	line-height: 1.4;
-	word-wrap: break-word;
-	color: var(--global-font-color);
+	position: absolute;
+	clip: rect(1px, 1px, 1px, 1px);
 }
 
 .site-logo {
