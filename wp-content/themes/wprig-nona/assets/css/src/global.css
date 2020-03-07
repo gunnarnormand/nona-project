@@ -73,12 +73,28 @@
 # Layouts
 --------------------------------------------------------------*/
 .site {
-	padding-top: 91px;
+	padding-top: 102px;
 	margin: 0 auto;
 	max-width: 100%;
 }
 
+@media (--wide-menu-query) {
+	.site {
+		padding-top: 118px;
+	}
+}
+
+@media (--content-query) {
+	.site {
+		padding-top: 72px;
+	}
+}
+
 @media (--sidebar-query) {
+	.site {
+		padding-top: 142px;
+	}
+
 	.has-sidebar .site {
 		display: grid;
 		grid-template-columns: 3fr 1fr;
