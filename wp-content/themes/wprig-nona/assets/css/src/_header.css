@@ -10,9 +10,8 @@
 	left: 0;
 	right: 0;
 	background: var(--color-theme-white);
-	padding: 0 1em;
+	padding: 0;
 	z-index: 1000;
-	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 @media (--content-query) {
@@ -21,6 +20,13 @@
 		grid-template-columns: 350px 1fr;
 		box-shadow: unset;
 		background: transparent;
+		padding: 0 1em;
+	}
+}
+
+@media (--sidebar-query) {
+	.site-header {
+		padding: 35px 50px;
 	}
 }
 
@@ -88,7 +94,7 @@
 ## Basic navigation menus - handles submenu and small screen toggle
 --------------------------------------------------------------*/
 .nav--toggle-small .menu-toggle {
-	width: 100%;
+	width: 95%;
 	height: 30px;
 	display: flex;
 	justify-content: center;
@@ -97,10 +103,28 @@
 	font-stretch: condensed;
 	font-size: 80%;
 	text-transform: uppercase;
-	border-radius: 0;
 	border: 0;
 	padding: 0;
 	background: transparent;
+	border-radius: 12px;
+	margin: 0 auto;
+	/* stylelint-disable */
+	box-shadow: inset 0 0 15px rgba(66, 66, 66, 0),
+		inset 0 0 20px rgba(255, 255, 255, 0),
+		7px 7px 15px rgba(58, 58, 58, 0.15),
+		-7px -7px 20px var(--color-theme-white),
+		inset 0 0 4px rgba(255, 255, 255, 0.2);
+	/* stylelint-enable */
+	transition-property: box-shadow;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
+}
+
+.nav--toggle-small .menu-toggle:focus {
+	outline-style: dotted;
+	outline-color: var(--color-theme-secondary);
+	outline-width: 1px;
+	outline-offset: 10px;
 }
 
 .menu-text {
@@ -153,6 +177,15 @@
 	.nav--toggle-small.nav--toggled-on {
 		height: calc(100vh - var(--header-height));
 	}
+
+	.nav--toggle-small.nav--toggled-on .menu-toggle {
+		/* stylelint-disable */
+		box-shadow: inset 7px 7px 15px rgba(66, 66, 66, 0.15),
+			inset -7px -7px 20px var(--color-theme-white),
+			0 0 4px rgba(255, 255, 255, 0.2);
+		/* stylelint-enable */
+		color: #676767;
+	}
 }
 
 @media (--wide-menu-query) {
@@ -173,8 +206,26 @@
 		margin: 0;
 		padding: 0;
 		border: 0;
-		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+		border-radius: 12px;
+		/* stylelint-disable */
+		box-shadow: inset 0 0 15px rgba(66, 66, 66, 0),
+			inset 0 0 20px rgba(255, 255, 255, 0),
+			7px 7px 15px rgba(58, 58, 58, 0.15),
+			-7px -7px 20px var(--color-theme-white),
+			inset 0 0 4px rgba(255, 255, 255, 0.2);
+		/* stylelint-enable */
 		z-index: 1;
+		transition-property: box-shadow;
+		transition-duration: 1000ms;
+		transition-timing-function: var(--primary-ease);
+	}
+
+	.nav--toggle-sub ul ul:hover {
+		/* stylelint-disable */
+		box-shadow: inset 7px 7px 15px rgba(66, 66, 66, 0.15),
+			inset -7px -7px 20px var(--color-theme-white),
+			0 0 4px rgba(255, 255, 255, 0.2);
+		/* stylelint-enable */
 	}
 
 	.nav--toggle-sub .dropdown,
@@ -258,10 +309,11 @@
 ## Main navigation menu
 --------------------------------------------------------------*/
 .main-navigation {
+	width: 100%;
 	clear: both;
 	display: block;
 	margin: 0 auto;
-	padding: 0 1em;
+	padding: 0;
 	max-width: var(--content-width);
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
