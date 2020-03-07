@@ -21,7 +21,9 @@ a:active {
 }
 
 a:focus {
-	outline: thin dotted;
+	outline-style: dotted;
+	outline-width: 1px;
+	outline-offset: 10px;
 }
 
 a:hover,
