@@ -13,24 +13,24 @@
 	--highlight-font-family: "brandon-grotesque", sans-serif;
 	--content-width: 45rem;
 	--dropdown-symbol-width: 0.7em;
+	--font-al-fresco: "al-fresco", sans-serif;
 
 	/* Custom editor colors */
 	--color-theme-primary: #f25430;
 	--color-theme-secondary: #57d6f2;
 	--color-theme-green: #038e3e;
-	--color-theme-yellow: ##f2ac29;
+	--color-theme-yellow: #f2ac29;
 	--color-theme-black: #1c2833;
 	--color-theme-grey: #95a5a6;
 	--color-theme-white: #fff;
+	--color-dark-blue: #296573;
 
 	--color-link: var(--color-theme-secondary);
 	--color-link-visited: var(--color-theme-secondary);
 	--color-link-active: var(--color-theme-secondary);
 
-	--color-quote-border: #000;
-	--color-quote-citation: #6c7781;
-
-	--color-hill-footer-blue: #296573;
+	--color-quote-border: var(--global-font-color);
+	--color-quote-citation: var(--color-theme-black);
 
 	/* Custom editor font sizes */
 	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
