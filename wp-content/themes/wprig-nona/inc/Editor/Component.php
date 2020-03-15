@@ -64,57 +64,42 @@ class Component implements Component_Interface {
 				[
 					'name'  => __( 'Primary', 'wp-rig' ),
 					'slug'  => 'theme-primary',
-					'color' => '#e36d60',
+					'color' => '#f25430',
 				],
 				[
 					'name'  => __( 'Secondary', 'wp-rig' ),
 					'slug'  => 'theme-secondary',
-					'color' => '#41848f',
-				],
-				[
-					'name'  => __( 'Red', 'wp-rig' ),
-					'slug'  => 'theme-red',
-					'color' => '#C0392B',
+					'color' => '#57d6f2',
 				],
 				[
 					'name'  => __( 'Green', 'wp-rig' ),
 					'slug'  => 'theme-green',
-					'color' => '#27AE60',
-				],
-				[
-					'name'  => __( 'Blue', 'wp-rig' ),
-					'slug'  => 'theme-blue',
-					'color' => '#2980B9',
+					'color' => '#038e3e',
 				],
 				[
 					'name'  => __( 'Yellow', 'wp-rig' ),
 					'slug'  => 'theme-yellow',
-					'color' => '#F1C40F',
+					'color' => '#f2ac29',
 				],
 				[
 					'name'  => __( 'Black', 'wp-rig' ),
 					'slug'  => 'theme-black',
-					'color' => '#1C2833',
+					'color' => '#1c2833',
 				],
 				[
 					'name'  => __( 'Grey', 'wp-rig' ),
 					'slug'  => 'theme-grey',
-					'color' => '#95A5A6',
+					'color' => '#95a5a6',
 				],
 				[
 					'name'  => __( 'White', 'wp-rig' ),
 					'slug'  => 'theme-white',
-					'color' => '#ECF0F1',
+					'color' => '#ffffff',
 				],
 				[
-					'name'  => __( 'Dusty daylight', 'wp-rig' ),
-					'slug'  => 'custom-daylight',
-					'color' => '#97c0b7',
-				],
-				[
-					'name'  => __( 'Dusty sun', 'wp-rig' ),
-					'slug'  => 'custom-sun',
-					'color' => '#eee9d1',
+					'name'  => __( 'Dark Blue', 'wp-rig' ),
+					'slug'  => 'custom-dark-blue',
+					'color' => '#296573',
 				],
 			]
 		);
