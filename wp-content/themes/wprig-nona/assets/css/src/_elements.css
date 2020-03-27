@@ -22,8 +22,10 @@ html {
 
 /* stylelint-disable */
 body {
-	background: var(--color-theme-white);
 	/* Fallback for when there is no custom background color defined. */
+	background: var(--color-theme-white);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 /* stylelint-enable */
 
