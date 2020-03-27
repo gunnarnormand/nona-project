@@ -15,7 +15,7 @@
 }
 
 .hero-illustration {
-	max-height: 100%;
+	max-height: 301px;
 	position: absolute;
 	top: 0;
 	right: -2px;
@@ -31,7 +31,7 @@
 	margin-left: auto;
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
-	max-width: var(--content-width);
+	max-width: 375px;
 }
 
 .hero-content h1,
@@ -84,13 +84,148 @@
 	font-style: italic;
 }
 
+@media (--mobile-query) {
+	.hero-content h2 {
+		padding-top: 115px;
+	}
+}
+
+@media (--mobile-lg-query) {
+	.hero-content {
+		padding-top: 120px;
+	}
+
+	.hero-content h2 {
+		padding-top: 130px;
+	}
+}
+
+@media (--wide-menu-query) {
+	.hero-illustration {
+		max-height: 450px;
+	}
+
+	.hero-content {
+		padding-top: 82px;
+		max-width: var(--content-width);
+	}
+
+	.hero-title h1 div:nth-of-type(1) {
+		top: -12px;
+		left: -28px;
+		font-size: 53px;
+	}
+
+	.hero-title h1 div:nth-of-type(2) {
+		font-size: 71px;
+	}
+
+	.hero-title h1 div:nth-of-type(3) {
+		top: 44px;
+		left: 51px;
+		font-size: 62px;
+	}
+
+	.hero-content h2,
+	.hero-content p {
+		max-width: 325px;
+	}
+
+	.hero-content h2 {
+		padding-top: 40px;
+	}
+}
+
 @media (--content-query) {
+	.hero-illustration {
+		max-height: 100%;
+	}
+
+	.hero {
+		height: 750px;
+	}
+
+	.hero-content {
+		padding-top: 135px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+@media (--sidebar-query) {
 	.hero {
 		height: 93vh;
 	}
 
 	.hero-content {
+		padding-top: 185px;
+	}
+
+	.hero-title {
 		padding-left: 0;
-		padding-right: 0;
+	}
+
+	.hero-title h1 div:nth-of-type(1) {
+		font-size: 75px;
+		top: -22px;
+		left: -41px;
+	}
+
+	.hero-title h1 div:nth-of-type(2) {
+		font-size: 90px;
+	}
+
+	.hero-title h1 div:nth-of-type(3) {
+		font-size: 75px;
+		top: 57px;
+		left: 64px;
+	}
+
+	.hero-content h2 {
+		padding-top: 45px;
+	}
+}
+
+@media (--desktop-query) {
+	.hero {
+		height: 100vh;
+	}
+
+	.hero-content {
+		max-width: var(--content-width-lg);
+	}
+
+	.hero-title h1 div:nth-of-type(1) {
+		font-size: 90px;
+		top: -17px;
+		left: -47px;
+	}
+
+	.hero-title h1 div:nth-of-type(2) {
+		font-size: 135px;
+	}
+
+	.hero-title h1 div:nth-of-type(3) {
+		font-size: 114px;
+		top: 89px;
+		left: 92px;
+	}
+
+	.hero-content h2 {
+		padding-top: 60px;
+		font-size: 30px;
+		max-width: 400px;
+	}
+
+	.hero-content p {
+		max-width: 500px;
+		font-weight: 600;
+		font-size: 20px;
+	}
+}
+
+@media (--desktop-lg-query) {
+	.hero-content {
+		padding-top: 235px;
 	}
 }
