@@ -2,7 +2,7 @@
  * Custom styles for the front-page.php template.
  */
 
-@media (--content-query) {
+@media (--sidebar-query) {
 	.site {
 		padding-top: 0;
 	}
@@ -10,7 +10,7 @@
 
 .hero {
 	position: relative;
-	height: 500px;
+	height: 515px;
 	overflow: hidden;
 }
 
@@ -24,8 +24,6 @@
 
 .hero-content {
 	height: 100%;
-	display: flex;
-	flex-direction: column;
 	padding-top: 120px;
 	margin-right: auto;
 	margin-left: auto;
@@ -91,6 +89,10 @@
 }
 
 @media (--mobile-lg-query) {
+	.hero {
+		height: 530px;
+	}
+
 	.hero-content {
 		padding-top: 120px;
 	}
@@ -100,9 +102,9 @@
 	}
 }
 
-@media (--wide-menu-query) {
-	.hero-illustration {
-		max-height: 450px;
+@media screen and (min-width: 500px) {
+	.hero {
+		height: 540px;
 	}
 
 	.hero-content {
@@ -130,6 +132,32 @@
 	.hero-content p {
 		max-width: 325px;
 	}
+}
+
+@media (--wide-menu-query) {
+	.hero {
+		height: 450px;
+	}
+
+	.hero-illustration {
+		max-height: 450px;
+	}
+
+	.hero-title h1 div:nth-of-type(1) {
+		top: -12px;
+		left: -28px;
+		font-size: 53px;
+	}
+
+	.hero-title h1 div:nth-of-type(2) {
+		font-size: 71px;
+	}
+
+	.hero-title h1 div:nth-of-type(3) {
+		top: 44px;
+		left: 51px;
+		font-size: 62px;
+	}
 
 	.hero-content h2 {
 		padding-top: 40px;
@@ -142,7 +170,7 @@
 	}
 
 	.hero {
-		height: 750px;
+		height: 500px;
 	}
 
 	.hero-content {
@@ -184,6 +212,10 @@
 	.hero-content h2 {
 		padding-top: 45px;
 	}
+
+	.hero-content a {
+		margin-top: 20px;
+	}
 }
 
 @media (--desktop-query) {
@@ -219,7 +251,6 @@
 
 	.hero-content p {
 		max-width: 500px;
-		font-weight: 600;
 		font-size: 20px;
 	}
 }
@@ -227,5 +258,9 @@
 @media (--desktop-lg-query) {
 	.hero-content {
 		padding-top: 235px;
+	}
+
+	.hero-content p {
+		font-weight: 600;
 	}
 }
