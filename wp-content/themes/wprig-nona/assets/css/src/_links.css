@@ -7,6 +7,9 @@
 a {
 	color: var(--color-link);
 	text-decoration: none;
+	transition-property: color;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
 }
 /* stylelint-enable */
 
@@ -29,4 +32,35 @@ a:focus {
 a:hover,
 a:active {
 	outline: 0;
+}
+
+a[role="button"],
+button[role="button"] {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--color-theme-primary);
+	font-family: var(--highlight-font-family);
+	font-stretch: condensed;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	border: 0;
+	padding: 1rem 1.5rem;
+	border-radius: 12px;
+	box-shadow: var(--box-shadow-out);
+	transition-property: box-shadow;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
+}
+
+a[role="button"]:hover,
+button[role="button"]:hover {
+	box-shadow: none;
+}
+
+a[role="button"]:focus,
+a[role="button"]:active,
+button[role="button"]:focus,
+button[role="button"]:active {
+	box-shadow: var(--box-shadow-in);
 }
