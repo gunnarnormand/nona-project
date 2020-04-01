@@ -17,11 +17,6 @@
 	transition-timing-function: var(--primary-ease);
 }
 
-.site-header:hover {
-	background-color: var(--color-theme-white);
-	box-shadow: var(--box-shadow-out);
-}
-
 @media (--sidebar-query) {
 	.site-header {
 		display: grid;
@@ -29,6 +24,11 @@
 		box-shadow: unset;
 		background: transparent;
 		padding: 35px 50px;
+	}
+
+	.site-header:hover {
+		background-color: var(--color-theme-white);
+		box-shadow: var(--box-shadow-out);
 	}
 }
 
@@ -96,7 +96,7 @@
 ## Basic navigation menus - handles submenu and small screen toggle
 --------------------------------------------------------------*/
 .nav--toggle-small .menu-toggle {
-	width: 95%;
+	width: 150px;
 	height: 30px;
 	display: flex;
 	justify-content: center;
@@ -110,17 +110,14 @@
 	background: transparent;
 	border-radius: 12px;
 	margin: 0 auto;
-	box-shadow: var(--box-shadow-out);
+	box-shadow: var(--box-shadow-out-flat);
 	transition-property: box-shadow;
 	transition-duration: 1000ms;
 	transition-timing-function: var(--primary-ease);
 }
 
 .nav--toggle-small .menu-toggle:focus {
-	outline-style: dotted;
-	outline-color: var(--color-theme-secondary);
-	outline-width: 1px;
-	outline-offset: 10px;
+	outline-style: none;
 }
 
 .menu-text {

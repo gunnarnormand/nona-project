@@ -55,12 +55,12 @@ button[role="button"] {
 
 a[role="button"]:hover,
 button[role="button"]:hover {
-	box-shadow: none;
+	box-shadow: var(--box-shadow-in);
 }
 
 a[role="button"]:focus,
 a[role="button"]:active,
 button[role="button"]:focus,
 button[role="button"]:active {
-	box-shadow: var(--box-shadow-in);
+	box-shadow: var(--box-shadow-in-deep);
 }

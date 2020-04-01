@@ -80,13 +80,7 @@
 
 @media (--wide-menu-query) {
 	.site {
-		padding-top: 118px;
-	}
-}
-
-@media (--content-query) {
-	.site {
-		padding-top: 72px;
+		padding-top: 107px;
 	}
 }
 
