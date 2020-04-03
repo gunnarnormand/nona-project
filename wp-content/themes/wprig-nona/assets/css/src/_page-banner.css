@@ -144,3 +144,51 @@
 		font-size: 92px;
 	}
 }
+
+@media (--desktop-query) {
+	.banner,
+	.page-header {
+		height: 700px;
+	}
+
+	.banner-illustration {
+		max-width: 920px;
+	}
+}
+
+@media (--desktop-lg-query) {
+	.banner,
+	.page-header {
+		height: 880px;
+	}
+
+	.banner-illustration {
+		max-width: 1170px;
+	}
+
+	.banner-content,
+	.header-content {
+		max-width: var(--content-width-lg);
+	}
+
+	.banner .entry-title,
+	.page-header .page-title {
+		max-width: 900px;
+	}
+}
+
+@media (--desktop-xl-query) {
+	.banner,
+	.page-header {
+		height: 1175px;
+	}
+
+	.banner-illustration {
+		max-width: 1560px;
+	}
+
+	.banner .entry-title,
+	.page-header .page-title {
+		font-size: 120px;
+	}
+}
