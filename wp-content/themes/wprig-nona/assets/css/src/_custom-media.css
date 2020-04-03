@@ -28,3 +28,6 @@
 
 /* 1920px */
 @custom-media --desktop-lg-query screen and (min-width: 120em);
+
+/* 2400px */
+@custom-media --desktop-xl-query screen and (min-width: 150em);
