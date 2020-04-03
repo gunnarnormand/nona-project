@@ -97,6 +97,11 @@ class Component implements Component_Interface {
 					'color' => '#ffffff',
 				],
 				[
+					'name'  => __( 'Ghostwhite', 'wp-rig' ),
+					'slug'  => 'theme-ghostwhite',
+					'color' => '#f8f8ff',
+				],
+				[
 					'name'  => __( 'Dark Blue', 'wp-rig' ),
 					'slug'  => 'custom-dark-blue',
 					'color' => '#296573',
