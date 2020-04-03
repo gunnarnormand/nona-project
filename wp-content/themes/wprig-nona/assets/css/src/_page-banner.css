@@ -1,0 +1,146 @@
+/**
+ * Custom styles for the page banner
+ */
+
+@media (--sidebar-query) {
+	.site {
+		padding-top: 0;
+	}
+}
+
+.banner,
+.page-header {
+	position: relative;
+	height: 301px;
+	overflow: hidden;
+}
+
+.banner-illustration {
+	max-height: 301px;
+	position: absolute;
+	top: 0;
+	right: -2px;
+	z-index: -1;
+}
+
+.banner-content,
+.header-content {
+	height: 100%;
+	max-width: 375px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+}
+
+.banner .entry-title,
+.page-header .page-title {
+	max-width: 140px;
+	font-family: var(--font-al-fresco);
+	line-height: 1.1;
+	font-weight: 700;
+	font-size: 50px;
+	margin: 0;
+}
+
+@media (--mobile-query) {
+	.banner,
+	.page-header {
+		height: 321px;
+	}
+
+	.banner-illustration {
+		max-height: 321px;
+	}
+}
+
+@media (--mobile-lg-query) {
+	.banner,
+	.page-header {
+		height: 380px;
+	}
+
+	.banner-illustration {
+		max-height: 380px;
+	}
+
+	.banner-content,
+	.header-content {
+		height: 85%;
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+@media screen and (min-width: 500px) {
+	.banner,
+	.page-header {
+		height: 453px;
+	}
+
+	.banner-illustration {
+		max-height: 453px;
+	}
+
+	.banner-content,
+	.header-content {
+		max-width: var(--content-width);
+	}
+}
+
+@media (--wide-menu-query) {
+	.banner,
+	.page-header {
+		height: 580px;
+	}
+
+	.banner-illustration {
+		max-height: 580px;
+	}
+
+	.banner-content,
+	.header-content {
+		max-width: 525px;
+	}
+
+	.banner .entry-title,
+	.page-header .page-title {
+		max-width: 200px;
+		font-size: 60px;
+	}
+}
+
+@media (--content-query) {
+	.banner,
+	.page-header {
+		height: 603px;
+	}
+
+	.banner-illustration {
+		max-height: 100%;
+		max-width: 800px;
+	}
+
+	.banner-content,
+	.header-content {
+		max-width: var(--content-width);
+		height: 100%;
+	}
+
+	.banner .entry-title,
+	.page-header .page-title {
+		max-width: 300px;
+		font-size: 75px;
+	}
+}
+
+@media (--sidebar-query) {
+	.banner .entry-title,
+	.page-header .page-title {
+		max-width: 600px;
+		font-size: 92px;
+	}
+}
