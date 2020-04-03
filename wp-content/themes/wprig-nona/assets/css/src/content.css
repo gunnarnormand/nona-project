@@ -17,6 +17,7 @@
 --------------------------------------------------------------*/
 @import "_blocks.css";
 @import "_media.css";
+@import "_page-banner";
 
 /*--------------------------------------------------------------
 # Post and page content
@@ -68,7 +69,6 @@
 	max-width: var(--content-width);
 }
 
-.page-header,
 .entry-header,
 .entry-footer,
 .post-navigation,
@@ -84,7 +84,6 @@
 	.page-content > *,
 	.entry-content > *,
 	.entry-summary > *,
-	.page-header,
 	.entry-header,
 	.entry-footer,
 	.post-navigation,
@@ -187,15 +186,6 @@
 	background-color: var(--color-theme-secondary);
 }
 
-.has-theme-red-color,
-.has-theme-red-color a {
-	color: var(--color-theme-red);
-}
-
-.has-theme-red-background-color {
-	background-color: var(--color-theme-red);
-}
-
 .has-theme-green-color,
 .has-theme-green-color a {
 	color: var(--color-theme-green);
@@ -205,13 +195,13 @@
 	background-color: var(--color-theme-green);
 }
 
-.has-theme-blue-color,
-.has-theme-blue-color a {
-	color: var(--color-theme-blue);
+.has-theme-dark-blue-color,
+.has-theme-dark-blue-color a {
+	color: var(--color-theme-dark-blue);
 }
 
-.has-theme-blue-background-color {
-	background-color: var(--color-theme-blue);
+.has-theme-dark-blue-background-color {
+	background-color: var(--color-theme-dark-blue);
 }
 
 .has-theme-yellow-color,
@@ -250,22 +240,13 @@
 	background-color: var(--color-theme-white);
 }
 
-.has-custom-daylight-color,
-.has-custom-daylight-color a {
-	color: var(--color-custom-daylight);
+.has-theme-ghostwhite-color,
+.has-theme-ghostwhite-color a {
+	color: var(--color-theme-ghostwhite);
 }
 
-.has-custom-daylight-background-color {
-	background-color: var(--color-custom-daylight);
-}
-
-.has-custom-sun-color,
-.has-custom-sun-color a {
-	color: var(--color-custom-sun);
-}
-
-.has-custom-sun-background-color {
-	background-color: var(--color-custom-sun);
+.has-theme-ghostwhite-background-color {
+	background-color: var(--color-theme-ghostwhite);
 }
 
 /*--------------------------------------------------------------
