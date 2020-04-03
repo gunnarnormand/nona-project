@@ -172,7 +172,7 @@
 	}
 
 	.nav--toggle-small.nav--toggled-on .menu-toggle {
-		box-shadow: var(--box-shadow-in);
+		box-shadow: var(--box-shadow-in-deep);
 	}
 }
 
@@ -311,7 +311,8 @@
 .main-navigation ul li a {
 	display: block;
 	width: 100%;
-	padding: 0.5em 1em;
+	padding: 1em;
+	font-size: 21px;
 	text-decoration: none;
 	text-transform: uppercase;
 	color: var(--global-font-color);
@@ -328,6 +329,7 @@
 
 @media (--wide-menu-query) {
 	.main-navigation ul li a {
+		font-size: var(--font-size-regular);
 		padding: 0.4em 0.5em;
 	}
 
