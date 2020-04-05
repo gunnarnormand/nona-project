@@ -58,7 +58,7 @@ li > ol {
 }
 
 dt {
-	font-weight: 700;
+	font-weight: var(--highlight-font-weight-black);
 }
 
 dd {

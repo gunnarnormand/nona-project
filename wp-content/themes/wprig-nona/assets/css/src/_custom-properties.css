@@ -10,11 +10,17 @@
 	--global-font-family: "brandon-grotesque", serif;
 	--global-font-size: 16;
 	--global-font-line-height: 1.4;
-	--highlight-font-family: "brandon-grotesque", sans-serif;
+	--highlight-font-family: "brandon-grotesque", serif;
+	--highlight-font-normal: normal;
+	--highlight-font-italic: italic;
+	--highlight-font-weight-medium: 500;
+	--highlight-font-weight-black: 900;
 	--content-width: 45rem;
 	--content-width-lg: 65rem;
 	--dropdown-symbol-width: 0.7em;
 	--font-al-fresco: "al-fresco", sans-serif;
+	--font-al-fresco-font-weight-regular: 400;
+	--font-al-fresco-font-weight-bold: 700;
 
 	/* Custom editor colors */
 	--color-theme-primary: #f25430;
@@ -35,8 +41,9 @@
 	--color-quote-citation: var(--color-theme-black);
 
 	/* Custom editor font sizes */
-	--font-size-small: calc(16 / var(--global-font-size) * 1rem);
+	--font-size-small: calc(14 / var(--global-font-size) * 1rem);
 	--font-size-regular: calc(var(--global-font-size) / 16 * 1rem);
+	--font-size-medium: calc(20 / var(--global-font-size) * 1rem);
 	--font-size-large: calc(36 / var(--global-font-size) * 1rem);
 	--font-size-larger: calc(48 / var(--global-font-size) * 1rem);
 

@@ -14,7 +14,6 @@
 .comment-reply-title {
 	margin-bottom: 1em;
 	font-size: 2em;
-	font-weight: 900;
 }
 
 .comment-list {
@@ -33,7 +32,6 @@
 }
 
 @media (--content-query) {
-
 	.children {
 		margin-left: 2em;
 	}
@@ -117,7 +115,6 @@
 }
 
 @media (--content-query) {
-
 	.comment-content ul,
 	.comment-content ol {
 		padding-right: 1.5em;
