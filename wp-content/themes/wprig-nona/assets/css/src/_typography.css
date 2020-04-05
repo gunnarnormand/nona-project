@@ -12,6 +12,7 @@ optgroup,
 textarea {
 	color: var(--global-font-color);
 	font-family: var(--global-font-family);
+	font-weight: var(--highlight-font-weight-medium);
 	font-size: var(--font-size-regular);
 	line-height: var(--global-font-line-height);
 }
@@ -24,16 +25,36 @@ h4,
 h5,
 h6 {
 	font-family: var(--highlight-font-family);
+	font-weight: var(--highlight-font-weight-medium);
 	font-stretch: condensed;
 	clear: both;
 }
 
-.entry-header h1.entry-title,
+.banner .entry-title,
 .page-header .page-title {
+	max-width: 140px;
+	font-family: var(--font-al-fresco);
+	font-weight: var(--font-al-fresco-font-weight-bold);
+	line-height: 1.1;
+	font-size: 50px;
+	margin: 0;
+}
+
+.entry-header h1.entry-title,
+.entry-header h2.entry-title {
 	font-size: 2.5rem;
+	font-weight: var(--highlight-font-weight-black);
+	text-transform: uppercase;
 	line-height: 1.4;
 	margin-top: 1em;
 	margin-bottom: 1em;
+}
+
+h2 {
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	font-weight: var(--highlight-font-weight-black);
+	line-height: 1.4;
 }
 
 dfn,
@@ -59,7 +80,6 @@ blockquote {
 }
 
 @media (--content-query) {
-
 	.entry-content > blockquote {
 		margin-left: auto;
 	}
@@ -79,7 +99,7 @@ address {
 
 /* stylelint-disable */
 pre {
-	background: #eee;
+	background: var(--color-theme-ghostwhite);
 	font-family: "Courier 10 Pitch", Courier, monospace;
 	font-size: 0.9375rem;
 	line-height: 1.6;
@@ -100,7 +120,7 @@ var {
 
 abbr,
 acronym {
-	border-bottom: 1px dotted #666;
+	border-bottom: 1px dotted var((--color-theme-grey));
 	cursor: help;
 }
 
