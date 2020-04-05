@@ -10,13 +10,14 @@
 	--global-font-family: "brandon-grotesque", serif;
 	--global-font-size: 16;
 	--global-font-line-height: 1.4;
+	--global-border-radius: 12px;
 	--highlight-font-family: "brandon-grotesque", serif;
 	--highlight-font-normal: normal;
 	--highlight-font-italic: italic;
 	--highlight-font-weight-medium: 500;
 	--highlight-font-weight-black: 900;
 	--content-width: 45rem;
-	--content-width-lg: 65rem;
+	--content-width-lg: calc(50% + var(--content-width) / 2);
 	--dropdown-symbol-width: 0.7em;
 	--font-al-fresco: "al-fresco", sans-serif;
 	--font-al-fresco-font-weight-regular: 400;
