@@ -17,7 +17,6 @@
 --------------------------------------------------------------*/
 @import "_blocks.css";
 @import "_media.css";
-@import "_page-banner";
 
 /*--------------------------------------------------------------
 # Post and page content
@@ -37,7 +36,7 @@
 .entry-footer {
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
-	font-size: 80%;
+	/* font-size: 80%; */
 }
 
 .entry-meta {
@@ -62,11 +61,12 @@
 .page-content > *,
 .entry-content > *,
 .entry-summary > * {
+	max-width: var(--content-width);
 	margin-right: auto;
 	margin-left: auto;
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
-	max-width: var(--content-width);
+	font-size: var(--font-size-medium);
 }
 
 .entry-header,
@@ -259,6 +259,10 @@
 
 .has-regular-font-size {
 	font-size: var(--font-size-regular);
+}
+
+.has-medium-font-size {
+	font-size: var(--font-size-medium);
 }
 
 .has-large-font-size {

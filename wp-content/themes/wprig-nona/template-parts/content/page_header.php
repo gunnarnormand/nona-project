@@ -8,6 +8,7 @@
 namespace WP_Rig\WP_Rig;
 
 if ( is_404() ) {
+	wp_rig()->print_styles( 'wp-rig-banner' );
 	?>
 	<header class="page-header">
 		<div class="header-content">
@@ -68,6 +69,7 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_home() && ! have_posts() ) {
+	wp_rig()->print_styles( 'wp-rig-banner' );
 	?>
 	<header class="page-header">
 		<div class="header-content">
@@ -128,6 +130,7 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_home() && ! is_front_page() ) {
+	wp_rig()->print_styles( 'wp-rig-banner' );
 	?>
 	<header class="page-header">
 		<div class="header-content">
@@ -188,6 +191,7 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_search() ) {
+	wp_rig()->print_styles( 'wp-rig-banner' );
 	?>
 	<header class="page-header">
 		<div class="header-content">
@@ -254,6 +258,7 @@ if ( is_404() ) {
 	</header><!-- .page-header -->
 	<?php
 } elseif ( is_archive() ) {
+	wp_rig()->print_styles( 'wp-rig-banner' );
 	?>
 	<header class="page-header">
 		<div class="header-content">

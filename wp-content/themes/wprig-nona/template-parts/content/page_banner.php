@@ -7,6 +7,8 @@
 
 namespace WP_Rig\WP_Rig;
 
+wp_rig()->print_styles( 'wp-rig-banner' );
+
 ?>
 
 <header class="banner">

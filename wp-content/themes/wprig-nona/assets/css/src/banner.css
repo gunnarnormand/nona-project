@@ -36,16 +36,6 @@
 	padding-left: 1.5rem;
 }
 
-.banner .entry-title,
-.page-header .page-title {
-	max-width: 140px;
-	font-family: var(--font-al-fresco);
-	line-height: 1.1;
-	font-weight: 700;
-	font-size: 50px;
-	margin: 0;
-}
-
 @media (--mobile-query) {
 	.banner,
 	.page-header {
@@ -87,7 +77,7 @@
 
 	.banner-content,
 	.header-content {
-		max-width: var(--content-width);
+		max-width: 425px;
 	}
 }
 
