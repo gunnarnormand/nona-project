@@ -52,6 +52,7 @@
 
 .comment-meta a,
 .comment-form a {
+	font-weight: var(--highlight-font-weight-medium);
 	text-decoration: none;
 	border: none;
 }
@@ -79,7 +80,7 @@
 }
 
 .comment-author {
-	font-size: 1.4em;
+	font-size: 2em;
 	line-height: 1.3;
 }
 
@@ -135,29 +136,6 @@
 .reply {
 	margin-bottom: 1.5em;
 	text-align: right;
-}
-
-.comment-reply-link,
-.comment-form .form-submit input {
-	display: inline-block;
-	padding: 0.5em 1.4em;
-	font-family: var(--highlight-font-family);
-	font-stretch: condensed;
-	font-size: 85%;
-	color: #000;
-	line-height: 1.3;
-	text-decoration: none;
-	background: transparent;
-	border: 1px solid #c3c3c3;
-	border-radius: 0;
-}
-
-.comment-reply-link:hover,
-.comment-reply-link:focus,
-.comment-form .form-submit input:hover,
-.comment-form .form-submit input:focus {
-	border-color: #000;
-	cursor: pointer;
 }
 
 /* Comment Form */
