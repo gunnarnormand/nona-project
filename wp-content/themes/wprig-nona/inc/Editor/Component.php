@@ -121,25 +121,31 @@ class Component implements Component_Interface {
 				[
 					'name'      => __( 'Small', 'wp-rig' ),
 					'shortName' => __( 'S', 'wp-rig' ),
-					'size'      => 16,
+					'size'      => 14,
 					'slug'      => 'small',
+				],
+				[
+					'name'      => __( 'Regular', 'wp-rig' ),
+					'shortName' => __( 'M', 'wp-rig' ),
+					'size'      => 16,
+					'slug'      => 'medium',
 				],
 				[
 					'name'      => __( 'Medium', 'wp-rig' ),
 					'shortName' => __( 'M', 'wp-rig' ),
-					'size'      => 25,
+					'size'      => 20,
 					'slug'      => 'medium',
 				],
 				[
 					'name'      => __( 'Large', 'wp-rig' ),
 					'shortName' => __( 'L', 'wp-rig' ),
-					'size'      => 31,
+					'size'      => 36,
 					'slug'      => 'large',
 				],
 				[
 					'name'      => __( 'Larger', 'wp-rig' ),
 					'shortName' => __( 'XL', 'wp-rig' ),
-					'size'      => 39,
+					'size'      => 48,
 					'slug'      => 'larger',
 				],
 			]
