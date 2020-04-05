@@ -29,6 +29,7 @@
 /*--------------------------------------------------------------
 # Adjustments for the editor
 --------------------------------------------------------------*/
+/* stylelint-disable */
 button,
 select,
 option {
@@ -38,6 +39,7 @@ option {
 	line-height: inherit;
 	border-radius: inherit;
 }
+/* stylelint-enable */
 
 .editor-post-title__input {
 	font-family: var(--highlight-font-family);
