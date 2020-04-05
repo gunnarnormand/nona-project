@@ -1,0 +1,205 @@
+/*--------------------------------------------------------------
+NONA BLOCKS STYLE CSS
+----------------------------------------------------------------
+TABLE OF CONTENTS:
+----------------------------------------------------------------
+# custom properties
+# static 
+# program
+
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# custom properties
+--------------------------------------------------------------*/
+:root {
+	--global-font-color: #4f080e;
+	--global-font-family: "brandon-grotesque", serif;
+	--global-font-size: 16;
+	--global-font-line-height: 1.4;
+	--highlight-font-family: "brandon-grotesque", serif;
+	--highlight-font-normal: normal;
+	--highlight-font-italic: italic;
+	--highlight-font-weight-medium: 500;
+	--highlight-font-weight-black: 900;
+	--content-width: 45rem;
+	--content-width-lg: 65rem;
+	--dropdown-symbol-width: 0.7em;
+	--font-al-fresco: "al-fresco", sans-serif;
+	--font-al-fresco-font-weight-regular: 400;
+	--font-al-fresco-font-weight-bold: 700;
+
+	/* Custom editor colors */
+	--color-theme-primary: #f25430;
+	--color-theme-secondary: #57d6f2;
+	--color-theme-green: #038e3e;
+	--color-theme-yellow: #f2ac29;
+	--color-theme-black: #1c2833;
+	--color-theme-grey: #95a5a6;
+	--color-theme-white: #fff;
+	--color-theme-ghostwhite: #f8f8ff;
+	--color-theme-dark-blue: #296573;
+
+	--color-link: var(--color-theme-secondary);
+	--color-link-visited: var(--color-theme-secondary);
+	--color-link-active: var(--color-theme-secondary);
+
+	--color-quote-border: var(--global-font-color);
+	--color-quote-citation: var(--color-theme-black);
+
+	/* Custom editor font sizes */
+	--font-size-small: calc(14 / var(--global-font-size) * 1rem);
+	--font-size-regular: calc(var(--global-font-size) / 16 * 1rem);
+	--font-size-medium: calc(20 / var(--global-font-size) * 1rem);
+	--font-size-large: calc(36 / var(--global-font-size) * 1rem);
+	--font-size-larger: calc(48 / var(--global-font-size) * 1rem);
+
+	/* element sizes */
+	--header-height: 72px;
+
+	/* eases */
+	--primary-ease: cubic-bezier(0.165, 0.84, 0.44, 1);
+	--back-ease: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	--bounce-ease: cubic-bezier(0, 0.57, 0.49, 1.51);
+
+	/* box shadows */
+	/* stylelint-disable */
+	--box-shadow-out: 5px 5px 10px rgba(0, 0, 0, 0.15),
+		-5px -5px 10px rgba(255, 255, 255, 0.85);
+
+	--box-shadow-out-deep: inset 0 0 15px rgba(66, 66, 66, 0),
+		inset 0 0 20px rgba(255, 255, 255, 0),
+		7px 7px 15px rgba(58, 58, 58, 0.15),
+		-7px -7px 20px var(--color-theme-white),
+		inset 0 0 4px rgba(255, 255, 255, 0.2);
+
+	--box-shadow-out-flat: -3px -3px 5px inset rgba(0, 0, 0, 0.02),
+		3px 3px 5px inset rgba(255, 255, 255, 0.5);
+
+	--box-shadow-in: 5px 5px 5px rgba(0, 0, 0, 0.05),
+		-5px -5px 5px rgba(255, 255, 255, 0.5),
+		5px 5px 5px inset rgba(0, 0, 0, 0.05),
+		-5px -5px 5px inset rgba(255, 255, 255, 0.5);
+
+	--box-shadow-in-deep: inset 7px 7px 15px rgba(66, 66, 66, 0.15),
+		inset -7px -7px 20px var(--color-theme-white),
+		0 0 4px rgba(255, 255, 255, 0.2);
+
+	--box-shadow-in-flat: 3px 3px 5px inset rgba(0, 0, 0, 0.02),
+		-3px -3px 5px inset rgba(255, 255, 255, 0.5);
+	/* stylelint-enable */
+}
+
+/*--------------------------------------------------------------
+# static
+--------------------------------------------------------------*/
+.podkit-block {
+	display: grid;
+	grid-template-columns: 20% 1fr;
+	padding: 1em;
+	font-family: sans-serif;
+	background-color: var(--color-theme-ghostwhite);
+	box-shadow: 5px 5px 0 var(--color-theme-white),
+		10px 10px 0 var(--color-theme-grey);
+}
+
+.podkit-logo,
+.podkit-img {
+	grid-row: span 2;
+	overflow: hidden;
+}
+
+.podkit-logo img,
+.podkit-img img {
+	display: block;
+}
+
+.podkit-info {
+	margin-left: 1em;
+	color: var(--global-font-color);
+}
+
+.podkit-info > * {
+	margin: 0;
+	font-weight: lighter;
+}
+
+.podkit-nameplate,
+.podkit-cta {
+	font-size: 80%;
+}
+
+.podkit-nameplate {
+	margin-bottom: -0.25em;
+}
+
+.podkit-title {
+	font-size: 200%;
+}
+
+.podkit-description {
+	grid-column: span 2;
+	margin-top: 1em;
+	line-height: 1.3em;
+}
+
+.podkit-description p {
+	margin: 0;
+	padding-bottom: 1em;
+	font-weight: lighter;
+}
+
+.podkit-description p:last-of-type {
+	padding-bottom: 0;
+}
+
+.podkit-cta {
+	grid-column: span 2;
+	display: flex;
+	padding-top: 1em;
+	font-weight: normal;
+}
+
+.podkit-cta a::before {
+	display: inline-block;
+	margin: -3px 0.75em -3px -3px;
+	padding: 0.25em 0.85em 0.1em 1.25em;
+	content: "▶";
+	font-size: 0.8em;
+	line-height: 2.6em;
+	background: white;
+	border-radius: 50%;
+	border: 3px solid var(--color-theme-ghostwhite);
+}
+
+.podkit-cta a,
+.entry .entry-content .podkit-cta a {
+	margin-left: -3px;
+	padding-right: 1.5em;
+	text-decoration: none;
+	color: var(--color-theme-primary);
+	background: white;
+	border-radius: 1.5em;
+	border: 3px solid var(--color-theme-ghostwhite);
+}
+
+.podkit-cta a:focus::before,
+.podkit-cta a:hover::before {
+	color: white;
+	background-color: var(--color-theme-primary);
+}
+
+.podkit-block.alignwide .podkit-description,
+.podkit-block.alignfull .podkit-description {
+	grid-column: 2;
+	margin-left: 1em;
+}
+
+.podkit-block.alignfull {
+	padding: 3em;
+	box-shadow: none;
+}
+
+/*--------------------------------------------------------------
+# program
+--------------------------------------------------------------*/
