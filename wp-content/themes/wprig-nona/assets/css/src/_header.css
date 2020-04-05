@@ -108,7 +108,7 @@
 	border: 0;
 	padding: 0;
 	background: transparent;
-	border-radius: 12px;
+	border-radius: var(--global-border-radius);
 	margin: 0 auto;
 	box-shadow: var(--box-shadow-out-flat);
 	transition-property: box-shadow;
@@ -194,7 +194,7 @@
 		margin: 0;
 		padding: 0;
 		border: 0;
-		border-radius: 12px;
+		border-radius: var(--global-border-radius);
 		box-shadow: var(--box-shadow-out);
 		z-index: 1;
 		transition-property: box-shadow;
