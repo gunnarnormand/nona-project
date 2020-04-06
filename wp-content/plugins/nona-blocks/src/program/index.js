@@ -1,5 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { RichText } = wp.blockEditor;
 
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
@@ -12,13 +13,50 @@ registerBlockType("nona/program", {
     title: __("Program", "nona"),
     icon: 'carrot',
     category: "nona",
+    attributes: {
+        programTitle: {
+            type: "string",
+            source: "html",
+            selector: ".program-title",
+        },
+        buttonText: {
+            type: "string",
+            source: "text",
+            selector: ".register-button",
+        }
+    },
+
 
     // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
-    edit() {
+    edit: ( props ) => {
+
+        console.info(props);
+
+        const {
+            className,
+            attributes: {
+                programTitle,
+                buttonText,
+            },
+            setAttributes,
+        } = props;
+        
+        const onChangeProgramTitle = newProgramTitle => {
+            setAttributes({programTitle:newProgramTitle});
+        };
+
+        const onChangeButtonText = newButtonText => {
+            setAttributes({buttonText:newButtonText});
+        };
+
         return (
-            <div className="alignwide">
+            <div className={`${className} alignfull`}>
                 <h2 className="program-title">
-                    {__("nona winter 2020 program", "nona")}
+                    <RichText
+                        placeholder={__("nona winter 2020 program", "nona")}
+                        value={programTitle}
+                        onChange={onChangeProgramTitle}
+                    />
                 </h2>
 
                 <div className="program-cards">
@@ -65,14 +103,24 @@ registerBlockType("nona/program", {
                         </div>
                     </div>
                 </div>
+
+                <a href="#" role="button" className="register-button">
+                    <RichText
+                        placeholder={__("Register Now")}
+                        value={buttonText}
+                        onChange={onChangeButtonText}
+                    />
+                </a>
+
             </div>
         );
     },
-    save() {
+    save: ( props ) => {
+
         return (
-            <div className="alignwide">
+            <div className={`${props.className} alignfull`}>
                 <h2 className="program-title">
-                    {__("nona winter 2020 program", "nona")}
+                    <RichText.Content value={props.attributes.programTitle} />
                 </h2>
 
                 <div className="program-cards">
@@ -119,6 +167,11 @@ registerBlockType("nona/program", {
                         </div>
                     </div>
                 </div>
+
+                <a href="#" role="button" className="register-button">
+                    <RichText.Content value={props.attributes.buttonText} />    
+                </a>
+
             </div>
         );
     }

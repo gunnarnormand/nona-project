@@ -85,3 +85,7 @@ TABLE OF CONTENTS:
 	padding: 3em;
 	box-shadow: none;
 }
+
+.program-title {
+	border: 1px dotted red;
+}
