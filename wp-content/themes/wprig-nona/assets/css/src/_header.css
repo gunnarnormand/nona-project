@@ -34,7 +34,7 @@
 
 .scroll-marker {
 	position: absolute;
-	top: var(--header-height);
+	top: 102px;
 	width: 0;
 	height: 0;
 }
@@ -76,7 +76,7 @@
 
 .site-logo svg {
 	width: 350px;
-	height: var(--header-height);
+	height: var(--logo-height);
 }
 
 @media (--sidebar-query) {
@@ -168,7 +168,7 @@
 	}
 
 	.nav--toggle-small.nav--toggled-on {
-		height: calc(100vh - var(--header-height));
+		height: calc(100vh - var(--logo-height));
 	}
 
 	.nav--toggle-small.nav--toggled-on .menu-toggle {

@@ -11,12 +11,12 @@
 .banner,
 .page-header {
 	position: relative;
-	height: 301px;
+	height: 238px;
 	overflow: hidden;
 }
 
 .banner-illustration {
-	max-height: 301px;
+	max-height: 238px;
 	position: absolute;
 	top: 0;
 	right: -2px;
@@ -32,22 +32,48 @@
 	justify-content: center;
 	margin-right: auto;
 	margin-left: auto;
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
+	padding: 2rem 1.5rem 0;
+}
+
+.banner .entry-title,
+.page-header .page-title {
+	max-width: 225px;
+	font-family: var(--font-al-fresco);
+	font-weight: var(--font-al-fresco-font-weight-bold);
+	line-height: 1.1;
+	font-size: 50px;
+	margin: 0;
 }
 
 @media (--mobile-query) {
 	.banner,
 	.page-header {
-		height: 321px;
+		height: 269px;
 	}
 
 	.banner-illustration {
-		max-height: 321px;
+		max-height: 269px;
 	}
 }
 
 @media (--mobile-lg-query) {
+	.banner,
+	.page-header {
+		height: 317px;
+	}
+
+	.banner-illustration {
+		max-height: 317px;
+	}
+
+	.banner-content,
+	.header-content {
+		height: 85%;
+		padding: 2rem 0 0;
+	}
+}
+
+@media screen and (min-width: 500px) {
 	.banner,
 	.page-header {
 		height: 380px;
@@ -59,24 +85,6 @@
 
 	.banner-content,
 	.header-content {
-		height: 85%;
-		padding-right: 0;
-		padding-left: 0;
-	}
-}
-
-@media screen and (min-width: 500px) {
-	.banner,
-	.page-header {
-		height: 453px;
-	}
-
-	.banner-illustration {
-		max-height: 453px;
-	}
-
-	.banner-content,
-	.header-content {
 		max-width: 425px;
 	}
 }
@@ -84,11 +92,11 @@
 @media (--wide-menu-query) {
 	.banner,
 	.page-header {
-		height: 580px;
+		height: 486px;
 	}
 
 	.banner-illustration {
-		max-height: 580px;
+		max-height: 486px;
 	}
 
 	.banner-content,
@@ -98,7 +106,7 @@
 
 	.banner .entry-title,
 	.page-header .page-title {
-		max-width: 200px;
+		max-width: 300px;
 		font-size: 60px;
 	}
 }
@@ -106,7 +114,7 @@
 @media (--content-query) {
 	.banner,
 	.page-header {
-		height: 603px;
+		height: 505px;
 	}
 
 	.banner-illustration {
@@ -118,11 +126,12 @@
 	.header-content {
 		max-width: var(--content-width);
 		height: 100%;
+		padding: 4rem 0 0;
 	}
 
 	.banner .entry-title,
 	.page-header .page-title {
-		max-width: 300px;
+		max-width: 450px;
 		font-size: 75px;
 	}
 }
@@ -138,7 +147,7 @@
 @media (--desktop-query) {
 	.banner,
 	.page-header {
-		height: 700px;
+		height: 581px;
 	}
 
 	.banner-illustration {
@@ -149,7 +158,7 @@
 @media (--desktop-lg-query) {
 	.banner,
 	.page-header {
-		height: 880px;
+		height: 739px;
 	}
 
 	.banner-illustration {
@@ -163,14 +172,15 @@
 
 	.banner .entry-title,
 	.page-header .page-title {
-		max-width: 900px;
+		max-width: var(--content-width-lg);
+		font-size: 125px;
 	}
 }
 
 @media (--desktop-xl-query) {
 	.banner,
 	.page-header {
-		height: 1175px;
+		height: 985px;
 	}
 
 	.banner-illustration {
@@ -179,6 +189,7 @@
 
 	.banner .entry-title,
 	.page-header .page-title {
-		font-size: 120px;
+		max-width: 1450px;
+		font-size: 175px;
 	}
 }

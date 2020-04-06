@@ -30,16 +30,6 @@ h6 {
 	clear: both;
 }
 
-.banner .entry-title,
-.page-header .page-title {
-	max-width: 140px;
-	font-family: var(--font-al-fresco);
-	font-weight: var(--font-al-fresco-font-weight-bold);
-	line-height: 1.1;
-	font-size: 50px;
-	margin: 0;
-}
-
 .entry-header h1.entry-title,
 .entry-header h2.entry-title {
 	font-size: 2.5rem;
