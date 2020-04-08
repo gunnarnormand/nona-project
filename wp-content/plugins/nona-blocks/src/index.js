@@ -3,3 +3,4 @@
  */
 import "./static";
 import "./program";
+import "./team";

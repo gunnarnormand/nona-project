@@ -6,6 +6,7 @@ TABLE OF CONTENTS:
 # custom properties
 # static 
 # program
+# our team
 
 --------------------------------------------------------------*/
 
@@ -202,7 +203,7 @@ TABLE OF CONTENTS:
 }
 
 /*--------------------------------------------------------------
-# program
+# program block
 --------------------------------------------------------------*/
 .wp-block-nona-program {
 	width: 100%;
@@ -221,18 +222,8 @@ TABLE OF CONTENTS:
 
 .program-card {
 	max-width: 425px;
-	background-color: var(--color-theme-white);
-	border-radius: var(--global-border-radius);
-	box-shadow: var(--box-shadow-out);
 	padding: 1rem 0;
 	margin: 2rem 0;
-	transition-property: box-shadow;
-	transition-duration: 300ms;
-	transition-timing-function: var(--back-ease);
-}
-
-.program-card:hover {
-	box-shadow: var(--box-shadow-in);
 }
 
 .program-card-title,
@@ -294,5 +285,67 @@ TABLE OF CONTENTS:
 @media screen and (min-width: 90em) {
 	.program-title {
 		font-size: 60px;
+	}
+}
+
+/*--------------------------------------------------------------
+# our team block
+--------------------------------------------------------------*/
+.wp-block-nona-team {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 1rem 0;
+	padding: 2rem;
+}
+
+.wp-block-nona-team:hover .team-card-img {
+	box-shadow: var(--box-shadow-in-flat);
+}
+
+.wp-block-nona-team:hover .team-card-img img {
+	filter: grayscale(0%);
+}
+
+.team-card-img {
+	max-width: calc(200px + 2rem);
+	overflow: hidden;
+	background-color: var(--color-theme-ghostwhite);
+	display: flex;
+	justify-content: center;
+	border-radius: 24px;
+	box-shadow: var(--box-shadow-out-flat);
+	padding: 1rem;
+	transition-property: box-shadow;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--back-ease);
+}
+
+.team-card-img img {
+	max-width: 200px;
+	max-height: 200px;
+	border-radius: 50%;
+	filter: grayscale(100%);
+	transition-property: filter;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
+}
+
+@media screen and (min-width: 600px) {
+	.team-card-img img {
+		max-width: 100%;
+		max-height: unset;
+	}
+}
+
+@media screen and (min-width: 782px) {
+	.wp-block-nona-team {
+		margin: 1rem 1rem;
+	}
+}
+
+@media screen and (min-width: 1920px) {
+	.wp-block-nona-team {
+		margin: 1rem 2rem;
 	}
 }
