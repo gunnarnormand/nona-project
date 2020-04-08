@@ -31,7 +31,7 @@ function nona_load_textdomain() {
 add_action( 'init', 'nona_add_image_size' );
 
 function nona_add_image_size() {
-	add_image_size( 'nonaFeatImg', 250, 250, array( 'center', 'center' ) ); 
+	add_image_size( 'nonaFeatImg', 300, 300, array( 'center', 'center' ) ); 
 }
 
 /** 
@@ -109,7 +109,9 @@ function nona_register_blocks() {
 
 	// Array of block created in this plugin.
 	$blocks = [
-		'nona/static'
+		'nona/static',
+		'nona/program',
+		'nona/team'
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
