@@ -150,7 +150,7 @@ class Theme {
 			new Customizer\Component(),
 			new Styles\Component(),
 			new Archive_Content\Component(),
-			new Hero_Content\Component(),
+			new Front_Page_Content\Component(),
 		];
 
 		if ( defined( 'JETPACK__VERSION' ) ) {
