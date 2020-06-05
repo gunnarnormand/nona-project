@@ -35,10 +35,6 @@
 	--color-theme-dark-blue: #296573;
 	--color-theme-dark-green: #024d22;
 
-	--color-link: var(--color-theme-secondary);
-	--color-link-visited: var(--color-theme-secondary);
-	--color-link-active: var(--color-theme-secondary);
-
 	--color-quote-border: var(--global-font-color);
 	--color-quote-citation: var(--color-theme-black);
 
