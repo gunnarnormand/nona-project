@@ -36,7 +36,6 @@
 .entry-footer {
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
-	/* font-size: 80%; */
 }
 
 .entry-meta {
@@ -94,6 +93,54 @@
 	}
 }
 
+/* stylelint-disable */
+.page-content a,
+.entry-content a:not(.wp-block-button__link):not([role="button"]),
+.entry-summary a,
+.entry-header a,
+.entry-footer a,
+.post-navigation a,
+.page-navigation a,
+.comments-area a {
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+}
+
+.page-content a::before,
+.entry-content a:not(.wp-block-button__link):not([role="button"])::before,
+.entry-summary a::before,
+.entry-header a::before,
+.entry-footer a::before,
+.post-navigation a::before,
+.page-navigation a::before,
+.comments-area a::before {
+	content: "";
+	width: 100%;
+	height: 35%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: rgba(87, 214, 242, 0.2);
+	z-index: -1;
+	border-radius: var(--global-border-radius);
+	transition-property: height;
+	transition-duration: 300ms;
+	transition-timing-function: var(--back-ease);
+}
+
+.page-content a:hover::before,
+.entry-content a:not(.wp-block-button__link):not([role="button"]):hover::before,
+.entry-summary a:hover::before,
+.entry-header a:hover::before,
+.entry-footer a:hover::before,
+.post-navigation a:hover::before,
+.page-navigation a:hover::before,
+.comments-area a:hover::before {
+	height: 100%;
+}
+/* stylelint-enable */
+
 .entry-content ul,
 .entry-content ol {
 	padding-right: 2.5em;
@@ -143,8 +190,6 @@
 
 .entry-footer {
 	clear: both;
-	padding: 1.5em 1.5rem 3em;
-	border-bottom: 1px solid #111;
 }
 
 @media (--content-query) {
@@ -186,7 +231,7 @@
 /*--------------------------------------------------------------
 ## Custom block colors.
 --------------------------------------------------------------*/
-
+/* stylelint-disable */
 .has-theme-primary-color,
 .has-theme-primary-color a {
 	color: var(--color-theme-primary);
@@ -267,7 +312,7 @@
 .has-theme-ghostwhite-background-color {
 	background-color: var(--color-theme-ghostwhite);
 }
-
+/* stylelint-enable */
 /*--------------------------------------------------------------
 ## Custom block font sizes.
 --------------------------------------------------------------*/
