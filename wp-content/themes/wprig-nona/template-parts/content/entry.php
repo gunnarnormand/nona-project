@@ -21,9 +21,7 @@ namespace WP_Rig\WP_Rig;
 		get_template_part( 'template-parts/content/entry_content', get_post_type() );
 	}
 
-	if ( ! is_front_page() ) {
-		get_template_part( 'template-parts/content/entry_footer', get_post_type() );
-	}
+	get_template_part( 'template-parts/content/entry_footer', get_post_type() );
 	?>
 </article><!-- #post-<?php the_ID(); ?> -->
 
@@ -33,8 +31,8 @@ if ( is_singular( get_post_type() ) ) {
 	if ( 'post' === get_post_type() || get_post_type_object( get_post_type() )->has_archive ) {
 		the_post_navigation(
 			[
-				'prev_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous:', 'wp-rig' ) . '</span></div>%title',
-				'next_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'wp-rig' ) . '</span></div>%title',
+				'prev_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous post', 'wp-rig' ) . '</span></div>',
+				'next_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Next post', 'wp-rig' ) . '</span></div>',
 			]
 		);
 	}
