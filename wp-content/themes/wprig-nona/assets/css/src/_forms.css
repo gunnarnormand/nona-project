@@ -1,0 +1,90 @@
+@import "_custom-properties.css";
+
+/*--------------------------------------------------------------
+# Forms
+--------------------------------------------------------------*/
+/* stylelint-disable */
+textarea {
+	width: 100%;
+}
+/* stylelint-enable */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea {
+	display: block;
+	width: 100%;
+	color: var(--global-font-color);
+	background-color: transparent;
+	padding: 1rem 1.5rem;
+	appearance: none;
+	outline: none;
+	border: none;
+	border-radius: var(--global-border-radius);
+	box-shadow: var(--box-shadow-in-deep);
+	transition-property: box-shadow;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus {
+	box-shadow: var(--box-shadow-in-flat);
+}
+
+select {
+	display: block;
+	position: relative;
+	appearance: none;
+	font-family: var(--highlight-font-family);
+	font-stretch: condensed;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 1rem 2rem 1rem 1.5rem;
+	border: 0;
+	border-radius: var(--global-border-radius);
+	box-shadow: var(--box-shadow-out);
+	background-color: transparent;
+	background-image: url(../images/angle-down.svg);
+	background-repeat: no-repeat;
+	background-size: 0.75rem;
+	background-position: 93% center;
+	background-clip: border-box;
+	transition-property: box-shadow;
+	transition-duration: 1000ms;
+	transition-timing-function: var(--primary-ease);
+}
+
+select:focus {
+	box-shadow: var(--box-shadow-in-deep);
+	outline-style: dotted;
+	outline-width: 1px;
+	outline-offset: 5px;
+}

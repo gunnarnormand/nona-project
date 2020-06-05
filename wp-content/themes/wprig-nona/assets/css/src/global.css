@@ -7,10 +7,10 @@
 	# Typography
 	# Elements
 	# Links
+	# Forms
 	# Header/Main navigation menu
 # Accessibility
 # Layout
-# Forms
 # Content navigation
 # Footer
 # Infinite scroll
@@ -24,6 +24,7 @@
 @import "_typography.css";
 @import "_elements.css";
 @import "_links.css";
+@import "_forms.css";
 @import "_header.css";
 @import "_footer.css";
 
@@ -113,60 +114,6 @@
 	.site-footer {
 		grid-column: span 2;
 	}
-}
-
-/*--------------------------------------------------------------
-# Forms
---------------------------------------------------------------*/
-/* stylelint-disable */
-textarea {
-	width: 100%;
-}
-/* stylelint-enable */
-
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="password"],
-input[type="search"],
-input[type="number"],
-input[type="tel"],
-input[type="range"],
-input[type="date"],
-input[type="month"],
-input[type="week"],
-input[type="time"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="color"],
-textarea {
-	color: #666;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	padding: 3px;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="password"]:focus,
-input[type="search"]:focus,
-input[type="number"]:focus,
-input[type="tel"]:focus,
-input[type="range"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="week"]:focus,
-input[type="time"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="color"]:focus,
-textarea:focus {
-	color: #111;
-}
-
-select {
-	border: 1px solid #ccc;
 }
 
 /*--------------------------------------------------------------
