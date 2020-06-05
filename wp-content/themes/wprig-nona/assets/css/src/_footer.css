@@ -59,7 +59,6 @@
 	max-width: 375px;
 	padding: 0.5em 0;
 	text-decoration: none;
-	color: var(--global-font-color);
 }
 /* stylelint-enable */
 
@@ -81,12 +80,6 @@
 		flex-wrap: wrap;
 		justify-content: center;
 	}
-}
-
-.footer-navigation a:hover,
-.footer-navigation a:focus,
-.footer-navigation a:active {
-	color: var(--color-link-active);
 }
 
 .footer-navigation ul {
