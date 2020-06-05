@@ -5,36 +5,20 @@
 --------------------------------------------------------------*/
 /* stylelint-disable */
 a {
-	color: var(--color-link);
+	color: var(--global-font-color);
 	text-decoration: none;
-	transition-property: color;
-	transition-duration: 1000ms;
-	transition-timing-function: var(--primary-ease);
 }
 /* stylelint-enable */
 
-a:visited {
-	color: var(--color-link-visited);
-}
-
-a:hover,
-a:focus,
 a:active {
-	color: var(--color-link-active);
-}
-
-a:focus {
 	outline-style: dotted;
 	outline-width: 1px;
-	outline-offset: 10px;
+	outline-offset: 5px;
 }
 
-a:hover,
-a:active {
-	outline: 0;
-}
-
-/* button styles */
+/*--------------------------------------------------------------
+# Buttons
+--------------------------------------------------------------*/
 /* stylelint-disable */
 input[type="button"],
 input[type="reset"],
@@ -80,6 +64,6 @@ button[role="button"]:active {
 	box-shadow: var(--box-shadow-in-deep);
 	outline-style: dotted;
 	outline-width: 1px;
-	outline-offset: 10px;
+	outline-offset: 5px;
 }
 /* stylelint-enable */
