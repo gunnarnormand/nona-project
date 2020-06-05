@@ -9,7 +9,7 @@ namespace WP_Rig\WP_Rig;
 
 ?>
 
-<section class="mission">
+<section id="our-mission" class="mission">
 
 	<?php if ( get_theme_mod( 'mission_title' ) !== '' ) : ?>
 		<h2 class="mission-title">
