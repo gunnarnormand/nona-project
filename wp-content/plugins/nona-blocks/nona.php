@@ -62,7 +62,7 @@ function nona_block_categories( $categories, $post ) {
 			array(
 				'slug' => 'nona',
 				'title' => __( 'Nona', 'nona' ),
-				'icon'  => 'carrot',
+				'icon'  => 'admin-site',
 			),
 		)
 	);

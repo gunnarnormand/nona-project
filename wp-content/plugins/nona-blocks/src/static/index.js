@@ -3,12 +3,12 @@ const { registerBlockType } = wp.blocks;
 
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
-import LogoUrl, { ReactComponent as Logo } from "./logo.svg";
+import { ReactComponent as Logo } from "./logo.svg";
 
 // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 registerBlockType("nona/static", {
   title: __("Like & Subscribe", "nona"),
-  icon: { src: LogoUrl },
+  icon: { src: Logo },
   category: "nona",
 
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/

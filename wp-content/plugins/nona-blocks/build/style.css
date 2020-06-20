@@ -249,12 +249,10 @@ TABLE OF CONTENTS:
 	margin: 1rem 0;
 }
 
-.program-card-description ul,
-.program-card-description ol {
-	font-size: 80%;
+.wp-block-nona-program .program-card-description ul {
 	margin: 0;
 	padding-right: 0;
-	padding-left: 1rem;
+	padding-left: 1.5em;
 }
 
 .register-button {
@@ -295,7 +293,7 @@ TABLE OF CONTENTS:
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 1rem 0;
+	margin: 1rem 1.5rem;
 	padding: 2rem;
 }
 
@@ -340,7 +338,7 @@ TABLE OF CONTENTS:
 
 @media screen and (min-width: 782px) {
 	.wp-block-nona-team {
-		margin: 1rem 1rem;
+		margin: 1rem;
 	}
 }
 
