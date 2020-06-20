@@ -110,71 +110,115 @@ msgid "Secondary"
 msgstr ""
 
 #: ../nona/inc/Editor/Component.php:75
-msgid "Red"
-msgstr ""
-
-#: ../nona/inc/Editor/Component.php:80
 msgid "Green"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:85
-msgid "Blue"
-msgstr ""
-
-#: ../nona/inc/Editor/Component.php:90
+#: ../nona/inc/Editor/Component.php:80
 msgid "Yellow"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:95
+#: ../nona/inc/Editor/Component.php:85
 msgid "Black"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:100
+#: ../nona/inc/Editor/Component.php:90
 msgid "Grey"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:105
+#: ../nona/inc/Editor/Component.php:95
 msgid "White"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:110
-msgid "Dusty daylight"
+#: ../nona/inc/Editor/Component.php:100
+msgid "Ghostwhite"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:115
-msgid "Dusty sun"
+#: ../nona/inc/Editor/Component.php:105
+msgid "Dark Blue"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:132
+#: ../nona/inc/Editor/Component.php:122
 msgid "Small"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:133
+#: ../nona/inc/Editor/Component.php:123
 msgid "S"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:138
-msgid "Medium"
+#: ../nona/inc/Editor/Component.php:128
+msgid "Regular"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:139
+#: ../nona/inc/Editor/Component.php:129, ../nona/inc/Editor/Component.php:135
 msgid "M"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:144
+#: ../nona/inc/Editor/Component.php:134
+msgid "Medium"
+msgstr ""
+
+#: ../nona/inc/Editor/Component.php:140
 msgid "Large"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:145
+#: ../nona/inc/Editor/Component.php:141
 msgid "L"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:150
+#: ../nona/inc/Editor/Component.php:146
 msgid "Larger"
 msgstr ""
 
-#: ../nona/inc/Editor/Component.php:151
+#: ../nona/inc/Editor/Component.php:147
 msgid "XL"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:57
+msgid "Hero Subtitle"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:76
+msgid "Hero Text Area Content"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:96
+msgid "Hero URL Link"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:115
+msgid "Hero URL Text"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:143
+msgid "Mission Title"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:162
+msgid "Mission Text Area Content"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:190
+msgid "First About Title"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:209
+msgid "First About Content"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:228
+msgid "Second About Title"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:247
+msgid "Second About Content"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:266
+msgid "Third About Title"
+msgstr ""
+
+#: ../nona/inc/Front_Page_Content/Component.php:285
+msgid "Third About Content"
 msgstr ""
 
 #: ../nona/inc/Lazyload/Component.php:89
@@ -210,16 +254,24 @@ msgstr ""
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
 
-#: ../nona/template-parts/content/entry-attachment.php:33, ../nona/template-parts/content/entry.php:32
+#: ../nona/template-parts/content/entry-attachment.php:33, ../nona/template-parts/content/entry_page.php:36
 msgid "Previous:"
 msgstr ""
 
-#: ../nona/template-parts/content/entry-attachment.php:43, ../nona/template-parts/content/entry.php:33
+#: ../nona/template-parts/content/entry-attachment.php:43, ../nona/template-parts/content/entry_page.php:37
 msgid "Next:"
 msgstr ""
 
 #: ../nona/template-parts/content/entry-attachment.php:49
 msgid "Post navigation"
+msgstr ""
+
+#: ../nona/template-parts/content/entry.php:34
+msgid "Previous post"
+msgstr ""
+
+#: ../nona/template-parts/content/entry.php:35
+msgid "Next post"
 msgstr ""
 
 #. translators: %s: post title
@@ -326,16 +378,16 @@ msgstr ""
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
 msgstr ""
 
-#: ../nona/template-parts/content/page_header.php:14
+#: ../nona/template-parts/content/page_header.php:16
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: ../nona/template-parts/content/page_header.php:22
+#: ../nona/template-parts/content/page_header.php:63
 msgid "Nothing Found"
 msgstr ""
 
 #. translators: %s: search query
-#: ../nona/template-parts/content/page_header.php:41
+#: ../nona/template-parts/content/page_header.php:160
 msgid "Search Results for: %s"
 msgstr ""
 
@@ -365,6 +417,18 @@ msgstr ""
 msgid "Open menu"
 msgstr ""
 
-#: ../nona/template-parts/header/navigation.php:49
+#: ../nona/template-parts/header/navigation.php:55
 msgid "Menu"
+msgstr ""
+
+#: ../nona/template-parts/homepage/hero.php:16
+msgid "The"
+msgstr ""
+
+#: ../nona/template-parts/homepage/hero.php:17
+msgid "nona"
+msgstr ""
+
+#: ../nona/template-parts/homepage/hero.php:18
+msgid "Experience"
 msgstr ""

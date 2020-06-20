@@ -146,13 +146,11 @@ class Theme {
 			new Comments\Component(),
 			new Nav_Menus\Component(),
 			new Sidebars\Component(),
-			new Custom_Background\Component(),
-			new Custom_Header\Component(),
-			new Custom_Logo\Component(),
 			new Post_Thumbnails\Component(),
 			new Customizer\Component(),
 			new Styles\Component(),
 			new Archive_Content\Component(),
+			new Front_Page_Content\Component(),
 		];
 
 		if ( defined( 'JETPACK__VERSION' ) ) {

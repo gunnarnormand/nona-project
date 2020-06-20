@@ -9,7 +9,7 @@ namespace WP_Rig\WP_Rig;
 
 ?>
 
-<div class="site-branding">
+<div class="site-branding <?php echo has_custom_logo() ? 'has-custom-logo' : ''; ?> ">
 	<?php the_custom_logo(); ?>
 
 	<?php

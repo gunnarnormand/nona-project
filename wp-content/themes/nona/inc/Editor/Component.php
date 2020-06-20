@@ -64,57 +64,47 @@ class Component implements Component_Interface {
 				[
 					'name'  => __( 'Primary', 'nona' ),
 					'slug'  => 'theme-primary',
-					'color' => '#e36d60',
+					'color' => '#f25430',
 				],
 				[
 					'name'  => __( 'Secondary', 'nona' ),
 					'slug'  => 'theme-secondary',
-					'color' => '#41848f',
-				],
-				[
-					'name'  => __( 'Red', 'nona' ),
-					'slug'  => 'theme-red',
-					'color' => '#C0392B',
+					'color' => '#57d6f2',
 				],
 				[
 					'name'  => __( 'Green', 'nona' ),
 					'slug'  => 'theme-green',
-					'color' => '#27AE60',
-				],
-				[
-					'name'  => __( 'Blue', 'nona' ),
-					'slug'  => 'theme-blue',
-					'color' => '#2980B9',
+					'color' => '#038e3e',
 				],
 				[
 					'name'  => __( 'Yellow', 'nona' ),
 					'slug'  => 'theme-yellow',
-					'color' => '#F1C40F',
+					'color' => '#f2ac29',
 				],
 				[
 					'name'  => __( 'Black', 'nona' ),
 					'slug'  => 'theme-black',
-					'color' => '#1C2833',
+					'color' => '#1c2833',
 				],
 				[
 					'name'  => __( 'Grey', 'nona' ),
 					'slug'  => 'theme-grey',
-					'color' => '#95A5A6',
+					'color' => '#95a5a6',
 				],
 				[
 					'name'  => __( 'White', 'nona' ),
 					'slug'  => 'theme-white',
-					'color' => '#ECF0F1',
+					'color' => '#ffffff',
 				],
 				[
-					'name'  => __( 'Dusty daylight', 'nona' ),
-					'slug'  => 'custom-daylight',
-					'color' => '#97c0b7',
+					'name'  => __( 'Ghostwhite', 'nona' ),
+					'slug'  => 'theme-ghostwhite',
+					'color' => '#f8f8ff',
 				],
 				[
-					'name'  => __( 'Dusty sun', 'nona' ),
-					'slug'  => 'custom-sun',
-					'color' => '#eee9d1',
+					'name'  => __( 'Dark Blue', 'nona' ),
+					'slug'  => 'custom-dark-blue',
+					'color' => '#296573',
 				],
 			]
 		);
@@ -131,25 +121,31 @@ class Component implements Component_Interface {
 				[
 					'name'      => __( 'Small', 'nona' ),
 					'shortName' => __( 'S', 'nona' ),
-					'size'      => 16,
+					'size'      => 14,
 					'slug'      => 'small',
+				],
+				[
+					'name'      => __( 'Regular', 'nona' ),
+					'shortName' => __( 'M', 'nona' ),
+					'size'      => 16,
+					'slug'      => 'medium',
 				],
 				[
 					'name'      => __( 'Medium', 'nona' ),
 					'shortName' => __( 'M', 'nona' ),
-					'size'      => 25,
+					'size'      => 20,
 					'slug'      => 'medium',
 				],
 				[
 					'name'      => __( 'Large', 'nona' ),
 					'shortName' => __( 'L', 'nona' ),
-					'size'      => 31,
+					'size'      => 36,
 					'slug'      => 'large',
 				],
 				[
 					'name'      => __( 'Larger', 'nona' ),
 					'shortName' => __( 'XL', 'nona' ),
-					'size'      => 39,
+					'size'      => 48,
 					'slug'      => 'larger',
 				],
 			]
