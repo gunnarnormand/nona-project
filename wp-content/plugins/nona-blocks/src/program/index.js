@@ -216,7 +216,6 @@ registerBlockType("nona/program", {
                         <div className="program-card-description">
                             <p>
                                 <RichText.Content value={props.attributes.cardDesc1} />
-                                {__("A five day immersive experience where we uncover your passions, mentor you in preparation for adulthood and have fun while doing it.", "nona")}
                             </p>
                         </div>
                     </div>
@@ -243,7 +242,6 @@ registerBlockType("nona/program", {
                         <div className="program-card-description">
                             <p>
                                 <RichText.Content value={props.attributes.cardDesc3} />
-                                {__("The program is between December 5th through December 10th, 2020.", "nona")}
                             </p>
                         </div>
                     </div>
