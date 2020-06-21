@@ -43,8 +43,9 @@ namespace WP_Rig\WP_Rig;
 		<?php
 		/* translators: %1$s: smiley */
 		$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'nona' ), convert_smilies( ':)' ) ) . '</p>';
+		register_widget( 'WP_Widget_Archives' );
 		the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-
+		register_widget( 'WP_Widget_Tag_Cloud' );
 		the_widget( 'WP_Widget_Tag_Cloud' );
 		?>
 	</div><!-- .page-content -->
