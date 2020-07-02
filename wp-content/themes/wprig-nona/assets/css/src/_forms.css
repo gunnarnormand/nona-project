@@ -3,6 +3,11 @@
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
+form:not(.search-form) {
+	box-shadow: var(--box-shadow-out);
+	border-radius: var(--global-border-radius);
+	padding: 1rem 2rem 3rem 2rem;
+}
 /* stylelint-disable */
 textarea {
 	width: 100%;
@@ -297,7 +302,7 @@ ul.gfield_radio,
 	border: 0;
 	padding: 1rem 1.5rem;
 	border-radius: var(--global-border-radius);
-	box-shadow: var(--box-shadow-out);
+	box-shadow: var(--box-shadow-in);
 }
 
 .fields > li.error input,
