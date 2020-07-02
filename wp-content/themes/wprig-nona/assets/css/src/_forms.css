@@ -4,13 +4,14 @@
 # Forms
 --------------------------------------------------------------*/
 form:not(.search-form) {
-	box-shadow: var(--box-shadow-out);
+	box-shadow: var(--box-shadow-out-flat);
 	border-radius: var(--global-border-radius);
-	padding: 1rem 0 2rem;
+	padding: 0 0 2rem;
 }
 
 @media (--wide-menu-query) {
 	form:not(.search-form) {
+		box-shadow: var(--box-shadow-out);
 		padding: 1rem 2rem 3rem;
 	}
 }
@@ -288,6 +289,10 @@ ul.gfield_radio,
 	text-transform: uppercase;
 	line-height: 1.4;
 	margin-bottom: 0.25rem;
+}
+
+.gform_footer input[type="submit"] {
+	margin-left: 0.5rem;
 }
 
 /*--------------------------------------------------------------
