@@ -24,7 +24,8 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 a[role="button"],
-button[role="button"] {
+button[role="button"],
+a.wp-block-button__link {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -47,9 +48,20 @@ input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
 a[role="button"]:hover,
-button[role="button"]:hover {
+button[role="button"]:hover,
+a.wp-block-button__link:hover {
 	cursor: pointer;
 	box-shadow: var(--box-shadow-in);
+	color: var(--color-theme-primary);
+}
+
+input[type="button"]:visited,
+input[type="reset"]:visited,
+input[type="submit"]:visited,
+a[role="button"]:visited,
+button[role="button"]:visited,
+a.wp-block-button__link:visited {
+	color: var(--color-theme-primary);
 }
 
 input[type="button"]:active,
@@ -61,7 +73,9 @@ input[type="submit"]:focus,
 a[role="button"]:focus,
 a[role="button"]:active,
 button[role="button"]:focus,
-button[role="button"]:active {
+button[role="button"]:active,
+a.wp-block-button__link:focus,
+a.wp-block-button__link:active {
 	box-shadow: var(--box-shadow-in-deep);
 	outline-style: dotted;
 	outline-width: 1px;
