@@ -29,6 +29,7 @@ button[role="button"] {
 	justify-content: center;
 	align-items: center;
 	color: var(--color-theme-primary);
+	background-color: var(--color-theme-white);
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 	text-transform: uppercase;

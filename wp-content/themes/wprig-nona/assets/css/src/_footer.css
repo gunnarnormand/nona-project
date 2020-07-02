@@ -82,12 +82,14 @@
 	}
 }
 
+/* stylelint-disable */
 .footer-navigation ul {
 	display: block;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
+/* stylelint-enable */
 
 .footer-logo {
 	max-width: 375px;
