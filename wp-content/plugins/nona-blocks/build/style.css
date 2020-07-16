@@ -269,20 +269,10 @@ TABLE OF CONTENTS:
 		margin-right: auto;
 	}
 
-	.program-title {
-		font-size: 50px;
-	}
-
 	.program-cards {
 		display: grid;
 		grid-gap: 2rem;
 		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media screen and (min-width: 90em) {
-	.program-title {
-		font-size: 60px;
 	}
 }
 

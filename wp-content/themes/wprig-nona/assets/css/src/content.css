@@ -68,6 +68,13 @@
 	font-size: var(--font-size-medium);
 }
 
+.entry-content h2 {
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	font-weight: var(--highlight-font-weight-black);
+	line-height: 1.4;
+}
+
 .entry-header,
 .entry-footer,
 .post-navigation,
@@ -90,6 +97,18 @@
 	.comments-area {
 		padding-left: 0;
 		padding-right: 0;
+	}
+}
+
+@media (--sidebar-query) {
+	.entry-content h2 {
+		font-size: 3rem;
+	}
+}
+
+@media (--desktop-query) {
+	.entry-content h2 {
+		font-size: 3.75rem;
 	}
 }
 
