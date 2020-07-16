@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms
 Plugin URI: https://gravityforms.com
 Description: Easily create web forms and manage form entries within the WordPress admin.
-Version: 2.4.18.10
+Version: 2.4.19
 Author: Gravity Forms
 Author URI: https://gravityforms.com
 License: GPL-2.0+
@@ -207,7 +207,7 @@ class GFForms {
 	 *
 	 * @var string $version The version number.
 	 */
-	public static $version = '2.4.18.10';
+	public static $version = '2.4.19';
 
 	/**
 	 * Handles background upgrade tasks.
@@ -479,12 +479,18 @@ class GFForms {
 			}
 
 			if ( $gf_page == 'entry_list' ) {
-				add_filter( 'set-screen-option', array( 'GFForms', 'set_screen_options' ), 10, 3 );
 				add_filter( 'screen_settings', array( 'GFForms', 'show_screen_options' ), 10, 2 );
+				// For WP 5.4.1 and older.
+				add_filter( 'set-screen-option', array( 'GFForms', 'set_screen_options' ), 10, 3 );
+				// For WP 5.4.2+.
+				add_filter( 'set_screen_option_gform_entries_screen_options', array( 'GFForms', 'set_screen_options', ), 10, 3 );
 			}
 
 			if ( $gf_page == 'form_list' ) {
+				// For WP 5.4.1 and older.
 				add_filter( 'set-screen-option', array( 'GFForms', 'set_screen_options' ), 10, 3 );
+				// For WP 5.4.2+.
+				add_filter( 'set_screen_option_gform_forms_per_page', array( 'GFForms', 'set_screen_options' ), 10, 3 );
 			}
 
 			add_filter(	'wp_privacy_personal_data_exporters', array( 'GFForms', 'register_data_exporter' ),	10 );
