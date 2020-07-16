@@ -327,11 +327,6 @@
 }
 /* stylelint-enable */
 
-.main-navigation a:hover,
-.main-navigation a:focus {
-	/* text-decoration: underline; */
-}
-
 @media (--wide-menu-query) {
 	.main-navigation ul li a {
 		font-size: var(--font-size-regular);

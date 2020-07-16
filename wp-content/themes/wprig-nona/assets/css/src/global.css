@@ -186,6 +186,7 @@
 	text-decoration: none;
 }
 
+/* stylelint-disable */
 .pagination a:visited {
 	color: var(--color-link);
 }
@@ -195,6 +196,7 @@
 .pagination a:active {
 	border-color: var(--color-theme-secondary);
 }
+/* stylelint-enable */
 
 .pagination .prev,
 .pagination .next {

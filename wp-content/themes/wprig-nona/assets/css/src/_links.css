@@ -8,9 +8,8 @@ a {
 	color: var(--global-font-color);
 	text-decoration: none;
 }
-/* stylelint-enable */
 
-a:active {
+a:active:not([role="button"]):not(.wp-block-button__link) {
 	outline-style: dotted;
 	outline-width: 1px;
 	outline-offset: 5px;
@@ -19,7 +18,6 @@ a:active {
 /*--------------------------------------------------------------
 # Buttons
 --------------------------------------------------------------*/
-/* stylelint-disable */
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
@@ -77,8 +75,6 @@ button[role="button"]:active,
 a.wp-block-button__link:focus,
 a.wp-block-button__link:active {
 	box-shadow: var(--box-shadow-in-deep);
-	outline-style: dotted;
-	outline-width: 1px;
-	outline-offset: 5px;
+	outline: none;
 }
 /* stylelint-enable */

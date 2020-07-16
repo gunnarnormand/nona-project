@@ -282,17 +282,96 @@ ul.gfield_radio,
 }
 
 .gfield_label {
-	font-family: var(--highlight-font-family);
+	display: block;
 	font-stretch: condensed;
 	font-size: 1.5rem;
-	font-weight: var(--highlight-font-weight-black);
-	text-transform: uppercase;
 	line-height: 1.4;
 	margin-bottom: 0.25rem;
 }
 
 .gform_footer input[type="submit"] {
 	margin-left: 0.5rem;
+}
+
+.gf_page_steps {
+	display: flex;
+	flex-direction: column;
+	box-shadow: var(--box-shadow-in);
+	border-radius: var(--global-border-radius);
+}
+
+.gf_step {
+	border-radius: var(--global-border-radius);
+	padding: 1rem;
+}
+
+.gf_step_active {
+	background-color: var(--color-theme-primary);
+	color: var(--color-theme-white);
+}
+
+.gf_progressbar_wrapper {
+	text-align: center;
+}
+
+.gf_progressbar {
+	background-color: var(--color-theme-ghostwhite);
+	border-radius: var(--global-border-radius);
+	box-shadow: var(--box-shadow-in-flat);
+	margin: 0 1rem;
+}
+
+.gf_progressbar_percentage {
+	background-color: var(--color-theme-primary);
+	border-radius: var(--global-border-radius);
+}
+
+.gf_progressbar_percentage span {
+	color: var(--color-theme-white);
+	margin-left: 1rem;
+	font-size: 1rem;
+}
+
+form .clear-multi {
+	display: flex;
+	flex-direction: column;
+}
+
+.ginput_container_date {
+	margin: 0.5rem 0;
+	min-width: 100px;
+}
+
+@media (--wide-menu-query) {
+	.gf_page_steps {
+		width: max-content;
+		max-width: 100%;
+		flex-direction: row;
+	}
+
+	.gf_step {
+		margin-right: 1rem;
+	}
+
+	.gf_step_last {
+		margin-right: 0;
+	}
+
+	.gf_progressbar_wrapper {
+		text-align: left;
+	}
+
+	.gf_progressbar {
+		margin: 0;
+	}
+
+	form .clear-multi {
+		flex-direction: row;
+	}
+
+	.ginput_container_date {
+		margin: 0 1rem 0 0;
+	}
 }
 
 /*--------------------------------------------------------------
@@ -305,14 +384,13 @@ ul.gfield_radio,
 }
 
 .validation_error {
-	margin-bottom: 1rem;
-	padding: 1rem 2rem;
 	text-align: center;
 	background-color: var(--color-theme-white);
 	font-family: var(--highlight-font-family);
 	font-stretch: condensed;
 	border: 0;
-	padding: 1rem 1.5rem;
+	padding: 1rem;
+	margin: 1rem 0;
 	border-radius: var(--global-border-radius);
 	box-shadow: var(--box-shadow-in);
 }
