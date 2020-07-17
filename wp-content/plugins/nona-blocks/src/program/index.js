@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText } = wp.blockEditor;
+const { RichText, URLInputButton } = wp.blockEditor;
 
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
@@ -23,6 +23,12 @@ registerBlockType("nona/program", {
             type: "string",
             source: "text",
             selector: ".register-button",
+        },
+        buttonURL: {
+            type: "string",
+            source: "attribute",
+            selector: ".register-button",
+            attribute: "href"
         },
         cardTitle1: {
             type: "string",
@@ -64,6 +70,7 @@ registerBlockType("nona/program", {
             attributes: {
                 programTitle,
                 buttonText,
+                buttonURL,
                 cardTitle1,
                 cardTitle2,
                 cardTitle3,
@@ -80,6 +87,10 @@ registerBlockType("nona/program", {
 
         const onChangeButtonText = newButtonText => {
             setAttributes({buttonText:newButtonText});
+        };
+
+        const onChangeButtonURL = newButtonURL => {
+            setAttributes({buttonURL:newButtonURL});
         };
 
         const onChangeCardTitle1 = newCardTitle1 => {
@@ -192,6 +203,12 @@ registerBlockType("nona/program", {
                         value={buttonText}
                         onChange={onChangeButtonText}
                     />
+                    <URLInputButton
+                        className="button-dropdown__input"
+                        label={__("Button URL", "nona")}
+                        onChange={onChangeButtonURL}
+                        url={buttonURL}
+                    />
                 </a>
 
             </div>
@@ -247,7 +264,7 @@ registerBlockType("nona/program", {
                     </div>
                 </div>
 
-                <a href="#" role="button" className="register-button">
+                <a href={props.attributes.buttonURL} role="button" className="register-button">
                     <RichText.Content value={props.attributes.buttonText} />    
                 </a>
 

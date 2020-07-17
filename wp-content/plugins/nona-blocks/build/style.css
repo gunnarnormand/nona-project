@@ -233,6 +233,7 @@ TABLE OF CONTENTS:
 }
 
 .program-card-title {
+	min-height: 84px;
 	font-size: 30px;
 	margin-top: 0;
 }
