@@ -7,7 +7,7 @@ TABLE OF CONTENTS:
 # static 
 # program
 # our team
-
+# CTA 
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -328,5 +328,49 @@ TABLE OF CONTENTS:
 @media screen and (min-width: 1920px) {
 	.wp-block-nona-team {
 		margin: 1rem 2rem;
+	}
+}
+
+/*--------------------------------------------------------------
+# cta block
+--------------------------------------------------------------*/
+.wp-block-nona-cta {
+	position: relative;
+}
+
+.wp-block-nona-cta svg {
+	opacity: 0.5;
+}
+
+.cta-wrap {
+	width: 90%;
+	max-width: var(--content-width);
+	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.cta-text {
+	font-size: 1.5rem;
+	font-weight: var(--highlight-font-weight-black);
+	line-height: 1.4;
+	margin-top: 0;
+}
+
+/* 768px - tablet */
+@media screen and (min-width: 48em) {
+	.wp-block-nona-cta {
+		margin: 1.5em 0;
+	}
+
+	.wp-block-nona-cta svg {
+		opacity: 1;
+	}
+
+	.cta-text {
+		font-size: 2.5rem;
 	}
 }

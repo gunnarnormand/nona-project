@@ -109,9 +109,9 @@ function nona_register_blocks() {
 
 	// Array of block created in this plugin.
 	$blocks = [
-		'nona/static',
 		'nona/program',
-		'nona/team'
+		'nona/team',
+		'nona/cta'
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
