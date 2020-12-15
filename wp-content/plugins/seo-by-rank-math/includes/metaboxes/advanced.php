@@ -9,9 +9,7 @@
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 
-$robot_index = [
-	'index' => esc_html__( 'Index', 'rank-math' ) . Admin_Helper::get_tooltip( esc_html__( 'Instructs search engines to index and show these pages in the search results.', 'rank-math' ) ),
-];
+defined( 'ABSPATH' ) || exit;
 
 $cmb->add_field(
 	[
