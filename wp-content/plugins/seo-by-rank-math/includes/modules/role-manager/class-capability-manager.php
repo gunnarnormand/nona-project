@@ -10,10 +10,7 @@
 
 namespace RankMath\Role_Manager;
 
-use RankMath\Helper;
-use RankMath\Module;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Admin\Page;
 use MyThemeShop\Helpers\WordPress;
 
 defined( 'ABSPATH' ) || exit;
@@ -168,5 +165,15 @@ class Capability_Manager {
 		}
 
 		return [];
+	}
+
+	/**
+	 * Reset capabilities.
+	 *
+	 * @return void
+	 */
+	public function reset_capabilities() {
+		$this->remove_capabilities();
+		$this->create_capabilities();
 	}
 }

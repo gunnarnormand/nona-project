@@ -1,6 +1,6 @@
 <?php
 /**
- * Help Role page template.
+ * Role Manager main view.
  *
  * @package    RankMath
  * @subpackage RankMath\Role_Manager
@@ -22,20 +22,21 @@ rank_math()->admin->display_admin_header();
 				<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 				<p>
 					<?php
-						/* translators: %s is a Learn More link to the documentation */
-						printf( __( 'Control which user has access to which options of Rank Math. %s', 'rank-math' ), '<a href="' . \RankMath\KB::get( 'role-manager' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.' );
+						/* translators: %s is a Learn More link to the documentation. */
+						printf( esc_html__( 'Control which user has access to which options of Rank Math. %s', 'rank-math' ), '<a href="' . esc_url_raw( \RankMath\KB::get( 'role-manager' ) ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>.' );
 					?>
 				</p>
 			</header>
 
-			<input type="hidden" name="action" value="rank_math_save_capabilities">
+			<input type="hidden" name="action" value="rank_math_handle_capabilities">
 			<?php
-				wp_nonce_field( 'rank-math-save-capabilities', 'security' );
+				wp_nonce_field( 'rank-math-handle-capabilities', 'security' );
 				$cmb = cmb2_get_metabox( 'rank-math-role-manager', 'rank-math-role-manager' );
 				$cmb->show_form();
 			?>
 
 			<footer class="form-footer rank-math-ui">
+				<input type="submit" name="reset-capabilities" id="rank-math-reset-cmb" value="<?php esc_attr_e( 'Reset', 'rank-math' ); ?>" class="button button-secondary reset-options alignleft">
 				<button type="submit" class="button button-primary"><?php esc_html_e( 'Update Capabilities', 'rank-math' ); ?></button>
 			</footer>
 
