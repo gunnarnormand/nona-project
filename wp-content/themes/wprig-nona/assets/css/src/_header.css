@@ -17,10 +17,6 @@
 	transition-timing-function: var(--primary-ease);
 }
 
-@media (--wide-menu-query) {
-	background-color: rgba(255, 255, 255, 0.9);
-}
-
 @media (--sidebar-query) {
 	.site-header {
 		display: grid;
@@ -196,7 +192,7 @@
 		flex-direction: column;
 		background: var(--color-theme-white);
 		margin: 0;
-		padding: 0;
+		padding: 20px 0;
 		border: 0;
 		border-radius: var(--global-border-radius);
 		box-shadow: var(--box-shadow-out);
