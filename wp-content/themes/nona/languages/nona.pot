@@ -361,6 +361,10 @@ msgstr ""
 msgid " National Outreach for Native Americans Corp."
 msgstr ""
 
+#: ../nona/template-parts/footer/info.php:215
+msgid "Tax ID #85-3145631"
+msgstr ""
+
 #: ../nona/template-parts/header/navigation.php:16
 msgid "Main menu"
 msgstr ""
