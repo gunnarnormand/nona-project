@@ -80,48 +80,38 @@ a.wp-block-button__link:active {
 
 @media (--sidebar-query) {
 	/* NAV BUTTON */
-	#primary-menu .nav-button {
+	#primary-menu .nav-button a {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
+		color: var(--color-theme-white);
 		background-color: var(--color-theme-primary);
 		font-family: var(--highlight-font-family);
 		font-stretch: condensed;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
 		border: 0;
-		padding: 0;
+		padding: 1rem 1.5rem;
 		margin-left: 1.5rem;
 		border-radius: var(--global-border-radius);
 		box-shadow: none;
-		transition-property: box-shadow, background-color;
-		transition-duration: 1000ms;
+		transition-property: box-shadow, background-color, color;
+		transition-duration: 300ms;
 		transition-timing-function: var(--primary-ease);
 	}
 
-	#primary-menu .nav-button a {
-		padding: 1rem 1.5rem;
-		color: var(--color-theme-white);
-		transition-property: color;
-		transition-duration: 1000ms;
-		transition-timing-function: var(--primary-ease);
-	}
-
-	#primary-menu .nav-button:hover {
+	#primary-menu .nav-button a:hover {
 		box-shadow: var(--box-shadow-in);
+		color: var(--color-theme-primary);
 		background-color: var(--color-theme-white);
 	}
 
-	#primary-menu .nav-button:hover a {
-		color: var(--color-theme-primary);
+	#primary-menu .nav-button a:visited {
+		color: var(--color-theme-white);
 	}
 
-	#primary-menu .nav-button:visited {
-		color: var(--color-theme-primary);
-	}
-
-	#primary-menu .nav-button:focus,
-	#primary-menu .nav-button:active {
+	#primary-menu .nav-button a:focus,
+	#primary-menu .nav-button a:active {
 		box-shadow: var(--box-shadow-in-deep);
 		outline: none;
 	}
