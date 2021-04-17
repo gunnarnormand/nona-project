@@ -139,8 +139,8 @@ registerBlockType("nona/program", {
                         <div className="program-card-illustration">
                             <ProgramSvg1 />
                         </div>
-                        <div className="program-card-description program-card-description-1">
-                            <p>
+                        <div className="program-card-description">
+                            <p className="program-card-description-1">
                                 <RichText
                                     value={cardDesc1}
                                     onChange={onChangeCardDesc1}
@@ -161,8 +161,8 @@ registerBlockType("nona/program", {
                         <div className="program-card-illustration">
                             <ProgramSvg2 />
                         </div>
-                        <div className="program-card-description program-card-description-2">
-                            <ul>
+                        <div className="program-card-description">
+                            <ul className="program-card-description-2">
                                 <RichText
                                     multiline="li"
                                     value={cardDesc2}
@@ -184,8 +184,8 @@ registerBlockType("nona/program", {
                         <div className="program-card-illustration">
                             <ProgramSvg3 />
                         </div>
-                        <div className="program-card-description program-card-description-3">
-                            <p>
+                        <div className="program-card-description">
+                            <p className="program-card-description-3">
                                 <RichText
                                     value={cardDesc3}
                                     onChange={onChangeCardDesc3}
@@ -217,7 +217,7 @@ registerBlockType("nona/program", {
     save: ( props ) => {
 
         return (
-            <div className={`${props.className} alignfull`}>
+            <div className={`${props.attributes.className} alignfull`}>
                 <h2 className="program-title">
                     <RichText.Content value={props.attributes.programTitle} />
                 </h2>
@@ -231,7 +231,7 @@ registerBlockType("nona/program", {
                             <ProgramSvg1 />
                         </div>
                         <div className="program-card-description">
-                            <p>
+                            <p className="program-card-description-1">
                                 <RichText.Content value={props.attributes.cardDesc1} />
                             </p>
                         </div>
@@ -244,7 +244,7 @@ registerBlockType("nona/program", {
                             <ProgramSvg2 />
                         </div>
                         <div className="program-card-description">
-                            <ul>
+                            <ul className="program-card-description-2">
                                 <RichText.Content value={props.attributes.cardDesc2} />
                             </ul>
                         </div>
@@ -257,7 +257,7 @@ registerBlockType("nona/program", {
                             <ProgramSvg3 />
                         </div>
                         <div className="program-card-description">
-                            <p>
+                            <p className="program-card-description-3">
                                 <RichText.Content value={props.attributes.cardDesc3} />
                             </p>
                         </div>

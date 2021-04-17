@@ -85,7 +85,7 @@ registerBlockType("nona/cta", {
     },
     save: (props) => {
         return (
-            <div className={`${props.className} alignfull`}>
+            <div className={`${props.attributes.className} alignfull`}>
                 <OverlaySvg />
                 <div className="cta-wrap">
                     <p className="cta-text">
