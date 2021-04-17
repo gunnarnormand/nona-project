@@ -14,9 +14,18 @@
 		url(../images/nona-pattern.svg);
 	background-size: 100%;
 	margin: 4rem 0;
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
 	overflow: hidden;
+}
+
+body .about {
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+}
+
+@media (--content-query) {
+	body .about {
+		padding: 0;
+	}
 }
 /* stylelint-enable */
 
