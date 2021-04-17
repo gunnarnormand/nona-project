@@ -205,12 +205,17 @@ namespace WP_Rig\WP_Rig;
 </svg>
 <div class="footer-info">
 	<p class="copyright">&copy;
-	<?php
-	echo gmdate( 'Y' ); // phpcs:ignore
-	esc_html_e( ' National Outreach for Native Americans Corp.', 'wp-rig' );
-	if ( function_exists( 'the_privacy_policy_link' ) ) {
-		the_privacy_policy_link( '<span class="sep"> ⌁ </span>' );
-	}
-	?>
+		<?php
+		echo gmdate( 'Y' ); // phpcs:ignore
+		esc_html_e( ' National Outreach for Native Americans Corp.', 'wp-rig' );
+		?>
+	</p>
+	<p class="tax-info">
+		<?php
+		esc_html_e( 'Tax ID #85-3145631', 'wp-rig' ); 
+		if ( function_exists( 'the_privacy_policy_link' ) ) {
+			the_privacy_policy_link( '<span class="sep"> ⌁ </span>' );
+		}
+		?>
 	</p>
 </div>
