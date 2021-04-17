@@ -206,7 +206,8 @@ namespace WP_Rig\WP_Rig;
 <div class="footer-info">
 	<p class="copyright">&copy;
 	<?php
-	esc_html_e( '2020 National Outreach for Native Americans Corp.', 'nona' );
+	echo gmdate( 'Y' ); // phpcs:ignore
+	esc_html_e( ' National Outreach for Native Americans Corp.', 'nona' );
 	if ( function_exists( 'the_privacy_policy_link' ) ) {
 		the_privacy_policy_link( '<span class="sep"> ⌁ </span>' );
 	}

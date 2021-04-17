@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Nona
+# Copyright (C) 2021 Nona
 # This file is distributed under the same license as the Nona package.
 msgid ""
 msgstr ""
@@ -171,54 +171,6 @@ msgstr ""
 
 #: ../nona/inc/Editor/Component.php:147
 msgid "XL"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:57
-msgid "Hero Subtitle"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:76
-msgid "Hero Text Area Content"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:96
-msgid "Hero URL Link"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:115
-msgid "Hero URL Text"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:143
-msgid "Mission Title"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:162
-msgid "Mission Text Area Content"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:190
-msgid "First About Title"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:209
-msgid "First About Content"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:228
-msgid "Second About Title"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:247
-msgid "Second About Content"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:266
-msgid "Third About Title"
-msgstr ""
-
-#: ../nona/inc/Front_Page_Content/Component.php:285
-msgid "Third About Content"
 msgstr ""
 
 #: ../nona/inc/Lazyload/Component.php:89
@@ -405,8 +357,8 @@ msgstr ""
 msgid "Page navigation"
 msgstr ""
 
-#: ../nona/template-parts/footer/info.php:209
-msgid "2020 National Outreach for Native Americans Corp."
+#: ../nona/template-parts/footer/info.php:210
+msgid " National Outreach for Native Americans Corp."
 msgstr ""
 
 #: ../nona/template-parts/header/navigation.php:16
@@ -419,16 +371,4 @@ msgstr ""
 
 #: ../nona/template-parts/header/navigation.php:55
 msgid "Menu"
-msgstr ""
-
-#: ../nona/template-parts/homepage/hero.php:16
-msgid "The"
-msgstr ""
-
-#: ../nona/template-parts/homepage/hero.php:17
-msgid "nona"
-msgstr ""
-
-#: ../nona/template-parts/homepage/hero.php:18
-msgid "Experience"
 msgstr ""
