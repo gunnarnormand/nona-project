@@ -105,7 +105,8 @@
 		"rules": {
 			"rule-empty-line-before": null,
 			"no-eol-whitespace": null,
-			"comment-empty-line-before": null
+			"comment-empty-line-before": null,
+			"no-descending-specificity": null
 		}
 	},
 	"scripts": {
