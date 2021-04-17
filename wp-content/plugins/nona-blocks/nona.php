@@ -111,7 +111,10 @@ function nona_register_blocks() {
 	$blocks = [
 		'nona/program',
 		'nona/team',
-		'nona/cta'
+		'nona/cta',
+		'nona/hero',
+		'nona/mission',
+		'nona/about',
 	];
 	
 	// Loop through $blocks and register each block with the same script and styles.
