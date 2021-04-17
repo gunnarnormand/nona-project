@@ -6,8 +6,17 @@
 	background-color: var(--color-theme-dark-green);
 	position: relative;
 	text-align: center;
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
+}
+
+body .mission {
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+}
+
+@media (--content-query) {
+	body .mission {
+		padding: 0;
+	}
 }
 
 .entry-content h2.mission-title,
