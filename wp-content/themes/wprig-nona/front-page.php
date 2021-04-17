@@ -16,10 +16,6 @@ wp_rig()->print_styles( 'wp-rig-content', 'wp-rig-front-page' );
 	<main id="primary" class="site-main">
 		<?php
 
-		get_template_part( 'template-parts/homepage/hero' );
-		get_template_part( 'template-parts/homepage/mission' );
-		get_template_part( 'template-parts/homepage/about' );
-
 		while ( have_posts() ) {
 			the_post();
 
