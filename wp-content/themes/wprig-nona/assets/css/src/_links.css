@@ -50,7 +50,6 @@ button[role="button"]:hover,
 a.wp-block-button__link:hover {
 	cursor: pointer;
 	box-shadow: var(--box-shadow-in);
-	color: var(--color-theme-primary);
 }
 
 input[type="button"]:visited,
@@ -104,10 +103,6 @@ a.wp-block-button__link:active {
 		box-shadow: var(--box-shadow-in);
 		color: var(--color-theme-primary);
 		background-color: var(--color-theme-white);
-	}
-
-	#primary-menu .nav-button a:visited {
-		color: var(--color-theme-white);
 	}
 
 	#primary-menu .nav-button a:focus,
