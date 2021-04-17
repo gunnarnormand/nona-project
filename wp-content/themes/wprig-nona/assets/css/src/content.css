@@ -22,11 +22,11 @@
 # Post and page content
 --------------------------------------------------------------*/
 
-/* Custom rule  for sticky posts:
-.sticky {
-
+@media (--sidebar-query) {
+	.blog-single {
+		padding-top: 150px;
+	}
 }
-*/
 
 .entry {
 	margin-bottom: 1rem;
@@ -116,7 +116,7 @@
 .page-content a,
 .entry-content a:not(.wp-block-button__link):not([role="button"]),
 .entry-summary a,
-.entry-header a,
+.entry-header a:not(.post-thumbnail),
 .entry-footer a,
 .post-navigation a,
 .page-navigation a,
@@ -129,7 +129,7 @@
 .page-content a::before,
 .entry-content a:not(.wp-block-button__link):not([role="button"])::before,
 .entry-summary a::before,
-.entry-header a::before,
+.entry-header a:not(.post-thumbnail)::before,
 .entry-footer a::before,
 .post-navigation a::before,
 .page-navigation a::before,
@@ -151,7 +151,7 @@
 .page-content a:hover::before,
 .entry-content a:not(.wp-block-button__link):not([role="button"]):hover::before,
 .entry-summary a:hover::before,
-.entry-header a:hover::before,
+.entry-header a:not(.post-thumbnail):hover::before,
 .entry-footer a:hover::before,
 .post-navigation a:hover::before,
 .page-navigation a:hover::before,
