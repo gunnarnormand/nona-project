@@ -6,7 +6,7 @@ const { Button, IconButton } = wp.components;
 // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 registerBlockType("nona/team", {
     title: __("Team Member", "nona"),
-    icon: 'groups',
+    icon: "groups",
     category: "nona",
     attributes: {
         teamImage: {
