@@ -365,6 +365,11 @@ msgstr ""
 msgid "Tax ID #85-3145631"
 msgstr ""
 
+#. translators: attribution name.
+#: ../nona/template-parts/footer/info.php:224
+msgid "Website by %s"
+msgstr ""
+
 #: ../nona/template-parts/header/navigation.php:16
 msgid "Main menu"
 msgstr ""
