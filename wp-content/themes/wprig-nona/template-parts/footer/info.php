@@ -218,4 +218,10 @@ namespace WP_Rig\WP_Rig;
 		}
 		?>
 	</p>
+	<p class="attribution">
+		<?php
+		/* translators: attribution name. */
+		printf( esc_html__( 'Website by %s', 'wp-rig' ), '<a href="' . esc_url( 'https://ultramodern.us' ) . '" rel="nofollow" target="_blank">ultramodern ✨</a>' );
+		?>
+	</p>
 </div>
