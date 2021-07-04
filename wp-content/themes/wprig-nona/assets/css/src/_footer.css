@@ -144,6 +144,10 @@
 		justify-content: center;
 	}
 
+	.footer-svg {
+		bottom: 0;
+	}
+
 	.footer-info {
 		position: absolute;
 		bottom: 0;
