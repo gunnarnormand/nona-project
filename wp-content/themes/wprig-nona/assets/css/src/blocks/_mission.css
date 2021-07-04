@@ -38,7 +38,7 @@ h2.mission-title {
 .mission-mask {
 	width: 100%;
 	position: absolute;
-	bottom: 0;
+	bottom: -1px;
 	left: 0;
 }
 
@@ -55,12 +55,6 @@ h2.mission-title {
 
 	.mission-text {
 		font-size: 21px;
-	}
-}
-
-@media (--mobile-lg-query) {
-	.mission-mask {
-		bottom: -1px;
 	}
 }
 
