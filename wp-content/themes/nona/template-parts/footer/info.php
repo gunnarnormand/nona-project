@@ -212,7 +212,7 @@ namespace WP_Rig\WP_Rig;
 	</p>
 	<p class="tax-info">
 		<?php
-		esc_html_e( 'Tax ID #85-3145631', 'nona' ); 
+		esc_html_e( 'Tax ID #85-3145631', 'nona' );
 		if ( function_exists( 'the_privacy_policy_link' ) ) {
 			the_privacy_policy_link( '<span class="sep"> ⌁ </span>' );
 		}
