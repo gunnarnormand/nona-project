@@ -63,7 +63,7 @@ $cmb->add_field(
 		'desc'              => esc_html__( 'Custom values for robots meta tag on author page.', 'rank-math' ),
 		'options'           => Helper::choices_robots(),
 		'select_all_button' => false,
-		'classes'           => 'rank-math-advanced-option',
+		'classes'           => 'rank-math-advanced-option rank-math-robots-data',
 		'dep'               => [
 			'relation' => 'and',
 			[ 'author_custom_robots', 'on' ],
@@ -111,7 +111,7 @@ $cmb->add_field(
 		'dep'        => $dep,
 		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'rows'                   => 2,
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],

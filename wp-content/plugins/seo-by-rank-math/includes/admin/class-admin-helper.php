@@ -35,8 +35,11 @@ class Admin_Helper {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 		$wp_filesystem = WordPress::get_filesystem();
-		$htaccess_file = get_home_path() . '.htaccess';
+		if ( empty( $wp_filesystem ) ) {
+			return;
+		}
 
+		$htaccess_file = get_home_path() . '.htaccess';
 		return ! $wp_filesystem->exists( $htaccess_file ) ? false : [
 			'content'  => $wp_filesystem->get_contents( $htaccess_file ),
 			'writable' => $wp_filesystem->is_writable( $htaccess_file ),
@@ -147,7 +150,7 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Is user plan expire.
+	 * Is user plan expired.
 	 *
 	 * @return boolean
 	 */
@@ -328,6 +331,11 @@ class Admin_Helper {
 	 */
 	public static function is_home_page() {
 		$front_page = (int) get_option( 'page_on_front' );
+
+		if ( Helper::is_divi_frontend_editor() ) {
+			$p = get_post();
+			return ! empty( $p->ID ) && $p->ID === $front_page;
+		}
 
 		return $front_page && self::is_post_edit() && (int) Param::get( 'post' ) === $front_page;
 	}

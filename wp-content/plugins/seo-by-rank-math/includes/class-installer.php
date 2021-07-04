@@ -97,7 +97,8 @@ class Installer {
 		$tables[] = $wpdb->prefix . 'rank_math_redirections_cache';
 		$tables[] = $wpdb->prefix . 'rank_math_internal_links';
 		$tables[] = $wpdb->prefix . 'rank_math_internal_meta';
-		$tables[] = $wpdb->prefix . 'rank_math_sc_analytics';
+		$tables[] = $wpdb->prefix . 'rank_math_analytics_gsc';
+		$tables[] = $wpdb->prefix . 'rank_math_analytics_objects';
 
 		return $tables;
 	}
@@ -156,7 +157,7 @@ class Installer {
 
 		// Save install date.
 		if ( false === boolval( get_option( 'rank_math_install_date' ) ) ) {
-			update_option( 'rank_math_install_date', current_time( 'timestamp' ) );
+			update_option( 'rank_math_install_date', current_time( 'timestamp' ) ); // phpcs:ignore
 		}
 
 		// Activate Watcher.
@@ -198,7 +199,6 @@ class Installer {
 				uri VARCHAR(255) NOT NULL,
 				accessed DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 				times_accessed BIGINT(20) unsigned NOT NULL DEFAULT 1,
-				ip VARCHAR(50) NOT NULL DEFAULT '',
 				referer VARCHAR(255) NOT NULL DEFAULT '',
 				user_agent VARCHAR(255) NOT NULL DEFAULT '',
 				PRIMARY KEY id (id),
@@ -346,6 +346,8 @@ class Installer {
 					'redirections_header_code'            => '301',
 					'redirections_debug'                  => 'off',
 					'console_caching_control'             => '90',
+					'console_email_reports'               => 'on',
+					'console_email_frequency'             => 'monthly',
 					'link_builder_links_per_page'         => '7',
 					'link_builder_links_per_target'       => '1',
 					'wc_remove_product_base'              => 'off',
@@ -587,8 +589,8 @@ class Installer {
 	 */
 	private function get_cron_jobs() {
 		return [
-			'redirection/clean_trashed' => 'daily',  // Add cron for cleaning trashed redirects.
-			'links/internal_links'      => 'daily',  // Add cron for counting links.
+			'redirection/clean_trashed'    => 'daily',     // Add cron for cleaning trashed redirects.
+			'links/internal_links'         => 'daily',     // Add cron for counting links.
 		];
 	}
 
@@ -643,4 +645,5 @@ class Installer {
 		// On deactivation.
 		add_action( 'shutdown', 'flush_rewrite_rules' );
 	}
+
 }
