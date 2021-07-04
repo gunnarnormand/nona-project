@@ -305,6 +305,10 @@ ul.gfield_radio,
 	padding: 1rem;
 }
 
+.gf_step_number {
+	margin-right: 0.5rem;
+}
+
 .gf_step_active {
 	background-color: var(--color-theme-primary);
 	color: var(--color-theme-white);
@@ -393,6 +397,11 @@ form .clear-multi {
 	margin: 1rem 0;
 	border-radius: var(--global-border-radius);
 	box-shadow: var(--box-shadow-in);
+}
+
+body .validation_error .gform_submission_error {
+	font-size: 1rem;
+	font-weight: var(--highlight-font-weight-medium);
 }
 
 .fields > li.error input,
