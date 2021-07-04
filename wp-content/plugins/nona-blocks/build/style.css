@@ -226,6 +226,8 @@ TABLE OF CONTENTS:
 --------------------------------------------------------------*/
 .wp-block-nona-cta {
 	position: relative;
+	margin-top: 5em;
+	margin-bottom: 5em;
 }
 
 .wp-block-nona-cta svg {
@@ -244,8 +246,8 @@ TABLE OF CONTENTS:
 }
 
 .cta-text {
-	font-size: 1.5rem;
-	font-weight: var(--highlight-font-weight-black);
+	font-size: 2rem;
+	font-weight: var(--highlight-font-weight-medium);
 	line-height: 1.4;
 	margin-top: 0;
 }
@@ -262,5 +264,6 @@ TABLE OF CONTENTS:
 
 	.cta-text {
 		font-size: 2.5rem;
+		font-weight: var(--highlight-font-weight-black);
 	}
 }
