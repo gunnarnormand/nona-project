@@ -10,9 +10,11 @@ namespace AmpProject\AmpWP\Admin;
 use AMP_Core_Theme_Sanitizer;
 use AMP_Options_Manager;
 use AMP_Theme_Support;
+use AmpProject\AmpWP\DependencySupport;
 use AmpProject\AmpWP\Infrastructure\Conditional;
 use AmpProject\AmpWP\Infrastructure\Registerable;
 use AmpProject\AmpWP\Infrastructure\Service;
+use AmpProject\AmpWP\LoadingError;
 
 /**
  * OptionsMenu class.
@@ -58,6 +60,12 @@ class OptionsMenu implements Conditional, Service, Registerable {
 	 */
 	private $rest_preloader;
 
+	/** @var LoadingError */
+	private $loading_error;
+
+	/** @var DependencySupport */
+	private $dependency_support;
+
 	/**
 	 * Check whether the conditional object is currently needed.
 	 *
@@ -80,14 +88,18 @@ class OptionsMenu implements Conditional, Service, Registerable {
 	/**
 	 * OptionsMenu constructor.
 	 *
-	 * @param GoogleFonts   $google_fonts An instance of the GoogleFonts service.
-	 * @param ReaderThemes  $reader_themes An instance of the ReaderThemes class.
-	 * @param RESTPreloader $rest_preloader An instance of the RESTPreloader class.
+	 * @param GoogleFonts       $google_fonts An instance of the GoogleFonts service.
+	 * @param ReaderThemes      $reader_themes An instance of the ReaderThemes class.
+	 * @param RESTPreloader     $rest_preloader An instance of the RESTPreloader class.
+	 * @param DependencySupport $dependency_support An instance of the DependencySupport class.
+	 * @param LoadingError      $loading_error An instance of the LoadingError class.
 	 */
-	public function __construct( GoogleFonts $google_fonts, ReaderThemes $reader_themes, RESTPreloader $rest_preloader ) {
-		$this->google_fonts   = $google_fonts;
-		$this->reader_themes  = $reader_themes;
-		$this->rest_preloader = $rest_preloader;
+	public function __construct( GoogleFonts $google_fonts, ReaderThemes $reader_themes, RESTPreloader $rest_preloader, DependencySupport $dependency_support, LoadingError $loading_error ) {
+		$this->google_fonts       = $google_fonts;
+		$this->reader_themes      = $reader_themes;
+		$this->rest_preloader     = $rest_preloader;
+		$this->dependency_support = $dependency_support;
+		$this->loading_error      = $loading_error;
 	}
 
 	/**
@@ -210,6 +222,7 @@ class OptionsMenu implements Conditional, Service, Registerable {
 		$is_reader_theme = $this->reader_themes->theme_data_exists( get_stylesheet() );
 
 		$js_data = [
+			'AMP_QUERY_VAR'               => amp_get_slug(),
 			'CURRENT_THEME'               => [
 				'name'            => $theme->get( 'Name' ),
 				'description'     => $theme->get( 'Description' ),
@@ -217,6 +230,7 @@ class OptionsMenu implements Conditional, Service, Registerable {
 				'screenshot'      => $theme->get_screenshot() ?: null,
 				'url'             => $theme->get( 'ThemeURI' ),
 			],
+			'HAS_DEPENDENCY_SUPPORT'      => $this->dependency_support->has_support(),
 			'OPTIONS_REST_PATH'           => '/amp/v1/options',
 			'READER_THEMES_REST_PATH'     => '/amp/v1/reader-themes',
 			'IS_CORE_THEME'               => in_array(
@@ -268,7 +282,9 @@ class OptionsMenu implements Conditional, Service, Registerable {
 				<?php settings_errors(); ?>
 
 				<div class="amp amp-settings">
-					<div id="amp-settings-root"></div>
+					<div id="amp-settings-root">
+						<?php $this->loading_error->render(); ?>
+					</div>
 				</div>
 			</form>
 		</div>
