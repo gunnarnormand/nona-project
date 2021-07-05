@@ -37,7 +37,7 @@ class Objects extends Summary {
 	}
 
 	/**
-	 * Get page views for pages.
+	 * Get objects by seo score range filter.
 	 *
 	 * @param WP_REST_Request $request Filters.
 	 *
@@ -46,6 +46,10 @@ class Objects extends Summary {
 	public function get_objects_by_score( $request ) {
 		global $wpdb;
 
+		$orderby = in_array( $request->get_param( 'orderby' ), [ 'title', 'seo_score', 'created' ], true ) ? $request->get_param( 'orderby' ) : 'created';
+		$order   = in_array( $request->get_param( 'order' ), [ 'asc', 'desc' ], true ) ? strtoupper( $request->get_param( 'order' ) ) : 'DESC';
+
+		// Construct filters from request parameters.
 		$filters    = [
 			'good'   => $request->get_param( 'good' ),
 			'ok'     => $request->get_param( 'ok' ),
@@ -56,6 +60,7 @@ class Objects extends Summary {
 		$per_page   = 25;
 		$offset     = ( $request->get_param( 'page' ) - 1 ) * $per_page;
 
+		// Construct SQL condition based on filter parameters.
 		$conditions = [];
 		if ( $filters['good'] ) {
 			$conditions[] = "{$field_name} BETWEEN 81 AND 100";
@@ -79,24 +84,24 @@ class Objects extends Summary {
 			$subwhere = " AND ({$subwhere})";
 		}
 
-		$limit = "LIMIT {$offset}, {$per_page}";
-
+		// Get filtered objects data limited by page param.
 		// phpcs:disable
 		$pages = $wpdb->get_results(
 			"SELECT * FROM {$wpdb->prefix}rank_math_analytics_objects 
 			WHERE is_indexable = 1 
 			{$subwhere}
-			ORDER BY created DESC
-			{$limit}",
+			ORDER BY {$orderby} {$order}",
 			ARRAY_A
 		);
-
+		
+		// Get total filtered objects count.
 		$total_rows = $wpdb->get_var(
 			"SELECT count(*) FROM {$wpdb->prefix}rank_math_analytics_objects 
 			WHERE is_indexable = 1 
 			{$subwhere}
 			ORDER BY created DESC"
 		);
+		// phpcs:enable
 
 		return [
 			'rows'      => $this->set_page_as_key( $pages ),

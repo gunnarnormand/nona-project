@@ -1,6 +1,6 @@
 <?php
 /**
- * The 404 Monitor Module
+ * The WP List Table class for the 404 Monitor module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -121,8 +121,6 @@ class Table extends List_Table {
 		if ( in_array( $column_name, [ 'times_accessed', 'accessed', 'user_agent' ], true ) ) {
 			return esc_html( $item[ $column_name ] );
 		}
-
-		return print_r( $item, true );
 	}
 
 	/**
@@ -193,7 +191,7 @@ class Table extends List_Table {
 	}
 
 	/**
-	 * Get a list of columns.
+	 * Get the list of columns.
 	 *
 	 * @return array
 	 */
@@ -217,7 +215,7 @@ class Table extends List_Table {
 	}
 
 	/**
-	 * Get a list of sortable columns.
+	 * Get the list of sortable columns.
 	 *
 	 * @return array
 	 */

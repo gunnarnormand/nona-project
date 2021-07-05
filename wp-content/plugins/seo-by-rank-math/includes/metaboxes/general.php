@@ -38,7 +38,7 @@ $cmb->add_field(
 		'sanitization_cb' => [ '\RankMath\CMB2', 'sanitize_textfield' ],
 		'attributes'      => [
 			'class'                  => 'regular-text wp-exclude-emoji',
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
 		'before_row'      => '<div class="rank-math-serp-fields-wrapper hidden">',
@@ -68,12 +68,17 @@ $cmb->add_field(
 			'class'                  => 'cmb2_textarea wp-exclude-emoji',
 			'rows'                   => 2,
 			'data-autoresize'        => true,
-			'data-gramm_editor'      => 'false',
+			'data-gramm'             => 'false',
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],
 		'after_row'  => '</div>' . $serp_footer,
 	]
 );
+
+$trends_tool_button = '<a href="#" id="rank-math-compare-keywords-trigger" class="rank-math-compare-keywords-trigger button button-secondary" target="_blank" title="' . esc_attr__( 'Trends', 'rank-math' ) . '">' . Admin_Helper::get_trends_icon_svg() . '</a>';
+if ( ! defined( 'RANK_MATH_PRO_FILE' ) ) {
+	$trends_tool_button = '<div id="rank-math-trends-tool-preview"></div>';
+}
 
 $cmb->add_field(
 	[
@@ -90,7 +95,7 @@ $cmb->add_field(
 				'<a href="' . KB::get( 'pro-general-ce' ) . '" target="_blank"><strong>' . __( 'Upgrade today to the PRO', 'rank-math' ) . '</strong></a>'
 			) . '</p></div>'
 		),
-		'before'          => '<a href="https://rankmath.com/pricing/?utm_source=Plugin&utm_medium=CE%20General%20Tab%20Trends&utm_campaign=WP" id="rank-math-compare-keywords-trigger" class="rank-math-compare-keywords-trigger button button-secondary" target="_blank" title="' . esc_attr__( 'Trends', 'rank-math' ) . '">' . Admin_Helper::get_trends_icon_svg() . '</a>',
+		'before'          => $trends_tool_button,
 		'classes'         => 'nob',
 		'attributes'      => [
 			'placeholder' => esc_html__( 'Example: Rank Math SEO', 'rank-math' ),

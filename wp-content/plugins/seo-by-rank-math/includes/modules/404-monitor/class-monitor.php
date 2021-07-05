@@ -13,7 +13,6 @@ namespace RankMath\Monitor;
 use RankMath\Helper;
 use RankMath\Traits\Ajax;
 use RankMath\Traits\Hooker;
-use MyThemeShop\Helpers\Arr;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\Param;
 use MyThemeShop\Helpers\Conditional;
@@ -30,8 +29,6 @@ class Monitor {
 
 	/**
 	 * The Constructor.
-	 *
-	 * @codeCoverageIgnore
 	 */
 	public function __construct() {
 		if ( is_admin() ) {
@@ -42,7 +39,8 @@ class Monitor {
 			$this->ajax( 'delete_log', 'delete_log' );
 		}
 
-		$this->action( 'get_header', 'capture_404' );
+		$hook = defined( 'CT_VERSION' ) ? 'oxygen_enqueue_frontend_scripts' : 'get_header';
+		$this->action( $hook, 'capture_404' );
 		if ( Helper::has_cap( '404_monitor' ) ) {
 			$this->action( 'rank_math/admin_bar/items', 'admin_bar_items', 11 );
 		}
@@ -50,8 +48,6 @@ class Monitor {
 
 	/**
 	 * Add admin bar item.
-	 *
-	 * @codeCoverageIgnore
 	 *
 	 * @param Admin_Bar_Menu $menu Menu class instance.
 	 */
@@ -68,9 +64,7 @@ class Monitor {
 	}
 
 	/**
-	 * Delete log.
-	 *
-	 * @codeCoverageIgnore
+	 * Delete a log item.
 	 */
 	public function delete_log() {
 
@@ -84,11 +78,11 @@ class Monitor {
 		}
 
 		DB::delete_log( $id );
-		$this->success( esc_html__( 'Log successfully deleted.', 'rank-math' ) );
+		$this->success( esc_html__( 'Log item successfully deleted.', 'rank-math' ) );
 	}
 
 	/**
-	 * This function logs the request details when is_404().
+	 * Log the request details when is_404() is true and WP's response code is *not* 410 or 451.
 	 */
 	public function capture_404() {
 		if ( ! is_404() || in_array( http_response_code(), [ 410, 451 ], true ) ) {
@@ -113,7 +107,6 @@ class Monitor {
 		DB::add(
 			[
 				'uri'        => $uri,
-				'ip'         => Param::server( 'REMOTE_ADDR', '' ),
 				'referer'    => Param::server( 'HTTP_REFERER', '' ),
 				'user_agent' => $this->get_user_agent(),
 			]
@@ -121,9 +114,9 @@ class Monitor {
 	}
 
 	/**
-	 * Check if current URL is excluded.
+	 * Check if given URL is excluded.
 	 *
-	 * @param string $uri Check this URI for exclusion.
+	 * @param string $uri The URL to check for exclusion.
 	 *
 	 * @return boolean
 	 */
@@ -143,7 +136,7 @@ class Monitor {
 	}
 
 	/**
-	 * Get user-agent.
+	 * Get user-agent header.
 	 *
 	 * @return string
 	 */
@@ -154,14 +147,15 @@ class Monitor {
 		}
 
 		$parsed = $this->parse_user_agent( $u_agent );
+		$nice_ua = '';
 		if ( ! empty( $parsed['browser'] ) ) {
-			$u_agent .= $parsed['browser'];
+			$nice_ua .= $parsed['browser'];
 		}
 		if ( ! empty( $parsed['version'] ) ) {
-			$u_agent .= ' ' . $parsed['version'];
+			$nice_ua .= ' ' . $parsed['version'];
 		}
 
-		return $u_agent;
+		return $nice_ua . ' | ' . $u_agent;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * The robots txt module.
+ * The robots.txt editor module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -79,14 +79,18 @@ class Robots_Txt {
 	}
 
 	/**
-	 * Get robots.txt related data.
+	 * Get robots.txt related data: whether the file exists, the contents
+	 * of the file, and the "Search engine visibility" setting for the site.
 	 *
 	 * @return array
 	 */
 	public static function get_robots_data() {
 		$wp_filesystem = WordPress::get_filesystem();
-		$public        = absint( get_option( 'blog_public' ) );
+		if ( empty( $wp_filesystem ) ) {
+			return;
+		}
 
+		$public = absint( get_option( 'blog_public' ) );
 		if ( $wp_filesystem->exists( ABSPATH . 'robots.txt' ) ) {
 			return [
 				'exists'  => true,

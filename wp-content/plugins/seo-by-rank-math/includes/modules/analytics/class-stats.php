@@ -78,12 +78,12 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Date range.
+	 * Set date range.
 	 *
 	 * @param string $range Range of days.
 	 */
 	public function set_date_range( $range = false ) {
-		// Dates.
+		// Shift 3 days prior.
 		$subtract = DAY_IN_SECONDS * 3;
 		$start    = strtotime( false !== $range ? $range : $this->get_date_from_cookie( 'date_range', '-30 days' ) ) - $subtract;
 		$end      = strtotime( $this->do_filter( 'analytics/end_date', 'today' ) ) - $subtract;
@@ -93,38 +93,19 @@ class Stats extends Keywords {
 		$this->start = Helper::get_midnight( $start );
 
 		// Period.
-		$this->end_date   = date_i18n( 'Y-m-d 23:59:59', $end );
-		$this->start_date = date_i18n( 'Y-m-d 00:00:00', $start );
+		$this->end_date   = Helper::get_date( 'Y-m-d 23:59:59', $end, false, true );
+		$this->start_date = Helper::get_date( 'Y-m-d 00:00:00', $start, false, true );
 
-		// Compare with.
+		// Compare date.
 		$this->days               = ceil( abs( $end - $start ) / DAY_IN_SECONDS );
 		$this->compare_end_date   = $start - DAY_IN_SECONDS;
 		$this->compare_start_date = $this->compare_end_date - ( $this->days * DAY_IN_SECONDS );
-		$this->compare_end_date   = date_i18n( 'Y-m-d 23:59:59', $this->compare_end_date );
-		$this->compare_start_date = date_i18n( 'Y-m-d 00:00:00', $this->compare_start_date );
+		$this->compare_end_date   = Helper::get_date( 'Y-m-d 23:59:59', $this->compare_end_date, false, true );
+		$this->compare_start_date = Helper::get_date( 'Y-m-d 00:00:00', $this->compare_start_date, false, true );
 	}
 
 	/**
-	 * Get sql range.
-	 *
-	 * @param string $column Column name.
-	 *
-	 * @return string
-	 */
-	public function get_sql_range( $column = 'date' ) {
-		$range    = $this->get_date_from_cookie( 'date_range', '-30 days' );
-		$interval = [
-			'-30 days'  => 'WEEK(' . $column . ')',
-			'-3 months' => 'WEEK(' . $column . ')',
-			'-6 months' => 'MONTH(' . $column . ')',
-			'-1 year'   => 'MONTH(' . $column . ')',
-		];
-
-		return isset( $interval[ $range ] ) ? $interval[ $range ] : $column;
-	}
-
-	/**
-	 * Get intervals for graph.
+	 * Get date intervals for graph.
 	 *
 	 * @return array
 	 */
@@ -168,20 +149,19 @@ class Stats extends Keywords {
 		$start = strtotime( $interval, $end );
 
 		for ( $i = 0; $i < $ticks; $i++ ) {
-			$end_date   = date_i18n( 'Y-m-d', $end );
-			$start_date = date_i18n( 'Y-m-d', $start );
+			$end_date   = Helper::get_date( 'Y-m-d', $end, false, true );
+			$start_date = Helper::get_date( 'Y-m-d', $start, false, true );
 
 			$dates[ $end_date ] = [
-				'start'     => $start_date,
-				'end'       => $end_date,
-				'formatted' => $start_date === $end_date ?
-					date_i18n( 'd M, Y', $end ) :
-					date_i18n( 'd M', $start ) . ' - ' . date_i18n( 'd M, Y', $end ),
+				'start'            => $start_date,
+				'end'              => $end_date,
+				'formatted_date'   => Helper::get_date( 'd M, Y', $end ),
+				'formatted_period' => Helper::get_date( 'd M', $start ) . ' - ' . Helper::get_date( 'd M, Y', $end ),
 			];
 
 			$map[ $start_date ] = $end_date;
 			for ( $j = 1; $j < 32; $j++ ) {
-				$date = date_i18n( 'Y-m-d', strtotime( $j . ' days', $start ) );
+				$date = Helper::get_date( 'Y-m-d', strtotime( $j . ' days', $start ), false, true );
 				if ( $start_date === $end_date ) {
 					break;
 				}
@@ -197,7 +177,6 @@ class Stats extends Keywords {
 			$end   = \strtotime( '-1 days', $start );
 			$start = \strtotime( $interval, $end + $addition );
 		}
-
 		return [
 			'map'   => $map,
 			'dates' => \array_reverse( $dates ),
@@ -205,7 +184,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Get date intervals sql part.
+	 * Get date intervals for SQL query.
 	 *
 	 * @param  array  $intervals Date Intervals.
 	 * @param  string $column Column name to check.
@@ -244,7 +223,8 @@ class Stats extends Keywords {
 		foreach ( $dates as $date => $d ) {
 			$data[ $date ]                  = $default;
 			$data[ $date ]['date']          = $date;
-			$data[ $date ]['dateFormatted'] = $d['formatted'];
+			$data[ $date ]['dateFormatted'] = $d['start'] === $d['end'] ? $d['formatted_date'] : $d['formatted_period'];
+			$data[ $date ]['formattedDate'] = $d['formatted_date'];
 		}
 
 		return $data;
@@ -311,6 +291,7 @@ class Stats extends Keywords {
 
 			foreach ( $keys as $key_idx => $key ) {
 				if ( 'position' === $key ) {
+					// Should subtract the position value from 100. The position data was inverted before call this function.
 					$value = 100 - (int) $mixed[ $mixed_count - $key_idx - 1 ];
 				} else {
 					$value = $mixed[ $mixed_count - $key_idx - 1 ];
@@ -335,6 +316,7 @@ class Stats extends Keywords {
 	public function get_merged_metrics( $metrics_rows1, $metrics_rows2, $has_traffic = false ) {
 		$data = [];
 
+		// Construct base data array.
 		$base_array = [
 			'position'        => 0,
 			'diffPosition'    => 0,
@@ -351,6 +333,7 @@ class Stats extends Keywords {
 			$base_array['difference'] = 0;
 		}
 
+		// Merge first array and second array into base array.
 		foreach ( $metrics_rows1 as $key => $row ) {
 			if ( isset( $metrics_rows2[ $key ] ) ) {
 				if ( is_object( $row ) ) {
@@ -364,6 +347,7 @@ class Stats extends Keywords {
 			}
 		}
 
+		// Merge remaining items from second array into base array.
 		foreach ( $metrics_rows2 as $key => $row ) {
 			if ( is_object( $row ) ) {
 				$metrics_rows2[ $key ] = (object) array_merge( $base_array, (array) $row );
@@ -376,7 +360,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * [get_merge_data_graph description]
+	 * Merge data graph by date.
 	 *
 	 * @param  array $rows Rows to merge.
 	 * @param  array $data Data array.
@@ -474,7 +458,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Get rows from analytics.
+	 * Get analytics data.
 	 *
 	 * @param  array $args Array of arguments.
 	 * @return array
@@ -659,8 +643,11 @@ class Stats extends Keywords {
 		$sub_where = $args['sub_where'];
 
 		if ( 'page' === $dimension ) {
-			// phpcs:disable
+			// In case dimension is set as 'page', position data for each page will be top position of last ranked date.
+			// That is, among all the position value from the last date of the page, the top position(smallest position value) value will be the result.
+
 			// Get current position data.
+			// phpcs:disable
 			$query = $wpdb->prepare(
 				"SELECT {$dimension}, MAX(CONCAT({$dimension}, ':', DATE(created), ':', LPAD((100 - position), 3, '0'))) as uid
 				FROM {$wpdb->prefix}rank_math_analytics_gsc 
@@ -691,7 +678,7 @@ class Stats extends Keywords {
 			$positions     = $this->set_dimension_as_key( $positions, $dimension );
 			$old_positions = $this->set_dimension_as_key( $old_positions, $dimension );
 
-			// Calculate position difference, merge old into current.
+			// Calculate position difference, merge old into current position data array.
 			foreach ( $positions as $page => &$row ) {
 				$row = (array) $row; // force to convert as array.
 				if ( ! isset( $old_positions[ $page ] ) ) {
@@ -703,23 +690,50 @@ class Stats extends Keywords {
 				$row['diffPosition'] = $row['position'] - $old_position_value;
 			}
 		} else {
+			// In case dimension is not 'page', position data for each dimension will be most recent position value.
+
+			// Step1. Get most recent row id for each dimension for current data.
 			// phpcs:disable
 			$query = $wpdb->prepare(
+				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				$this->start_date,
+				$this->end_date
+			);
+			$ids = $wpdb->get_results( $query );
+			// phpcs:enable
+
+			// Step2. Get id list from above result.
+			$ids       = wp_list_pluck( $ids, 'id' );
+			$ids_where = " AND id IN ('" . join( "', '", $ids ) . "')";
+
+			// Step3. Get most recent row id for each dimension for compare data.
+			// phpcs:disable
+			$query = $wpdb->prepare(
+				"SELECT MAX(id) as id FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension}",
+				$this->compare_start_date,
+				$this->compare_end_date
+			);
+			$old_ids = $wpdb->get_results( $query );
+			// phpcs:enable
+
+			// Step4. Get id list from above result.
+			$old_ids       = wp_list_pluck( $old_ids, 'id' );
+			$old_ids_where = " AND id IN ('" . join( "', '", $old_ids ) . "')";
+
+			// Step5. Get position and difference data based on above id list.
+			// phpcs:disable
+			$positions = $wpdb->get_results(
 				"SELECT
 					t1.{$dimension} as {$dimension}, ROUND( t1.position, 0 ) as position,
 					COALESCE( ROUND( t1.position - COALESCE( t2.position, 100 ), 0 ), 0 ) as diffPosition
 				FROM
-					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1 AND id IN (SELECT MAX(id) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension})) AS t1
+					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1{$ids_where}) AS t1
 				LEFT JOIN
-					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1 AND id IN (SELECT MAX(id) FROM {$wpdb->prefix}rank_math_analytics_gsc WHERE created BETWEEN %s AND %s {$sub_where} GROUP BY {$dimension})) AS t2
+					( SELECT a.{$dimension}, a.position FROM {$wpdb->prefix}rank_math_analytics_gsc AS a WHERE 1 = 1{$old_ids_where}) AS t2
 				ON t1.{$dimension} = t2.{$dimension}
 				{$where}",
-				$this->start_date,
-				$this->end_date,
-				$this->compare_start_date,
-				$this->compare_end_date
+				ARRAY_A
 			);
-			$positions = $wpdb->get_results( $query, ARRAY_A );
 			// phpcs:enable
 
 			$positions = $this->set_dimension_as_key( $positions, $dimension );
@@ -748,8 +762,8 @@ class Stats extends Keywords {
 		$dimension = $args['dimension'];
 		$sub_where = $args['sub_where'];
 
-		// phpcs:disable
 		// Get metrics data like impressions, click, ctr, etc.
+		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT
 				t1.{$dimension} as {$dimension}, t1.clicks, t1.impressions, t1.ctr,
@@ -772,7 +786,6 @@ class Stats extends Keywords {
 			$this->compare_start_date,
 			$this->compare_end_date
 		);
-		
 		$metrics = $wpdb->get_results( $query, ARRAY_A );
 		// phpcs:enable
 
@@ -789,30 +802,17 @@ class Stats extends Keywords {
 	 * @return array
 	 */
 	public function filter_analytics_data( $data, $args ) {
-		$order_position_fields = [ 'position', 'diffPosition' ];
-		$dimension             = $args['dimension'];
-		$type                  = $args['type'];
-		$offset                = $args['offset'];
-		$perpage               = $args['perpage'];
-		$order_by_field        = $args['orderBy'];
+		$dimension      = $args['dimension'];
+		$offset         = $args['offset'];
+		$perpage        = $args['perpage'];
+		$order_by_field = $args['orderBy'];
 
-		// Filter array by $type value.
-		$order_by_position = in_array( $order_by_field, [ 'diffPosition', 'position' ], true ) ? true : false;
-
-		if ( ( 'win' === $type && $order_by_position ) || ( 'lose' === $type && ! $order_by_position ) ) {
-			$data = array_filter(
-				$data,
-				function( $row ) use ( $order_by_field ) {
-					return $row[ $order_by_field ] < 0;
-				}
-			);
-		} elseif ( ( 'lose' === $type && $order_by_position ) || ( 'win' === $type && ! $order_by_position ) ) {
-			$data = array_filter(
-				$data,
-				function( $row ) use ( $order_by_field ) {
-					return $row[ $order_by_field ] > 0;
-				}
-			);
+		/**
+		 * Short-circuit to filter the data.
+		 */
+		$pre = $this->do_filter( 'analytics/pre_filter_data', null, $data, $args );
+		if ( is_array( $pre ) ) {
+			return $pre;
 		}
 
 		// Sort array by $args['order'], $order_by_field value.
@@ -836,7 +836,10 @@ class Stats extends Keywords {
 	public function set_page_as_key( $data ) {
 		$rows = [];
 		foreach ( $data as $row ) {
-			$page          = $this->get_relative_url( $row['page'] );
+			$page = $this->get_relative_url( $row['page'] );
+			if ( ! empty( $row['object_id'] ) && empty( $row['schemas_in_use'] ) ) {
+				$row['schemas_in_use'] = Helper::get_default_schema_type( $row['object_id'], true, true );
+			}
 			$rows[ $page ] = $row;
 		}
 
@@ -844,21 +847,7 @@ class Stats extends Keywords {
 	}
 
 	/**
-	 * Set query as key.
-	 *
-	 * @param array $data Rows to process.
-	 * @return array
-	 */
-	public function set_query_as_key( $data ) {
-		$rows = [];
-		foreach ( $data as $row ) {
-			$rows[ $row['query'] ] = $row;
-		}
-		return $rows;
-	}
-
-	/**
-	 * Set dimension as key.
+	 * Set dimension parameter as key.
 	 *
 	 * @param array  $data      Rows to process.
 	 * @param string $dimension Dimension to set as key.
@@ -872,7 +861,7 @@ class Stats extends Keywords {
 			} else {
 				$value = $row[ $dimension ];
 			}
-			$key          = 'page' === $dimension ? $this->get_relative_url( $value ) : $value;
+			$key          = 'page' === $dimension ? $this->get_relative_url( $value ) : strtolower( $value );
 			$rows[ $key ] = $row;
 		}
 
@@ -889,12 +878,14 @@ class Stats extends Keywords {
 	 */
 	public function set_query_position( $data, $history ) {
 		foreach ( $history as $row ) {
-			if ( ! isset( $data[ $row->query ]['query'] ) ) {
-				$data[ $row->query ]['query'] = $row->query;
-			}
+			$key = strtolower( $row->query );
 
-			if ( ! isset( $data[ $row->query ]['graph'] ) ) {
-				$data[ $row->query ]['graph'] = [];
+			$data[ $key ]['query'] = isset( $data[ $key ]['query'] ) ? $data[ $key ]['query'] : $key;
+			$data[ $key ]['graph'] = isset( $data[ $key ]['graph'] ) ? $data[ $key ]['graph'] : [];
+
+			if ( ! isset( $row->formatted_date ) ) {
+				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
+				$row->formatted_date = $formatted_date;
 			}
 
 			$data[ $row->query ]['graph'][] = $row;
@@ -913,11 +904,14 @@ class Stats extends Keywords {
 	 */
 	public function set_page_position_graph( $data, $history ) {
 		foreach ( $history as $row ) {
-			if ( ! isset( $data[ $row->page ]['graph'] ) ) {
-				$data[ $row->page ]['graph'] = [];
-			}
+			$data[ $row->page ]['graph'] = isset( $data[ $row->page ]['graph'] ) ? $data[ $row->page ]['graph'] : [];
 
+			if ( ! isset( $row->formatted_date ) ) {
+				$formatted_date      = Helper::get_date( 'd M, Y', strtotime( $row->date ) );
+				$row->formatted_date = $formatted_date;
+			}
 			$data[ $row->page ]['graph'][] = $row;
+
 		}
 
 		return $data;
