@@ -1,6 +1,6 @@
 <?php
 /**
- * Export Redirections in various formats.
+ * The Redirections Export.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -18,6 +18,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Export class.
+ *
+ * @codeCoverageIgnore
  */
 class Export {
 
@@ -74,7 +76,7 @@ class Export {
 		$text[] = '';
 		$text[] = '# Rank Math Redirections END';
 
-		echo implode( PHP_EOL, $text ) . PHP_EOL; // phpcs:ignore
+		echo implode( PHP_EOL, $text ) . PHP_EOL;
 		exit;
 	}
 
@@ -110,9 +112,9 @@ class Export {
 		foreach ( $sources as $from ) {
 			$url = $from['pattern'];
 			if ( 'regex' !== $from['comparison'] && strpos( $url, '?' ) !== false || strpos( $url, '&' ) !== false ) {
-				$url_parts = wp_parse_url( $url );
+				$url_parts = parse_url( $url );
 				$url       = $url_parts['path'];
-				$output[]  = sprintf( 'RewriteCond %%{QUERY_STRING} ^%s$', preg_quote( $url_parts['query'], null ) );
+				$output[]  = sprintf( 'RewriteCond %%{QUERY_STRING} ^%s$', preg_quote( $url_parts['query'] ) );
 			}
 
 			// Get rewrite string.
@@ -215,7 +217,7 @@ class Export {
 			'end'      => '{url}/?$',
 		];
 
-		$url = preg_quote( $url, null );
+		$url = preg_quote( $url );
 		return isset( $hash[ $comparison ] ) ? str_replace( '{url}', $url, $hash[ $comparison ] ) : $url;
 	}
 
@@ -227,7 +229,7 @@ class Export {
 	 * @return string
 	 */
 	private function encode2nd( $url ) {
-		$url = rawurlencode( $url );
+		$url = urlencode( $url );
 		$url = str_replace( '%2F', '/', $url );
 		$url = str_replace( '%3F', '?', $url );
 		$url = str_replace( '%3A', ':', $url );

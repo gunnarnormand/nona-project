@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirection add/edit form.
+ * The Redirections Form.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -19,6 +19,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Form class.
+ *
+ * @codeCoverageIgnore
  */
 class Form {
 
@@ -26,6 +28,8 @@ class Form {
 
 	/**
 	 * The hooks.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function hooks() {
 		$this->action( 'cmb2_admin_init', 'register_form' );
@@ -35,6 +39,8 @@ class Form {
 
 	/**
 	 * Display form.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function display() {
 		?>
@@ -57,7 +63,7 @@ class Form {
 	}
 
 	/**
-	 * Create CMB.
+	 * Create box
 	 *
 	 * @return CMB2
 	 */
@@ -156,19 +162,16 @@ class Form {
 	 */
 	public function set_options( $opts ) {
 		// If editing previous record.
-		$redirection_id = $this->is_editing();
-		if ( $redirection_id ) {
+		if ( $redirection_id = $this->is_editing() ) { // phpcs:ignore
 			return DB::get_redirection_by_id( $redirection_id );
 		}
 
-		$url = Param::get( 'url' );
-		if ( $url ) {
+		if ( $url = Param::get( 'url' ) ) { // phpcs:ignore
 			$url = esc_attr( $url );
 			return [ 'sources' => [ [ 'pattern' => $url ] ] ];
 		}
 
-		$urls = Param::get( 'urls', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-		if ( $urls ) {
+		if ( $urls = Param::get( 'urls', false, FILTER_DEFAULT, FILTER_REQUIRE_ARRAY ) ) { // phpcs:ignore
 			$urls   = array_map( 'esc_attr', $urls );
 			$return = [ 'sources' => [] ];
 			foreach ( $urls as $url ) {
@@ -198,7 +201,6 @@ class Form {
 			[
 				'ids'     => $logs,
 				'orderby' => '',
-				'limit'   => 1000,
 			]
 		);
 

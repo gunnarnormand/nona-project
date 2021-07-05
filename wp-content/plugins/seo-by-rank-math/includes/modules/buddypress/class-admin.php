@@ -1,6 +1,6 @@
 <?php
 /**
- * The admin-side code for the BuddyPress module.
+ * The BuddyPress Module
  *
  * @since      1.0.32
  * @package    RankMath
@@ -10,6 +10,7 @@
 
 namespace RankMath\BuddyPress;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -29,13 +30,14 @@ class Admin {
 	}
 
 	/**
-	 * Add new tab in the Titles & Meta settings for the BuddyPress module.
+	 * Add module settings into titles optional panel.
 	 *
 	 * @param array $tabs Array of option panel tabs.
 	 *
 	 * @return array
 	 */
 	public function add_title_settings( $tabs ) {
+
 		$tabs['buddypress'] = [
 			'title' => esc_html__( 'BuddyPress:', 'rank-math' ),
 			'type'  => 'seprator',

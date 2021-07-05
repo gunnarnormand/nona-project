@@ -30,7 +30,7 @@ class Authentication {
 	protected static $api_version = '2.1';
 
 	/**
-	 * Get or update token data.
+	 * Get or update Search Console data.
 	 *
 	 * @param  bool|array $data Data to save.
 	 * @return bool|array
@@ -134,16 +134,7 @@ class Authentication {
 	public static function get_page_slug() {
 		$page = Param::get( 'page' );
 		if ( ! empty( $page ) ) {
-			switch ( $page ) {
-				case 'rank-math-wizard':
-					return 'rank-math-wizard&step=analytics';
-
-				case 'rank-math-analytics':
-					return 'rank-math-analytics';
-
-				default:
-					return 'rank-math-options-general#setting-panel-analytics';
-			}
+			return 'rank-math-wizard' === $page ? 'rank-math-wizard&step=analytics' : 'rank-math-options-general#setting-panel-analytics';
 		}
 
 		$page = wp_get_referer();

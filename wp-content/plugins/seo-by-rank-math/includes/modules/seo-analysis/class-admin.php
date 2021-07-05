@@ -1,6 +1,6 @@
 <?php
 /**
- * The SEO Analysis module - admin side functionality.
+ * The SEO Analysis Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -10,6 +10,7 @@
 
 namespace RankMath\SEO_Analysis;
 
+use RankMath\Helper;
 use RankMath\Module\Base;
 use MyThemeShop\Admin\Page;
 

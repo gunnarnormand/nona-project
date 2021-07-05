@@ -283,9 +283,9 @@ class Console extends Analytics {
 	}
 
 	/**
-	 * Check if console is connected.
+	 * Get site url.
 	 *
-	 * @return boolean Returns True if the console is connected, otherwise False.
+	 * @return string
 	 */
 	public static function is_console_connected() {
 		$profile = wp_parse_args(

@@ -130,7 +130,7 @@ class Notification_Center {
 		?>
 		<script>
 			;(function($) {
-				$( '.wp-helpers-notice.is-dismissible' ).on( 'click', '.notice-dismiss', function() {
+				$( '.is-dismissible' ).on( 'click', '.notice-dismiss', function() {
 					var notice = $( this ).parent()
 
 					$.ajax({

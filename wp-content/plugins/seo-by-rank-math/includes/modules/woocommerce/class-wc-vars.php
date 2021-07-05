@@ -1,6 +1,6 @@
 <?php
 /**
- * Register additional variables for WooCommerce.
+ * The WooCommerce register variables.
  *
  * @since      1.0.32
  * @package    RankMath

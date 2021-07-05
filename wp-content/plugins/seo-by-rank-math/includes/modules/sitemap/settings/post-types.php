@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap settings - post type tabs.
+ * Sitemap - Post Types
  *
  * @package    RankMath
  * @subpackage RankMath\Sitemap

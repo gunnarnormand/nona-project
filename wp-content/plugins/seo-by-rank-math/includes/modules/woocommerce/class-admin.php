@@ -1,6 +1,6 @@
 <?php
 /**
- * The WooCommerce module - admin side functionality.
+ * The WooCommerce Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -11,6 +11,7 @@
 namespace RankMath\WooCommerce;
 
 use RankMath\KB;
+use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
 use RankMath\Module\Base;
 use RankMath\Traits\Hooker;
@@ -55,7 +56,7 @@ class Admin extends Base {
 			return;
 		}
 
-		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'includes/modules/woocommerce/assets/js/woocommerce.js', [ 'rank-math-metabox' ], rank_math()->version, true );
+		wp_enqueue_script( 'rank-math-description-analysis', rank_math()->plugin_url() . 'assets/admin/js/product-description.js', [ 'rank-math-metabox' ], rank_math()->version, true );
 	}
 
 	/**

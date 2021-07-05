@@ -1,6 +1,6 @@
 <?php
 /**
- * The WP List Table class for the 404 Monitor module.
+ * The 404 Monitor Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -193,7 +193,7 @@ class Table extends List_Table {
 	}
 
 	/**
-	 * Get the list of columns.
+	 * Get a list of columns.
 	 *
 	 * @return array
 	 */
@@ -217,7 +217,7 @@ class Table extends List_Table {
 	}
 
 	/**
-	 * Get the list of sortable columns.
+	 * Get a list of sortable columns.
 	 *
 	 * @return array
 	 */

@@ -1,6 +1,6 @@
 <?php
 /**
- * The robots.txt editor module.
+ * The robots txt module.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -79,8 +79,7 @@ class Robots_Txt {
 	}
 
 	/**
-	 * Get robots.txt related data: whether the file exists, the contents
-	 * of the file, and the "Search engine visibility" setting for the site.
+	 * Get robots.txt related data.
 	 *
 	 * @return array
 	 */

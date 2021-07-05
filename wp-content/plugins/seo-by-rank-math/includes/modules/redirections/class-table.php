@@ -1,6 +1,6 @@
 <?php
 /**
- * The WP List Table class for the Redirections module.
+ * The Redirections Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -67,6 +67,8 @@ class Table extends List_Table {
 	/**
 	 * Handles the checkbox column output.
 	 *
+	 * @codeCoverageIgnore
+	 *
 	 * @param object $item The current item.
 	 */
 	public function column_cb( $item ) {
@@ -96,6 +98,8 @@ class Table extends List_Table {
 	/**
 	 * Handles the default column output.
 	 *
+	 * @codeCoverageIgnore
+	 *
 	 * @param object $item        The current item.
 	 * @param string $column_name The current column name.
 	 */
@@ -109,11 +113,13 @@ class Table extends List_Table {
 			return esc_html( $item[ $column_name ] );
 		}
 
-		return esc_html( wp_json_encode( $item, true ) );
+		return esc_html( print_r( $item, true ) );
 	}
 
 	/**
 	 * Get html for sources column
+	 *
+	 * @codeCoverageIgnore
 	 *
 	 * @param  array $sources Array of sources.
 	 * @return string
@@ -151,7 +157,9 @@ class Table extends List_Table {
 	}
 
 	/**
-	 * Get html of a source.
+	 * Get html of a source
+	 *
+	 * @codeCoverageIgnore
 	 *
 	 * @param  array $source          Source for which render html.
 	 * @param  array $comparison_hash Comparison array hash.
@@ -169,6 +177,8 @@ class Table extends List_Table {
 
 	/**
 	 * Generate row actions div.
+	 *
+	 * @codeCoverageIgnore
 	 *
 	 * @param object $item The current item.
 	 */
@@ -239,6 +249,8 @@ class Table extends List_Table {
 	 * Get an associative array ( option_name => option_title ) with the list
 	 * of bulk actions available on this table.
 	 *
+	 * @codeCoverageIgnore
+	 *
 	 * @return array
 	 */
 	public function get_bulk_actions() {
@@ -291,6 +303,8 @@ class Table extends List_Table {
 
 	/**
 	 * Generates content for a single row of the table.
+	 *
+	 * @codeCoverageIgnore
 	 *
 	 * @param object $item The current item.
 	 */

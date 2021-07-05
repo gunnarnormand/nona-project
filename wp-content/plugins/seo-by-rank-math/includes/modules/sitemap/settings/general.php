@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap settings - General tab.
+ * Sitemap - General
  *
  * @package    RankMath
  * @subpackage RankMath\Sitemap

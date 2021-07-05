@@ -1,6 +1,6 @@
 <?php
 /**
- * 404 Monitor inline help: "Screen Content" tab.
+ * 404 Monitor inline help.
  *
  * @package    RankMath
  * @subpackage RankMath\Monitor

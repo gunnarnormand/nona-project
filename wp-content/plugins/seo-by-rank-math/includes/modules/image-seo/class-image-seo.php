@@ -1,16 +1,20 @@
 <?php
 /**
- * The Image SEO module.
+ * Image SEO module.
  *
  * @since      1.0
  * @package    RankMath
- * @subpackage RankMath\Image_Seo
  * @author     Rank Math <support@rankmath.com>
  */
 
 namespace RankMath\Image_Seo;
 
+use RankMath\KB;
+use RankMath\Runner;
+use RankMath\Helper;
+use RankMath\Admin\Admin_Helper;
 use RankMath\Traits\Hooker;
+use MyThemeShop\Helpers\HTML;
 
 defined( 'ABSPATH' ) || exit;
 

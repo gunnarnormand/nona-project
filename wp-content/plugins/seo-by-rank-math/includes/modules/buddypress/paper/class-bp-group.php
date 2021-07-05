@@ -1,6 +1,6 @@
 <?php
 /**
- * The BuddyPress group class for the BuddyPress module.
+ * The BP_Group Class
  *
  * @since      1.0.32
  * @package    RankMath
@@ -38,7 +38,7 @@ class BP_Group implements IPaper {
 	}
 
 	/**
-	 * Retrieves the robots meta value.
+	 * Retrieves the robots.
 	 *
 	 * @return string
 	 */
@@ -52,9 +52,9 @@ class BP_Group implements IPaper {
 	}
 
 	/**
-	 * Retrieves the advanced robots meta values.
+	 * Retrieves the robots.
 	 *
-	 * @return array The advanced robots meta values for the group.
+	 * @return array The advanced robots for the group.
 	 */
 	public function advanced_robots() {
 		$robots = [];
@@ -66,7 +66,7 @@ class BP_Group implements IPaper {
 	}
 
 	/**
-	 * Retrieves the default canonical URL.
+	 * Retrieves the canonical URL.
 	 *
 	 * @return array
 	 */
@@ -75,9 +75,9 @@ class BP_Group implements IPaper {
 	}
 
 	/**
-	 * Retrieves the default meta keywords.
+	 * Retrieves meta keywords.
 	 *
-	 * @return string
+	 * @return string The focus keywords.
 	 */
 	public function keywords() {
 		return '';

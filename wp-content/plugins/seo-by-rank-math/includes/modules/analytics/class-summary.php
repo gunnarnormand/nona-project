@@ -118,7 +118,7 @@ class Summary {
 
 		$total = 0;
 		foreach ( $data as $row ) {
-			$total              += (int) $row->count;
+			$total += (int) $row->count; // phpcs:ignore
 			$stats->{$row->type} = (int) $row->count;
 		}
 		$stats->total   = $total;
@@ -142,7 +142,7 @@ class Summary {
 	}
 
 	/**
-	 * Get analytics summmary.
+	 * Get console data/
 	 *
 	 * @return object
 	 */
@@ -281,20 +281,17 @@ class Summary {
 	}
 
 	/**
-	 * Get analytics graph data.
+	 * Get graph data.
 	 *
 	 * @return array
 	 */
 	public function get_analytics_summary_graph() {
 		global $wpdb;
 
-		$data = new \stdClass();
-
-		// Step1. Get splitted date intervals for graph within selected date range.
+		$data          = new \stdClass();
 		$intervals     = $this->get_intervals();
 		$sql_daterange = $this->get_sql_date_intervals( $intervals );
 
-		// Step2. Get current analytics data by splitted date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT DATE_FORMAT( created, '%%Y-%%m-%%d') as date, SUM(clicks) as clicks, SUM(impressions) as impressions, AVG(position) as position, AVG(ctr) as ctr, {$sql_daterange}
@@ -308,7 +305,6 @@ class Summary {
 		$analytics = $this->set_dimension_as_key( $analytics, 'range_group' );
 		// phpcs:enable
 
-		// Step2. Get current keyword data by splitted date intervals. Keyword count should be calculated as total count of most recent date for each splitted date intervals.
 		// phpcs:disable
 		$query = $wpdb->prepare(
 			"SELECT t.range_group, MAX(CONCAT(t.range_group, ':', t.date, ':', t.keywords )) as mixed FROM

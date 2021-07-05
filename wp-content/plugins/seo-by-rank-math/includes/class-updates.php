@@ -46,15 +46,13 @@ class Updates implements Runner {
 		'1.0.43'   => 'updates/update-1.0.43.php',
 		'1.0.46'   => 'updates/update-1.0.46.php',
 		'1.0.47'   => 'updates/update-1.0.47.php',
+		'1.0.48'   => 'updates/update-1.0.48.php',
 		'1.0.49'   => 'updates/update-1.0.49.php',
 		'1.0.50'   => 'updates/update-1.0.50.php',
 		'1.0.52'   => 'updates/update-1.0.52.php',
 		'1.0.54'   => 'updates/update-1.0.54.php',
 		'1.0.55'   => 'updates/update-1.0.55.php',
 		'1.0.56'   => 'updates/update-1.0.56.php',
-		'1.0.62'   => 'updates/update-1.0.62.php',
-		'1.0.63'   => 'updates/update-1.0.63.php',
-		'1.0.65'   => 'updates/update-1.0.65.php',
 	];
 
 	/**
@@ -95,7 +93,7 @@ class Updates implements Runner {
 
 		// Save install date.
 		if ( false === boolval( get_option( 'rank_math_install_date' ) ) ) {
-			update_option( 'rank_math_install_date', current_time( 'timestamp' ) ); // phpcs:ignore
+			update_option( 'rank_math_install_date', current_time( 'timestamp' ) );
 		}
 
 		// Clear rollback option if necessary.

@@ -12,7 +12,8 @@ namespace RankMath\Admin\Importers;
 
 use RankMath\Helper;
 use RankMath\Admin\Admin_Helper;
-use MyThemeShop\Helpers\Str;
+use RankMath\Schema\JsonLD;
+use RankMath\Schema\Singular;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,7 +51,21 @@ class WP_Schema_Pro extends Plugin_Importer {
 	protected $choices = [ 'settings', 'postmeta' ];
 
 	/**
-	 * Convert Schema Pro variables if needed.
+	 * JsonLD.
+	 *
+	 * @var JsonLD
+	 */
+	private $json_ld;
+
+	/**
+	 * Singular.
+	 *
+	 * @var Singular
+	 */
+	private $single;
+
+	/**
+	 * Convert SEOPress variables if needed.
 	 *
 	 * @param string $string Value to convert.
 	 *
@@ -130,6 +145,10 @@ class WP_Schema_Pro extends Plugin_Importer {
 	protected function postmeta() {
 		$this->set_pagination( $this->get_post_ids( true ) );
 
+		// Set Converter.
+		$this->json_ld = new JsonLD();
+		$this->single  = new Singular();
+
 		foreach ( $this->get_post_ids() as $snippet_post ) {
 			$post_id = $snippet_post->ID;
 			$snippet = $this->get_snippet_details( $post_id );
@@ -156,135 +175,62 @@ class WP_Schema_Pro extends Plugin_Importer {
 			return;
 		}
 
-		$details = $snippet['details'];
-		$methods = [
+		$schema_type = $this->sanitize_schema_type( $type );
+		$details     = $snippet['details'];
+		$methods     = [
 			'work-example' => 'get_book_editions',
-			'steps'        => 'get_howto_steps',
-			'tool'         => 'get_howto_tools',
-			'supply'       => 'get_howto_supplies',
+			'address'      => 'get_address',
 		];
 
-		$data = [];
 		foreach ( $hash[ $type ] as $snippet_key => $snippet_value ) {
-			$method = isset( $methods[ $snippet_key ] ) ? $methods[ $snippet_key ] : 'get_schema_meta';
-			$value  = $this->$method( $details, $snippet_key, $post_id, $snippet, $snippet_value );
 
-			$this->validate_schema_data( $data, $value, $snippet_value, $snippet_key );
-		}
-
-		if ( ! empty( $data ) ) {
-			if ( isset( $data['schema-type'] ) ) {
-				$type = $data['schema-type'];
-				unset( $data['schema-type'] );
+			if ( 'address' === $snippet_key ) {
+				$value = $this->get_address( $details, $snippet_key, $post_id, $snippet, $snippet_value );
+				update_post_meta( $post_id, 'rank_math_snippet_' . $schema_type . '_address', $value );
+				continue;
 			}
 
-			$type             = $this->sanitize_schema_type( $type );
-			$data['@type']    = $type;
-			$data['metadata'] = [
-				'title'     => Helper::sanitize_schema_title( $type ),
-				'type'      => 'template',
-				'isPrimary' => 1,
-				'shortcode' => uniqid( 's-' ),
-			];
+			$method = isset( $methods[ $snippet_key ] ) ? $methods[ $snippet_key ] : 'get_schema_meta';
+			$value  = $this->$method( $details, $snippet_key, $post_id, $snippet, $snippet_value );
+			update_post_meta( $post_id, 'rank_math_snippet_' . $snippet_value, $value );
+		}
 
-			$type = in_array( $type, [ 'BlogPosting', 'NewsArticle' ], true ) ? 'Article' : $type;
+		update_post_meta( $post_id, 'rank_math_rich_snippet', $schema_type );
+
+		// Convert post now.
+		$data = $this->json_ld->get_old_schema( $post_id, $this->single );
+		if ( isset( $data['richSnippet'] ) ) {
+			$data             = $data['richSnippet'];
+			$type             = $data['@type'];
+			$data['metadata'] = [
+				'title' => $type,
+				'type'  => 'template',
+			];
 			update_post_meta( $post_id, 'rank_math_schema_' . $type, $data );
 		}
 	}
 
 	/**
-	 * Validate schema data.
+	 * Get address
 	 *
-	 * @param array  $data        Schema entity data.
-	 * @param string $value       Entity value.
-	 * @param string $key         Entity key.
-	 * @param string $snippet_key Snippet key.
+	 * @param  array  $details       Array of details.
+	 * @param  string $snippet_key   Snippet key.
+	 * @param  string $post_id       Post ID.
+	 * @param  array  $snippet       Snippet data.
+	 * @param  string $snippet_value Snippet value.
+	 * @return string
 	 */
-	private function validate_schema_data( &$data, $value, $key, $snippet_key ) {
-		if ( 'question-answer' === $snippet_key && ! empty( $value ) ) {
-			foreach ( $value as $question ) {
-				$data[ $key ][] = [
-					'@type'          => 'Question',
-					'name'           => $question['question'],
-					'acceptedAnswer' => [
-						'@type' => 'Answer',
-						'text'  => $question['answer'],
-					],
-				];
-			}
-
-			return;
+	private function get_address( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
+		if ( empty( $snippet_value ) ) {
+			return '';
 		}
 
-		if ( ! Str::contains( '.', $key ) ) {
-			$data[ $key ] = $value;
-			return;
+		$address = [];
+		foreach ( $snippet_value as $key => $meta ) {
+			$address[ $meta ] = $this->get_schema_meta( $details, $key, $post_id, $snippet, $snippet_value );
 		}
 
-		$element = explode( '.', $key );
-		if ( 2 === count( $element ) ) {
-			$this->add_type( $data[ $element[0] ], $element[0] );
-			$data[ $element[0] ][ $element[1] ] = $value;
-			return;
-		}
-
-		if ( count( $element ) > 2 ) {
-			$this->add_type( $data[ $element[0] ], $element[0] );
-			$this->add_type( $data[ $element[0] ][ $element[1] ], $element[1] );
-			$data[ $element[0] ][ $element[1] ][ $element[2] ] = $value;
-		}
-	}
-
-	/**
-	 * Add property type.
-	 *
-	 * @param array  $data Schema entity data.
-	 * @param string $key  Entity key.
-	 */
-	private function add_type( &$data, $key ) {
-		if ( 'location' === $key || 'jobLocation' === $key ) {
-			$data['@type'] = 'Place';
-		}
-
-		if ( 'address' === $key ) {
-			$data['@type'] = 'PostalAddress';
-		}
-
-		if ( 'offers' === $key ) {
-			$data['@type'] = 'Offer';
-		}
-
-		if ( 'brand' === $key ) {
-			$data['@type'] = 'Brand';
-		}
-
-		if ( 'review' === $key ) {
-			$data['@type'] = 'Review';
-		}
-
-		if ( 'reviewRating' === $key ) {
-			$data['@type'] = 'Rating';
-		}
-
-		if ( 'nutrition' === $key ) {
-			$data['@type'] = 'NutritionInformation';
-		}
-
-		if ( 'baseSalary' === $key ) {
-			$data['@type'] = 'MonetaryAmount';
-		}
-
-		if ( 'value' === $key ) {
-			$data['@type'] = 'QuantitativeValue';
-		}
-
-		if ( 'performer' === $key ) {
-			$data['@type'] = 'Person';
-		}
-
-		if ( 'provider' === $key || 'hiringOrganization' === $key ) {
-			$data['@type'] = 'Organization';
-		}
+		return $address;
 	}
 
 	/**
@@ -325,104 +271,6 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 * @param  string $snippet_value Snippet value.
 	 * @return string
 	 */
-	private function get_howto_steps( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
-		$steps = get_post_meta( $post_id, "how-to-{$snippet['id']}-steps", true );
-		if ( empty( $steps ) ) {
-			return [];
-		}
-
-		$data = [];
-		foreach ( $steps as $step ) {
-			$entity = [
-				'@type' => 'HowToStep',
-				'name'  => $step['name'],
-				'url'   => $step['url'],
-			];
-
-			if ( ! empty( $step['description'] ) ) {
-				$entity['itemListElement'] = [
-					'@type' => 'HowToDirection',
-					'text'  => $step['description'],
-				];
-			}
-
-			if ( ! empty( $step['image'] ) ) {
-				$entity['image'] = [
-					'@type' => 'ImageObject',
-					'text'  => wp_get_attachment_url( $step['image'] ),
-				];
-			}
-
-			$data[] = $entity;
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Get Book Editions.
-	 *
-	 * @param  array  $details       Array of details.
-	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post ID.
-	 * @param  array  $snippet       Snippet data.
-	 * @param  string $snippet_value Snippet value.
-	 * @return string
-	 */
-	private function get_howto_tools( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
-		$tools = get_post_meta( $post_id, "how-to-{$snippet['id']}-tool", true );
-		if ( empty( $tools ) ) {
-			return [];
-		}
-
-		$data = [];
-		foreach ( $tools as $tool ) {
-			$data[] = [
-				'@type' => 'HowToTool',
-				'name'  => $tool['name'],
-			];
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Get Book Editions.
-	 *
-	 * @param  array  $details       Array of details.
-	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post ID.
-	 * @param  array  $snippet       Snippet data.
-	 * @param  string $snippet_value Snippet value.
-	 * @return string
-	 */
-	private function get_howto_supplies( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
-		$supplies = get_post_meta( $post_id, "how-to-{$snippet['id']}-supply", true );
-		if ( empty( $supplies ) ) {
-			return [];
-		}
-
-		$data = [];
-		foreach ( $supplies as $supply ) {
-			$data[] = [
-				'@type' => 'HowToSupply',
-				'name'  => $supply['name'],
-			];
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Get Book Editions.
-	 *
-	 * @param  array  $details       Array of details.
-	 * @param  string $snippet_key   Snippet key.
-	 * @param  string $post_id       Post ID.
-	 * @param  array  $snippet       Snippet data.
-	 * @param  string $snippet_value Snippet value.
-	 * @return string
-	 */
 	private function get_book_editions( $details, $snippet_key, $post_id, $snippet, $snippet_value ) {
 		if ( empty( $details[ $snippet_key ] ) ) {
 			return '';
@@ -436,7 +284,6 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'snippet'       => $snippet,
 			'snippet_value' => $snippet_value,
 		];
-
 		foreach ( $details[ $snippet_key ] as $key => $edition ) {
 			$editions[] = [
 				'book_edition' => $this->normalize_edition( $key . '-book-edition', $edition['book-edition'], $data ),
@@ -522,18 +369,12 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 */
 	private function sanitize_schema_type( $type ) {
 		$hash = [
-			'job-posting'          => 'JobPosting',
-			'video-object'         => 'VideoObject',
-			'software-application' => 'SoftwareApplication',
-			'faq'                  => 'FAQPage',
-			'how-to'               => 'HowTo',
+			'job-posting'          => 'jobposting',
+			'video-object'         => 'video',
+			'software-application' => 'software',
 		];
 
-		$type = in_array( $type, [ 'AdvertiserContentArticle', 'Report', 'SatiricalArticle', 'ScholarlyArticle', 'TechArticle' ], true )
-				? 'Article'
-				: $type;
-
-		return isset( $hash[ $type ] ) ? $hash[ $type ] : ucfirst( $type );
+		return isset( $hash[ $type ] ) ? $hash[ $type ] : $type;
 	}
 
 	/**
@@ -601,50 +442,46 @@ class WP_Schema_Pro extends Plugin_Importer {
 			'software-application' => $this->get_software_fields(),
 			'video-object'         => $this->get_video_fields(),
 			'article'              => [
-				'name'        => 'headline',
-				'description' => 'description',
-				'schema-type' => 'schema-type',
+				'name'        => 'name',
+				'description' => 'desc',
+				'schema-type' => 'article_type',
 			],
 			'book'                 => [
 				'name'         => 'name',
 				'url'          => 'url',
-				'author'       => 'author.name',
+				'author'       => 'author',
 				'work-example' => 'book_editions',
 			],
 			'course'               => [
 				'name'             => 'name',
-				'description'      => 'description',
-				'orgnization-name' => 'provider.name',
-				'same-as'          => 'provider.sameAs',
-				'rating'           => 'review.reviewRating.ratingValue',
+				'description'      => 'desc',
+				'orgnization-name' => 'provider',
+				'same-as'          => 'course_provider_url',
+				'rating'           => 'course_rating',
+			],
+			'review'               => [
+				'item'        => 'name',
+				'description' => 'desc',
+				'rating'      => 'review_rating_value',
 			],
 			'person'               => [
 				'name'      => 'name',
-				'email'     => 'email',
-				'gender'    => 'gender',
-				'job-title' => 'jobTitle',
-				'street'    => 'address.streetAddress',
-				'locality'  => 'address.addressLocality',
-				'region'    => 'address.addressRegion',
-				'postal'    => 'address.postalCode',
-				'country'   => 'address.addressCountry',
+				'email'     => 'person_email',
+				'gender'    => 'person_gender',
+				'job-title' => 'person_job_title',
+				'address'   => [
+					'street'   => 'streetAddress',
+					'locality' => 'addressLocality',
+					'region'   => 'addressRegion',
+					'postal'   => 'postalCode',
+					'country'  => 'addressCountry',
+				],
 			],
 			'service'              => [
 				'name'        => 'name',
-				'description' => 'description',
-				'type'        => 'serviceType',
-				'price-range' => 'offers.price',
-			],
-			'faq'                  => [
-				'question-answer' => 'mainEntity',
-			],
-			'how-to'               => [
-				'name'        => 'name',
-				'description' => 'description',
-				'total-time'  => 'totalTime',
-				'steps'       => 'step',
-				'supply'      => 'supply',
-				'tool'        => 'tool',
+				'description' => 'desc',
+				'type'        => 'service_type',
+				'price-range' => 'price',
 			],
 		];
 	}
@@ -657,23 +494,18 @@ class WP_Schema_Pro extends Plugin_Importer {
 	private function get_event_fields() {
 		return [
 			'name'                  => 'name',
-			'description'           => 'description',
-			'schema-type'           => 'schema-type',
-			'event-status'          => 'eventStatus',
-			'event-attendance-mode' => 'eventAttendanceMode',
-			'start-date'            => 'startDate',
-			'end-date'              => 'endDate',
-			'location'              => 'location.name',
-			'location-street'       => 'location.address.streetAddress',
-			'location-locality'     => 'location.address.addressLocality',
-			'location-region'       => 'location.address.addressRegion',
-			'location-postal'       => 'location.address.postalCode',
-			'location-country'      => 'location.address.addressCountry',
-			'ticket-buy-url'        => 'offers.url',
-			'price'                 => 'offers.price',
-			'currency'              => 'offers.priceCurrency',
-			'avail'                 => 'offers.availability',
-			'performer'             => 'performer.name',
+			'description'           => 'desc',
+			'schema-type'           => 'event_type',
+			'event-status'          => 'event_status',
+			'event-attendance-mode' => 'event_attendance_mode',
+			'ticket-buy-url'        => 'event_ticketurl',
+			'location'              => 'event_venue',
+			'start-date'            => 'event_startdate',
+			'end-date'              => 'event_enddate',
+			'price'                 => 'event_price',
+			'currency'              => 'event_currency',
+			'avail'                 => 'event_availability',
+			'performer'             => 'event_performer',
 		];
 	}
 
@@ -684,22 +516,24 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 */
 	private function get_job_posting_fields() {
 		return [
-			'title'             => 'title',
-			'description'       => 'description',
-			'job-type'          => 'employmentType',
-			'start-date'        => 'datePosted',
-			'expiry-date'       => 'validThrough',
-			'orgnization-name'  => 'hiringOrganization.name',
-			'same-as'           => 'hiringOrganization.sameAs',
-			'organization-logo' => 'hiringOrganization.logo',
-			'location-street'   => 'jobLocation.address.streetAddress',
-			'location-locality' => 'jobLocation.address.addressLocality',
-			'location-region'   => 'jobLocation.address.addressRegion',
-			'location-postal'   => 'jobLocation.address.postalCode',
-			'location-country'  => 'jobLocation.address.addressCountry',
-			'salary'            => 'baseSalary.value.value',
-			'salary-currency'   => 'baseSalary.currency',
-			'salary-unit'       => 'baseSalary.value.unitText',
+			'title'             => 'name',
+			'description'       => 'desc',
+			'salary'            => 'jobposting_salary',
+			'salary-currency'   => 'jobposting_currency',
+			'salary-unit'       => 'jobposting_payroll',
+			'job-type'          => 'jobposting_employment_type',
+			'orgnization-name'  => 'jobposting_organization',
+			'same-as'           => 'jobposting_url',
+			'organization-logo' => 'jobposting_logo',
+			'start-date'        => 'jobposting_startdate',
+			'expiry-date'       => 'jobposting_expirydate',
+			'address'           => [
+				'location-street'   => 'streetAddress',
+				'location-locality' => 'addressLocality',
+				'location-region'   => 'addressRegion',
+				'location-postal'   => 'postalCode',
+				'location-country'  => 'addressCountry',
+			],
 		];
 	}
 
@@ -711,13 +545,13 @@ class WP_Schema_Pro extends Plugin_Importer {
 	private function get_product_fields() {
 		return [
 			'name'              => 'name',
-			'description'       => 'description',
-			'sku'               => 'sku',
-			'brand-name'        => 'brand.name',
-			'price'             => 'offers.price',
-			'currency'          => 'offers.priceCurrency',
-			'avail'             => 'offers.availability',
-			'price-valid-until' => 'offers.priceValidUntil',
+			'description'       => 'desc',
+			'brand-name'        => 'product_brand',
+			'price'             => 'product_price',
+			'currency'          => 'product_currency',
+			'avail'             => 'product_instock',
+			'sku'               => 'product_sku',
+			'price-valid-until' => 'price_valid',
 		];
 	}
 
@@ -729,15 +563,14 @@ class WP_Schema_Pro extends Plugin_Importer {
 	private function get_recipe_fields() {
 		return [
 			'name'             => 'name',
-			'description'      => 'description',
-			'recipe-category'  => 'recipeCategory',
-			'recipe-cuisine'   => 'recipeCuisine',
-			'recipe-yield'     => 'recipeYield',
-			'recipe-keywords'  => 'keywords',
-			'nutrition'        => 'nutrition.calories',
-			'preperation-time' => 'prepTime',
-			'cook-time'        => 'cookTime',
-			'ingredients'      => 'recipeIngredient',
+			'description'      => 'desc',
+			'recipe-category'  => 'recipe_type',
+			'recipe-cuisine'   => 'recipe_cuisine',
+			'recipe-keywords'  => 'recipe_keywords',
+			'nutrition'        => 'recipe_calories',
+			'preperation-time' => 'recipe_preptime',
+			'cook-time'        => 'recipe_cooktime',
+			'ingredients'      => 'recipe_ingredients',
 		];
 	}
 
@@ -749,11 +582,12 @@ class WP_Schema_Pro extends Plugin_Importer {
 	private function get_software_fields() {
 		return [
 			'name'             => 'name',
-			'rating'           => 'review.reviewRating.ratingValue',
-			'price'            => 'offers.price',
-			'currency'         => 'offers.priceCurrency',
-			'operating-system' => 'operatingSystem',
-			'category'         => 'applicationCategory',
+			'rating'           => 'software_rating_value',
+			'review-count'     => 'software_rating_count',
+			'price'            => 'software_price',
+			'currency'         => 'software_price_currency',
+			'operating-system' => 'software_operating_system',
+			'category'         => 'software_application_category',
 		];
 	}
 
@@ -764,11 +598,12 @@ class WP_Schema_Pro extends Plugin_Importer {
 	 */
 	private function get_video_fields() {
 		return [
-			'name'        => 'name',
-			'description' => 'description',
-			'content-url' => 'contentUrl',
-			'embed-url'   => 'embedUrl',
-			'duration'    => 'duration',
+			'name'              => 'name',
+			'description'       => 'desc',
+			'content-url'       => 'video_url',
+			'embed-url'         => 'video_embed_url',
+			'duration'          => 'video_duration',
+			'interaction-count' => 'video_views',
 		];
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * The sitemap provider for taxonomies.
+ * The Sitemap Module
  *
  * @since      0.9.0
  * @package    RankMath

@@ -1,9 +1,9 @@
 <?php
 /**
- * The Image SEO settings.
+ * The images settings.
  *
  * @package    RankMath
- * @subpackage RankMath\Image_Seo
+ * @subpackage RankMath\Settings
  */
 
 defined( 'ABSPATH' ) || exit;

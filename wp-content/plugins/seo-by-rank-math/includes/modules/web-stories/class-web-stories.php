@@ -1,6 +1,6 @@
 <?php
 /**
- * The Web Stories module.
+ * Web Stories module.
  *
  * @since      1.0.45
  * @package    RankMath
@@ -9,6 +9,7 @@
 
 namespace RankMath\Web_Stories;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -29,7 +30,7 @@ class Web_Stories {
 	}
 
 	/**
-	 * Remove all meta tags added by the Web Stories plugin.
+	 * Remove metatags added by Web Stories plugin.
 	 */
 	public function remove_web_stories_meta_tags() {
 		$instance = \Google\Web_Stories\get_plugin_instance()->discovery;

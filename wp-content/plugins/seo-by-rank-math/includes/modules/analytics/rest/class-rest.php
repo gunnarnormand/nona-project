@@ -136,11 +136,11 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Update user perferences.
+	 * Add track keyword to DB.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
-	 * @return boolean|WP_Error True on success, or WP_Error object on failure.
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function update_user_preferences( WP_REST_Request $request ) {
 		$pref = $request->get_param( 'preferences' );
@@ -161,7 +161,7 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get post data.
+	 * Get dashboard.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -176,11 +176,11 @@ class Rest extends WP_REST_Controller {
 			);
 		}
 
-		return rest_ensure_response( Stats::get()->get_post( $request ) );
+		return rest_ensure_response( Stats::get()->get_post( $id ) );
 	}
 
 	/**
-	 * Get dashboard data.
+	 * Get dashboard.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
@@ -196,7 +196,7 @@ class Rest extends WP_REST_Controller {
 	}
 
 	/**
-	 * Get analytics summary.
+	 * Get dashboard.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

@@ -1,6 +1,6 @@
 <?php
 /**
- * The stylesheet class for the sitemaps.
+ * The Sitemap Stylesheet
  *
  * @since      0.9.0
  * @package    RankMath
@@ -13,6 +13,7 @@
 
 namespace RankMath\Sitemap;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;

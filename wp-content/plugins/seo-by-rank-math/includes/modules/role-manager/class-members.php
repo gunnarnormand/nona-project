@@ -1,6 +1,6 @@
 <?php
 /**
- * Members plugin integration.
+ * Menbers plugin integration.
  *
  * @since      0.9.0
  * @package    RankMath
@@ -10,6 +10,7 @@
 
 namespace RankMath\Role_Manager;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Param;
 
@@ -41,7 +42,7 @@ class Members {
 	 * Registers cap group.
 	 */
 	public function register_cap_groups() {
-		\members_register_cap_group(
+		members_register_cap_group(
 			self::GROUP,
 			[
 				'label'    => esc_html__( 'Rank Math', 'rank-math' ),
@@ -62,7 +63,7 @@ class Members {
 		}
 
 		foreach ( $caps as $key => $value ) {
-			\members_register_cap(
+			members_register_cap(
 				$key,
 				[
 					'label' => html_entity_decode( $value ),

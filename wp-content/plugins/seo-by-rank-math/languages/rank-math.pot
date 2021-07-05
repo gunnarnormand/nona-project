@@ -29,16 +29,6 @@ msgstr ""
 msgid "Setup Wizard"
 msgstr ""
 
-#. translators: 1. Bold text 2. Bold text
-msgid "%1$s A filter to remove the Rank Math data from the database is present. Deactivating & Deleting this plugin will remove everything related to the Rank Math plugin. %2$s"
-msgstr ""
-
-msgid "CAUTION:"
-msgstr ""
-
-msgid "This action is IRREVERSIBLE."
-msgstr ""
-
 msgid "Getting Started"
 msgstr ""
 
@@ -401,7 +391,7 @@ msgstr ""
 msgid "Are you sure you want to delete this backup?"
 msgstr ""
 
-msgid "Are you sure you want erase all traces of this plugin?"
+msgid "Are you sure you want erase traces of plugin?"
 msgstr ""
 
 #. translators: Plugin name
@@ -453,18 +443,11 @@ msgstr ""
 msgid "Settings could not be imported: Upload failed."
 msgstr ""
 
-#. translators: placeholder is the post type name.
-msgid "Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a>."
-msgstr ""
-
-#. translators: placeholder is the post type names separated with commas.
-msgid "Rank Math has detected new post types: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a>."
+#. translators: post names
+msgid "We detected new post type(s) (%1$s), and you would want to check the settings of <a href=\"%2$s\">Titles &amp; Meta page</a>."
 msgstr ""
 
 msgid "Please activate the WPML String Translation plugin to convert Rank Math Setting values in different languages."
-msgstr ""
-
-msgid "<b>Rank Math Warning:</b> Changing the permalinks on a live, indexed site may result in serious loss of traffic if done incorrectly. Consider adding a new redirection from the old URL format to the new one."
 msgstr ""
 
 msgid "Links"
@@ -487,7 +470,7 @@ msgstr ""
 msgid "Learn more"
 msgstr ""
 
-msgid "Use the following code in your theme template files to display breadcrumbs."
+msgid "Use the following code in your theme template files to display breadcrumbs:"
 msgstr ""
 
 msgid "Webmaster Tools"
@@ -643,6 +626,9 @@ msgid "Keyword"
 msgstr ""
 
 msgid "Not Set"
+msgstr ""
+
+msgid "All Posts"
 msgstr ""
 
 msgid "SEO Score: Good"
@@ -1130,12 +1116,6 @@ msgstr ""
 msgid "Vietnam"
 msgstr ""
 
-msgid "WooCommerce Product"
-msgstr ""
-
-msgid "EDD Product"
-msgstr ""
-
 msgid "Robots Meta"
 msgstr ""
 
@@ -1181,9 +1161,6 @@ msgstr ""
 msgid "This is what will appear as the description when this post shows up in the search results."
 msgstr ""
 
-msgid "Trends"
-msgstr ""
-
 #. translators: Link to kb article
 msgid "Insert keywords you want to rank for. Try to <a href=\"%s\" target=\"_blank\">attain 100/100 points</a> for better chances of ranking."
 msgstr ""
@@ -1193,6 +1170,9 @@ msgid "Want more? %s version"
 msgstr ""
 
 msgid "Upgrade today to the PRO"
+msgstr ""
+
+msgid "Trends"
 msgstr ""
 
 msgid "Example: Rank Math SEO"
@@ -1907,10 +1887,6 @@ msgstr ""
 msgid "Thank you for updating Rank Math! We've completely revamped our Analytics module with Google Analytics & Google Search Console integrations. For a seamless experience, please re-authenticate your Google account. %1$sClick here to Connect%2$s"
 msgstr ""
 
-#. translators: placeholders are the opening and closing anchor tags.
-msgid "Rank Math: Introducing SEO Performance Reports via Email. %1$sClick here to enable it%2$s."
-msgstr ""
-
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: post type label, %2$s: edit redirection URL.
 #. translators: %1$s: term name, %2$s: edit redirection URL.
@@ -1951,7 +1927,7 @@ msgstr ""
 msgid "Import Redirections"
 msgstr ""
 
-msgid "Import all the redirections you have already set up in Yoast Premium."
+msgid "Import all the redirections you have already set up in."
 msgstr ""
 
 msgid "Import Blocks"
@@ -2460,7 +2436,7 @@ msgstr ""
 msgid "No valid id found."
 msgstr ""
 
-msgid "Log item successfully deleted."
+msgid "Log successfully deleted."
 msgstr ""
 
 msgid "The 404 error log is empty."
@@ -2612,7 +2588,7 @@ msgid "Cache deleted."
 msgstr ""
 
 #. translators: Link to kb article
-msgid "See your Google Search Console, Analytics and AdSense data without leaving your WP dashboard. %s."
+msgid "See your Google Search Console, Analyitcs and AdSense data without leaving your WP dashboard. %s."
 msgstr ""
 
 msgid "Purge Analytics Cache"
@@ -2636,21 +2612,6 @@ msgid "Missing some posts/pages in the Analytics data? Clear the index and build
 msgstr ""
 
 msgid "Rebuild Index"
-msgstr ""
-
-#. translators: placeholder is "rankmath.com" as a link.
-msgid "This email was sent to you as a registered member of %s."
-msgstr ""
-
-#. translators: placeholder is "click here" as a link.
-msgid "To update your email preferences, %s."
-msgstr ""
-
-msgid "click here"
-msgstr ""
-
-#. translators: placeholder is the site URL.
-msgid "Rank Math [SEO Report] - %s"
 msgstr ""
 
 msgid "Sorry, no post found for given id."
@@ -2710,7 +2671,11 @@ msgstr ""
 msgid "Redirection rules successfully deleted."
 msgstr ""
 
-msgid "Table re-creation started. It might take a couple of minutes."
+msgid "No review posts found."
+msgstr ""
+
+#. translators: Number of posts updated
+msgid "%1$d review Posts updated. You can find the list of all converted posts %2$s."
 msgstr ""
 
 msgid "No posts found to convert."
@@ -2719,10 +2684,7 @@ msgstr ""
 msgid "Conversion started. A success message will be shown here once the process completes. You can close this page."
 msgstr ""
 
-msgid "No data found to delete."
-msgstr ""
-
-msgid "Deletion started. A success message will be shown here once the process completes. You can close this page."
+msgid "Table re-creation started. It might take a couple of minutes."
 msgstr ""
 
 msgid "Flush SEO Analysis Data"
@@ -2755,10 +2717,23 @@ msgstr ""
 msgid "Re-create Missing Database Tables"
 msgstr ""
 
+#. translators: 1. Review Schema documentation link
 msgid "Check if required tables exist and create them if not."
 msgstr ""
 
 msgid "Re-create Tables"
+msgstr ""
+
+msgid "Schema Converter"
+msgstr ""
+
+msgid "If you are using v1.0.48 or higher, and if some of the Schema data from previous versions is missing, then use this tool. Please note: Use this tool only if our support staff asked you to run it."
+msgstr ""
+
+msgid "Are you sure you want to do this? This is not recommended until and unless you are facing any issues with the revamped Schema Generator."
+msgstr ""
+
+msgid "Convert Schema"
 msgstr ""
 
 msgid "Yoast Block Converter"
@@ -2797,13 +2772,18 @@ msgstr ""
 msgid "Delete Redirections"
 msgstr ""
 
-msgid "Delete Old Schema Data"
+msgid "Convert Review Schema into Article"
 msgstr ""
 
-msgid "Delete the schema data from the old format (<1.0.48). Note: This process is irreversible and will delete all the metadata prefixed with rank_math_snippet."
+#. translators: 1. Review Schema documentation link
+msgid "Before using this converter, please read our Knowledge Base Article from %s."
 msgstr ""
 
-msgid "Are you sure you want to delete the old schema data? This action is irreversible."
+#. translators: Number of posts to update
+msgid "Are you sure you want to convert %d posts with review schema into new schema type? This action is irreversible."
+msgstr ""
+
+msgid "Convert"
 msgstr ""
 
 msgid "Images"
@@ -3082,7 +3062,7 @@ msgid "Empty Trash"
 msgstr ""
 
 #. translators: 1. url to new screen, 2. old trashed post permalink
-msgid "<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect <code>%2$s</code> to <a href=\"%3$s\">a new url</a>."
+msgid "<strong>SEO Notice:</strong> A previously published %1$s has been moved to trash. You may redirect it <code>%2$s</code> to <a href=\"%3$s\">new url</a>."
 msgstr ""
 
 msgid "Edit robots.txt"
@@ -3101,8 +3081,7 @@ msgstr ""
 msgid "Contents are locked because robots.txt file is present in the root folder."
 msgstr ""
 
-#. translators: placeholder is the Settings page URL.
-msgid "<strong>Warning:</strong> your site's search engine visibility is set to Hidden in <a href=\"%1$s\" target=\"_blank\">Settings &gt; Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content."
+msgid "<strong>Warning:</strong> your site's search engine visibility is set to Hidden in <a href=\"%1$s\" target=\"_blank\">Settings > Reading</a>. This means that the changes you make here will not take effect. Set the search engine visibility to Public to be able to change the robots.txt content."
 msgstr ""
 
 msgid "Titles & Meta Settings"
@@ -3139,6 +3118,12 @@ msgid "Top Admin Bar"
 msgstr ""
 
 msgid "Schema"
+msgstr ""
+
+msgid "WooCommerce Product"
+msgstr ""
+
+msgid "EDD Product"
 msgstr ""
 
 msgid "No schema found."
@@ -3185,9 +3170,6 @@ msgstr ""
 
 #. translators: API error
 msgid "<strong>API Error:</strong> %s"
-msgstr ""
-
-msgid "Rank Math SEO Analysis error: "
 msgstr ""
 
 msgid "Rank Math auto-update option is enabled on your site."
@@ -3438,8 +3420,8 @@ msgstr ""
 msgid "Exclude this image from sitemap"
 msgstr ""
 
-#. translators: the placeholder is for the sitemap base url.
-msgid "Since you are using an NGINX server, you may need to add the following code to your %s <strong>if your Sitemap pages are not loading</strong>. If you are unsure how to do it, please contact your hosting provider."
+#. translators: sitemap base url
+msgid "Since you are using NGINX, add this code to your NGINX %s <strong>if your Sitemap pages are not loading</strong> or you can ask your hosting support to add it."
 msgstr ""
 
 msgid "configuration file"
@@ -3448,12 +3430,8 @@ msgstr ""
 msgid "Click here to see the code."
 msgstr ""
 
-#. translators: placeholder is the post type name.
-msgid "Rank Math has detected a new post type: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a> and <a href=\"%3$s\">the Sitemap</a>."
-msgstr ""
-
-#. translators: placeholder is the post type names separated with commas.
-msgid "Rank Math has detected new post types: %1$s. You may want to check the settings of the <a href=\"%2$s\">Titles &amp; Meta page</a> and <a href=\"%3$s\">the Sitemap</a>."
+#. translators: post names
+msgid "We detected new post type(s) (%1$s), and you would want to check the settings of <a href=\"%2$s\">Titles &amp; Meta page</a> and <a href=\"%3$s\">the Sitemap</a>."
 msgstr ""
 
 #. translators: 1. separator, 2. blogname
@@ -3668,10 +3646,6 @@ msgid "Enable breadcrumbs function"
 msgstr ""
 
 msgid "Turning off breadcrumbs will hide breadcrumbs inserted in template files too."
-msgstr ""
-
-#. translators: Code to add support for Rank Math Breadcrumbs.
-msgid "This option cannot be changed since your theme has added the support for Rank Math Breadcrumbs using: %s"
 msgstr ""
 
 msgid "Separator character or string that appears between breadcrumb items."
@@ -4117,8 +4091,7 @@ msgstr ""
 msgid "Date Archives"
 msgstr ""
 
-#. translators: placeholder is an example URL.
-msgid "Enable or disable the date archives (e.g: %s). If this option is disabled, the date archives will be redirected to the homepage."
+msgid "Enable or disable the date archive (_e.g: domain.com/2019/06/_). If this option is disabled, the date archives will be redirected to the homepage."
 msgstr ""
 
 msgid "Date Archive Title"
@@ -4446,7 +4419,7 @@ msgstr ""
 msgid "This plugin is compatible with your PHP version but we recommend updating to PHP 7.2 for increased speed and security."
 msgstr ""
 
-msgid "You are using the recommended WordPress version."
+msgid "You are using minimum recommended WordPress version."
 msgstr ""
 
 msgid "PHP DOM Extension installed"
@@ -4605,10 +4578,7 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-msgid "Enable Cookieless Tracking. Want to make Analytics GDPR ready? %s"
-msgstr ""
-
-msgid "Click here."
+msgid "Enable Cookieless Tracking [No Consent Required]"
 msgstr ""
 
 msgid "Self-Hosted Analytics JS File"
@@ -4621,15 +4591,6 @@ msgid "AdSense"
 msgstr ""
 
 msgid "Google AdSense support is only available in Rank Math Pro's Advanced Analytics module."
-msgstr ""
-
-msgid "Email Reports"
-msgstr ""
-
-msgid "Receive Analytics reports periodically in email."
-msgstr ""
-
-msgid "Learn more about Email Reports."
 msgstr ""
 
 #. translators: sitename
@@ -4783,30 +4744,14 @@ msgstr ""
 msgid "Cancel Fetching"
 msgstr ""
 
-#. translators: placeholder is a link to rankmath.com, with "free version" as the anchor text.
+msgid "Analytics Database"
+msgstr ""
+
+#. translators: Anchor text 'free version', linking to pricing page.
 msgid "Enter the number of days to keep Analytics data in your database. The maximum allowed days are 90 in the %s. Though, 2x data will be stored in the DB for calculating the difference properly."
 msgstr ""
 
 msgid "free version"
-msgstr ""
-
-msgid "Analytics Database"
-msgstr ""
-
-#. translators: Placeholders are the opening and closing tag for the link.
-msgid "Receive periodic SEO Performance reports via email. Once enabled and options are saved, you can see %1$s the preview here%2$s."
-msgstr ""
-
-msgid "Turn on email reports."
-msgstr ""
-
-msgid "Email Frequency"
-msgstr ""
-
-msgid "Email report frequency."
-msgstr ""
-
-msgid "Every 30 days"
 msgstr ""
 
 msgid "Group Title"
@@ -4957,7 +4902,6 @@ msgstr ""
 msgid "Latitude and longitude values separated by comma."
 msgstr ""
 
-#. translators: placeholder is a link to the Pro version
 msgid "Multiple Locations are available in the %s."
 msgstr ""
 
@@ -4983,9 +4927,6 @@ msgstr ""
 msgid "Manage This Redirection"
 msgstr ""
 
-msgid "or"
-msgstr ""
-
 msgid "Manage All Redirections"
 msgstr ""
 
@@ -5007,7 +4948,7 @@ msgstr ""
 msgid "Here you can set up custom redirections. It is important to choose the right type of redirection."
 msgstr ""
 
-msgid "301 redirections are <em>permanent</em>. The old URL will be removed in search engines and replaced by the new one, passing on SearchRank and other SEO scores. Browsers may also store the new URL in cache and redirect to it even after the redirection is deleted from the list here."
+msgid "301 redirections are <em>permananent</em>. The old URL will be removed in search engines and replaced by the new one, passing on SearchRank and other SEO scores. Browsers may also store the new URL in cache and redirect to it even after the redirection is deleted from the list here."
 msgstr ""
 
 msgid "Using a 302 <em>temporary</em> redirection is useful when you want to test a new page for client feedback temporarily without affecting the SEO scores of the original page."
@@ -5046,7 +4987,7 @@ msgstr ""
 msgid "Extend the functionality of WordPress by creating redirects in our plugin when you change the slug of a post, page, category or a CPT. You can modify the redirection further according to your needs."
 msgstr ""
 
-#. translators: %s is a Learn More link to the documentation.
+#. translators: %s is a Learn More link to the documentation
 msgid "Control which user has access to which options of Rank Math. %s"
 msgstr ""
 
@@ -5510,32 +5451,4 @@ msgid "Brand"
 msgstr ""
 
 msgid "Select Product Brand Taxonomy to use in Schema.org & OpenGraph markup."
-msgstr ""
-
-msgid "Rank Math PRO"
-msgstr ""
-
-msgid "SEO Report of Your Website"
-msgstr ""
-
-msgid "FULL REPORT"
-msgstr ""
-
-msgid "External Link Icon"
-msgstr ""
-
-#. translators: don't translate the variable names between the #hashes#.
-msgid "Last ###PERIOD_DAYS### Days"
-msgstr ""
-
-msgid "Data Chart"
-msgstr ""
-
-msgid "Top 3 Positions"
-msgstr ""
-
-msgid "4-10 Positions"
-msgstr ""
-
-msgid "11-50 Positions"
 msgstr ""

@@ -21,6 +21,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Redirections class.
+ *
+ * @codeCoverageIgnore
  */
 class Redirections {
 
@@ -71,7 +73,7 @@ class Redirections {
 			! isset( $_SERVER['REQUEST_URI'] ) ||
 			empty( $_SERVER['REQUEST_URI'] ) ||
 			$this->is_script_uri_or_http_x() ||
-			(bool) Param::get( 'elementor-preview' )
+			isset( $_GET['elementor-preview'] )
 		) {
 			return;
 		}
@@ -120,7 +122,7 @@ class Redirections {
 				'redirections-redirect-me',
 				[
 					'title' => esc_html__( '&raquo; Redirect this page', 'rank-math' ),
-					'href'  => Security::add_query_arg_raw( 'url', rawurlencode( ltrim( Param::server( 'REQUEST_URI' ), '/' ) ), Helper::get_admin_url( 'redirections' ) ),
+					'href'  => Security::add_query_arg_raw( 'url', urlencode( ltrim( Param::server( 'REQUEST_URI' ), '/' ) ), Helper::get_admin_url( 'redirections' ) ),
 					'meta'  => [ 'title' => esc_html__( 'Redirect the current URL', 'rank-math' ) ],
 				],
 				'redirections'

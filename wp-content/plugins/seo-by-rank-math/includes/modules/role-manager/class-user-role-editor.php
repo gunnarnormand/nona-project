@@ -10,6 +10,7 @@
 
 namespace RankMath\Role_Manager;
 
+use RankMath\Helper;
 use RankMath\Traits\Hooker;
 
 defined( 'ABSPATH' ) || exit;
@@ -36,7 +37,7 @@ class User_Role_Editor {
 	private $caps = [];
 
 	/**
-	 * Class constructor.
+	 * Class Members constructor.
 	 */
 	public function __construct() {
 		$this->filter( 'ure_capabilities_groups_tree', 'register_group' );

@@ -21,9 +21,9 @@ defined( 'ABSPATH' ) || exit;
 class Block {
 
 	/**
-	 * Function to certain tags from the text.
+	 * [clean_text description]
 	 *
-	 * @param string $text Block content.
+	 * @param [type] $text [description].
 	 *
 	 * @return string
 	 */
@@ -32,13 +32,13 @@ class Block {
 	}
 
 	/**
-	 * Function to get the block image.
+	 * [get_image description]
 	 *
-	 * @param array  $attrs Block attributes data.
-	 * @param string $size  Image size.
-	 * @param string $class Attachment image class.
+	 * @param array  $attrs [description].
+	 * @param string $size  [description].
+	 * @param string $class [description].
 	 *
-	 * @return string The HTML image element.
+	 * @return [type]           [description]
 	 */
 	protected function get_image( $attrs, $size = 'thumbnail', $class = 'class=alignright' ) {
 		if ( ! isset( $attrs['imageID'] ) ) {

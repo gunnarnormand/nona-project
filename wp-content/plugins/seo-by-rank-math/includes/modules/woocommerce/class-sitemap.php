@@ -1,6 +1,6 @@
 <?php
 /**
- * WooCommerce product sitemaps adjustments.
+ * The WooCommerce register sitemap.
  *
  * @since      1.0.32
  * @package    RankMath

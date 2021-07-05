@@ -42,7 +42,7 @@ $cmb->add_field(
 	]
 );
 
-if ( Helper::is_breadcrumbs_enabled() ) {
+if ( Helper::get_settings( 'general.breadcrumbs' ) ) {
 	$cmb->add_field(
 		[
 			'id'   => 'rank_math_breadcrumb_title',

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Beta Opt-in functionality.
+ * The Beta Opt-in Class.
  *
  * @package    RankMath
  * @subpackage RankMath\Version_Control
@@ -41,13 +41,6 @@ class Beta_Optin {
 	 * @var string
 	 */
 	const NOTICE_END_MARKER = '&#x25C1;';
-
-	/**
-	 * Holds the fetched trunk version in memory to avoid fetching multiple times.
-	 *
-	 * @var mixed
-	 */
-	public $trunk_version = false;
 
 	/**
 	 * Actions and filters.
@@ -170,27 +163,23 @@ class Beta_Optin {
 	 * @return string
 	 */
 	public function fetch_trunk_version() {
-		if ( false !== $this->trunk_version ) {
-			return $this->trunk_version;
-		}
-
-		$this->trunk_version = 0;
+		$version = 0;
 
 		$response = wp_remote_get( 'https://plugins.svn.wordpress.org/seo-by-rank-math/trunk/rank-math.php' );
 		if ( ! is_array( $response ) || is_wp_error( $response ) ) {
-			return $this->trunk_version;
+			return $version;
 		}
 
 		$plugin_file = wp_remote_retrieve_body( $response );
 
 		preg_match( '/Version:\s+([0-9a-zA-Z.-]+)\s*$/m', $plugin_file, $matches );
 		if ( empty( $matches[1] ) ) {
-			return $this->trunk_version;
+			return $version;
 		}
 
-		$this->trunk_version = $matches[1];
-		set_transient( 'rank_math_trunk_version', $this->trunk_version, ( 12 * HOUR_IN_SECONDS ) );
-		return $this->trunk_version;
+		$version = $matches[1];
+		set_transient( 'rank_math_trunk_version', $version, ( 12 * HOUR_IN_SECONDS ) );
+		return $version;
 	}
 
 	/**
@@ -284,7 +273,7 @@ class Beta_Optin {
 			'plugins-network',
 		];
 
-		if ( ! in_array( $screen->base, $applicable_screens, true ) ) {
+		if ( ! in_array( $screen->base, $applicable_screens ) ) {
 			return;
 		}
 

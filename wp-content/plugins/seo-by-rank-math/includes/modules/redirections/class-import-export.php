@@ -17,6 +17,8 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Import_Export class.
+ *
+ * @codeCoverageIgnore
  */
 class Import_Export {
 
@@ -24,6 +26,8 @@ class Import_Export {
 
 	/**
 	 * The hooks.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function hooks() {
 		$this->action( 'rank_math/redirections/export_tab_content', 'export_tab' );
@@ -45,16 +49,18 @@ class Import_Export {
 
 	/**
 	 * Display form.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function display_form() {
-		$tabs = $this->do_filter(
+		$tabs = $this->do_filter( 
 			'redirections/export_tabs',
 			[
 				'export' => [
 					'name'  => __( 'Export', 'rank-math' ),
 					'icon'  => 'rm-icon-export',
 					'class' => 'active-tab',
-				],
+				]
 			]
 		);
 

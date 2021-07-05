@@ -1,6 +1,6 @@
 <?php
 /**
- * The sitemap provider interface.
+ * The Sitemap Provider Interface
  *
  * @since      0.9.0
  * @package    RankMath

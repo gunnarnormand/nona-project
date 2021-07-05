@@ -12,7 +12,6 @@ namespace RankMath\Analytics;
 
 use RankMath\Helper;
 use RankMath\Google\Api;
-use RankMath\Google\Console;
 use MyThemeShop\Helpers\Str;
 use MyThemeShop\Helpers\DB as DB_Helper;
 use MyThemeShop\Database\Database;
@@ -36,7 +35,7 @@ class DB {
 	}
 
 	/**
-	 * Get console data table.
+	 * Get analytics table.
 	 *
 	 * @return \MyThemeShop\Database\Query_Builder
 	 */
@@ -59,19 +58,15 @@ class DB {
 	 * @param  int $days Decide whether to delete all or delete 90 days data.
 	 */
 	public static function delete_by_days( $days ) {
-		// Delete console data.
-		if ( Console::is_console_connected() ) {
-			if ( -1 === $days ) {
-				self::analytics()->truncate();
-			} else {
-				$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-1 days' ) );
-				$end   = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . $days . ' days' ) );
+		if ( -1 === $days ) {
+			self::analytics()->truncate();
+		} else {
+			$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-1 days' ) );
+			$end   = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . $days . ' days' ) );
 
-				self::analytics()->whereBetween( 'created', [ $end, $start ] )->delete();
-			}
+			self::analytics()->whereBetween( 'created', [ $end, $start ] )->delete();
 		}
 
-		// Delete analytics, adsense data.
 		do_action( 'rank_math/analytics/delete_by_days', $days );
 		self::purge_cache();
 
@@ -84,12 +79,10 @@ class DB {
 	public static function delete_data_log() {
 		$days = Helper::get_settings( 'general.console_caching_control', 90 );
 
-		// Delete old console data more than 2 times ago of specified number of days to keep the data.
 		$start = date_i18n( 'Y-m-d H:i:s', strtotime( '-' . ( $days * 2 ) . ' days' ) );
 
 		self::analytics()->where( 'created', '<', $start )->delete();
 
-		// Delete old analytics and adsense data.
 		do_action( 'rank_math/analytics/delete_data_log', $start );
 	}
 
@@ -166,31 +159,62 @@ class DB {
 	}
 
 	/**
-	 * Check if console data exists at specified date.
+	 * Check if a date exists in the sysyem.
 	 *
-	 * @param  string $date   Date to check data existence.
-	 * @param  string $action Action name to filter data type.
+	 * @param  string $date   Date.
+	 * @param  string $action Action.
 	 * @return boolean
 	 */
 	public static function date_exists( $date, $action = 'console' ) {
-		$table['console'] = DB_Helper::check_table_exists( 'rank_math_analytics_gsc' ) ? 'rank_math_analytics_gsc' : '';
+		$table = [
+			'console'   => 'rank_math_analytics_gsc',
+			'analytics' => 'rank_math_analytics_ga',
+		];
 
-		if ( empty( $table[ $action ] ) ) {
-			return true; // Should return true to avoid further data fetch action.
+		if ( DB_Helper::check_table_exists( 'rank_math_analytics_adsense' ) ) {
+			$table['adsense'] = 'rank_math_analytics_adsense';
 		}
 
 		$table = self::table( $table[ $action ] );
 
 		$id = $table
 			->select( 'id' )
-			->where( 'DATE(created)', $date )
+			->where( 'created', $date )
 			->getVar();
 
 		return $id > 0 ? true : false;
 	}
 
 	/**
-	 * Add a new record into objects table.
+	 * Check if a date exists in the sysyem.
+	 *
+	 * @param  string $date  Date.
+	 * @param  string $table Table name.
+	 * @return boolean
+	 */
+	public static function job_date_exists( $date, $table = 'console' ) {
+		$tables = [
+			'analytics' => 'rank_math_analytics_ga',
+			'console'   => 'rank_math_analytics_gsc',
+		];
+
+		if ( DB_Helper::check_table_exists( 'rank_math_analytics_adsense' ) ) {
+			$table['adsense'] = 'rank_math_analytics_adsense';
+		}
+
+		$table = isset( $tables[ $table ] ) ? $tables [ $table ] : $table;
+		$id    = self::table( $table );
+
+		$id = $id
+			->select( 'id' )
+			->where( 'created', $date )
+			->getVar();
+
+		return $id > 0 ? true : false;
+	}
+
+	/**
+	 * Add a new record.
 	 *
 	 * @param array $args Values to insert.
 	 *
@@ -223,7 +247,7 @@ class DB {
 	}
 
 	/**
-	 * Add/Update a record into/from objects table.
+	 * Update a record.
 	 *
 	 * @param array $args Values to update.
 	 *
@@ -234,22 +258,20 @@ class DB {
 			return false;
 		}
 
-		// If object exists, try to update.
 		$old_id = absint( $args['id'] );
 		if ( ! empty( $old_id ) ) {
 			unset( $args['id'] );
 
 			$updated = self::objects()->set( $args )
-				->where( 'id', $old_id )
-				->where( 'object_id', absint( $args['object_id'] ) )
-				->update();
+			->where( 'id', $old_id )
+			->where( 'object_id', absint( $args['object_id'] ) )
+			->update();
 
 			if ( ! empty( $updated ) ) {
 				return $old_id;
 			}
 		}
 
-		// In case of new object or failed to update, try to add.
 		return self::add_object( $args );
 	}
 
@@ -268,7 +290,7 @@ class DB {
 	}
 
 	/**
-	 * Bulk inserts records into a console table using WPDB.  All rows must contain the same keys.
+	 * Bulk inserts records into a table using WPDB.  All rows must contain the same keys.
 	 *
 	 * @param  string $date        Date.
 	 * @param  array  $rows        Rows to insert.
@@ -334,7 +356,7 @@ class DB {
 	}
 
 	/**
-	 * Remove hash part from Url.
+	 * Remove hash part.
 	 *
 	 * @param  string $url Url to process.
 	 * @return string

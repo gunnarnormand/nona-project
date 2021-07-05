@@ -1,6 +1,6 @@
 <?php
 /**
- * The Redirections module.
+ * The Redirections Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -34,6 +34,8 @@ class Admin extends Base {
 
 	/**
 	 * The Constructor.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function __construct() {
 		$directory = dirname( __FILE__ );
@@ -151,7 +153,7 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Add module settings in the General Settings panel.
+	 * Add module settings in the General Options panel.
 	 *
 	 * @param  array $tabs Array of option panel tabs.
 	 * @return array
@@ -183,7 +185,9 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Add stats in the Rank Math admin dashboard widget.
+	 * Add stats into admin dashboard.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function dashboard_widget() {
 		$data = DB::get_stats();
@@ -212,7 +216,9 @@ class Admin extends Base {
 	}
 
 	/**
-	 * Initialize module actions.
+	 * Initialize.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function init() {
 		if ( ! empty( $_REQUEST['delete_all'] ) ) {
@@ -243,6 +249,8 @@ class Admin extends Base {
 
 	/**
 	 * Handle AJAX request.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function handle_ajax() {
 		$action = WordPress::get_request_action();
@@ -270,6 +278,8 @@ class Admin extends Base {
 
 	/**
 	 * Perform action on database.
+	 *
+	 * @codeCoverageIgnore
 	 *
 	 * @param  string        $action Action to perform.
 	 * @param  integer|array $ids    Rows to perform on.

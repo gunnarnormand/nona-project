@@ -1,6 +1,6 @@
 <?php
 /**
- * On-Screen help tab: Bulk Actions.
+ * On-Screen help tab.
  *
  * @package    RankMath
  * @subpackage RankMath\Redirections

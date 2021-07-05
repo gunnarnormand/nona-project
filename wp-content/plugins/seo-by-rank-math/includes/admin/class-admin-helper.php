@@ -147,7 +147,7 @@ class Admin_Helper {
 	}
 
 	/**
-	 * Is user plan expired.
+	 * Is user plan expire.
 	 *
 	 * @return boolean
 	 */
@@ -328,11 +328,6 @@ class Admin_Helper {
 	 */
 	public static function is_home_page() {
 		$front_page = (int) get_option( 'page_on_front' );
-
-		if ( Helper::is_divi_frontend_editor() ) {
-			$p = get_post();
-			return ! empty( $p->ID ) && $p->ID === $front_page;
-		}
 
 		return $front_page && self::is_post_edit() && (int) Param::get( 'post' ) === $front_page;
 	}

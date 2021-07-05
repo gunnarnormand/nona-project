@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap settings - Authors tab.
+ * Sitemap - Authors
  *
  * @package    RankMath
  * @subpackage RankMath\Sitemap

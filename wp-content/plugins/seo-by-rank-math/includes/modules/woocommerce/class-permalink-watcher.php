@@ -1,6 +1,6 @@
 <?php
 /**
- * The product permalink watcher class.
+ * The WooCommerce Module
  *
  * @since      0.9.0
  * @package    RankMath
@@ -116,7 +116,7 @@ class Permalink_Watcher {
 	}
 
 	/**
-	 * Add rewrite rules.
+	 * Add rewrite rules for wp.
 	 *
 	 * @param array $rules The compiled array of rewrite rules.
 	 *
@@ -232,7 +232,7 @@ class Permalink_Watcher {
 	}
 
 	/**
-	 * Check if the link can be changed or not.
+	 * Can change link
 	 *
 	 * @param string $check   Check string.
 	 * @param string $against Against this.

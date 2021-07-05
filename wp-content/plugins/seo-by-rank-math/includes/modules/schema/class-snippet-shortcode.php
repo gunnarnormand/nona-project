@@ -33,7 +33,7 @@ class Snippet_Shortcode {
 		$this->add_shortcode( 'rank_math_review_snippet', 'rich_snippet' );
 
 		if ( ! is_admin() ) {
-			$this->filter( 'the_content', 'output_schema_in_content', 11 );
+			$this->filter( 'the_content', 'add_review_to_content', 11 );
 		}
 
 		if ( ! function_exists( 'register_block_type' ) ) {
@@ -69,9 +69,8 @@ class Snippet_Shortcode {
 	public function rich_snippet( $atts ) {
 		$atts = shortcode_atts(
 			[
-				'id'        => false,
-				'post_id'   => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
-				'className' => '',
+				'id'      => false,
+				'post_id' => Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID(),
 			],
 			$atts,
 			'rank_math_rich_snippet'
@@ -81,7 +80,7 @@ class Snippet_Shortcode {
 			rank_math()->variables->setup();
 		}
 
-		$data = $this->get_schema_data( $atts['id'], $atts['post_id'] );
+		$data = $this->get_data( $atts['id'], $atts['post_id'] );
 		if ( empty( $data ) || empty( $data['schema'] ) ) {
 			return esc_html__( 'No schema found.', 'rank-math' );
 		}
@@ -89,23 +88,67 @@ class Snippet_Shortcode {
 		$post    = get_post( $data['post_id'] );
 		$schemas = ! empty( $atts['id'] ) ? [ $data['schema'] ] : $data['schema'];
 
-		$html = '';
+		ob_start();
 		foreach ( $schemas as $schema ) {
 			$schema = $this->replace_variables( $schema, $post );
 			$schema = $this->do_filter( 'schema/shortcode/filter_attributes', $schema, $atts );
 
-			/**
-			 * Change the Schema HTML output.
-			 *
-			 * @param string            $unsigned HTML output.
-			 * @param array             $schema   Schema data.
-			 * @param WP_Post           $post     The post instance.
-			 * @param Snippet_Shortcode $this     Snippet_Shortcode instance.
-			 */
-			$html .= $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post, $atts ), $schema, $post, $this );
+			echo $this->do_filter( 'snippet/html', $this->get_snippet_content( $schema, $post ), $schema, $post, $this );
 		}
 
-		return $html;
+		return ob_get_clean();
+	}
+
+	/**
+	 * Get schema data.
+	 *
+	 * @param  string $schema_id Schema id.
+	 * @param  string $post_id   Shortcode id.
+	 * @return array
+	 */
+	private function get_data( $schema_id, $post_id = false ) {
+		if ( ! empty( $schema_id ) && is_string( $schema_id ) ) {
+			return DB::get_schema_by_shortcode_id( $schema_id );
+		}
+
+		if ( ! $post_id ) {
+			$post_id = Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID();
+		}
+
+		$data = DB::get_schemas( $post_id );
+		return empty( $data ) ? false : [
+			'post_id' => $post_id,
+			'schema'  => $data,
+		];
+	}
+
+	/**
+	 * Replace variable.
+	 *
+	 * @param  array   $schemas Schema to replace.
+	 * @param  WP_Post $post    Post schema attached to.
+	 * @return array
+	 */
+	private function replace_variables( $schemas, $post ) {
+		if ( ! is_array( $schemas ) && ! is_object( $schemas ) ) {
+			return [];
+		}
+
+		$new_schemas = [];
+		foreach ( $schemas as $key => $schema ) {
+			if ( 'metadata' === $key ) {
+				continue;
+			}
+
+			if ( is_array( $schema ) ) {
+				$new_schemas[ $key ] = $this->replace_variables( $schema, $post );
+				continue;
+			}
+
+			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_seo_fields( $schema, $post ) : $schema;
+		}
+
+		return $new_schemas;
 	}
 
 	/**
@@ -113,12 +156,10 @@ class Snippet_Shortcode {
 	 *
 	 * @param  array   $schema Schema to replace.
 	 * @param  WP_Post $post   Post schema attached to.
-	 * @param  array   $atts   Optional. Shortcode arguments - currently only 'show'
-	 *                     parameter, which is a comma-separated list of elements to show.
 	 *
 	 * @return string Shortcode output.
 	 */
-	public function get_snippet_content( $schema, $post, $atts ) {
+	public function get_snippet_content( $schema, $post ) {
 		wp_enqueue_style( 'rank-math-review-snippet', rank_math()->assets() . 'css/rank-math-snippet.css', null, rank_math()->version );
 
 		$type         = \strtolower( $schema['@type'] );
@@ -137,11 +178,9 @@ class Snippet_Shortcode {
 			$type = 'restaurant';
 		}
 
-		$class = ! empty( $atts['className'] ) ? $atts['className'] : '';
-
 		ob_start();
 		?>
-			<div id="rank-math-rich-snippet-wrapper" class="<?php echo esc_attr( $class ); ?>">
+			<div id="rank-math-rich-snippet-wrapper">
 
 				<?php
 				$file = rank_math()->plugin_dir() . "includes/modules/schema/shortcode/$type.php";
@@ -352,14 +391,14 @@ class Snippet_Shortcode {
 	}
 
 	/**
-	 * Add schema data in the content.
+	 * Injects reviews to content.
 	 *
 	 * @param  string $content Post content.
 	 * @return string
 	 *
 	 * @since 1.0.12
 	 */
-	public function output_schema_in_content( $content ) {
+	public function add_review_to_content( $content ) {
 		$schemas = $this->get_schemas();
 		if ( empty( $schemas ) ) {
 			return $content;
@@ -385,70 +424,6 @@ class Snippet_Shortcode {
 	}
 
 	/**
-	 * Get schema data by shortcode/post ID.
-	 *
-	 * @param  string $shortcode_id Schema shortcode ID.
-	 * @param  string $post_id      Post ID.
-	 * @return array
-	 */
-	private function get_schema_data( $shortcode_id, $post_id = false ) {
-		if ( ! empty( $shortcode_id ) && is_string( $shortcode_id ) ) {
-			return DB::get_schema_by_shortcode_id( $shortcode_id );
-		}
-
-		if ( ! $post_id ) {
-			$post_id = Param::get( 'post_id' ) ? Param::get( 'post_id' ) : get_the_ID();
-		}
-
-		$data = DB::get_schemas( $post_id );
-		return empty( $data ) ? false : [
-			'post_id' => $post_id,
-			'schema'  => $data,
-		];
-	}
-
-	/**
-	 * Function to replace variables used in Schema fields.
-	 *
-	 * @param  array   $schemas Schema to replace.
-	 * @param  WP_Post $post    Post schema attached to.
-	 * @return array
-	 */
-	private function replace_variables( $schemas, $post ) {
-		if ( ! is_array( $schemas ) && ! is_object( $schemas ) ) {
-			return [];
-		}
-
-		$new_schemas = [];
-		foreach ( $schemas as $key => $schema ) {
-			if ( 'metadata' === $key ) {
-				continue;
-			}
-
-			if ( is_array( $schema ) ) {
-				$new_schemas[ $key ] = $this->replace_variables( $schema, $post );
-				continue;
-			}
-
-			$new_schemas[ $key ] = Str::contains( '%', $schema ) ? Helper::replace_seo_fields( $schema, $post ) : $schema;
-		}
-
-		return $new_schemas;
-	}
-
-	/**
-	 * Check if we can inject the review in the content.
-	 *
-	 * @param array $schema Schema Data.
-	 *
-	 * @return boolean|string
-	 */
-	private function get_content_location( $schema ) {
-		$location = ! empty( $schema['metadata']['shortcode'] ) && isset( $schema['metadata']['reviewLocation'] ) ? $schema['metadata']['reviewLocation'] : false;
-		return $this->do_filter( 'snippet/review/location', $location );
-	}
-
-	/**
 	 * Get schema data to show in the content.
 	 *
 	 * @return boolean|array
@@ -465,7 +440,7 @@ class Snippet_Shortcode {
 			return false;
 		}
 
-		$schemas = $this->get_schema_data( false );
+		$schemas = $this->get_data( false );
 		if ( empty( $schemas ) ) {
 			return false;
 		}
@@ -476,6 +451,18 @@ class Snippet_Shortcode {
 				return ! empty( $schema['metadata']['reviewLocation'] );
 			}
 		);
+	}
+
+	/**
+	 * Check if we can inject the review in the content.
+	 *
+	 * @param array $schema Schema Data.
+	 *
+	 * @return boolean|string
+	 */
+	private function get_content_location( $schema ) {
+		$location = ! empty( $schema['metadata']['shortcode'] ) && isset( $schema['metadata']['reviewLocation'] ) ? $schema['metadata']['reviewLocation'] : false;
+		return $this->do_filter( 'snippet/review/location', $location );
 	}
 
 	/**

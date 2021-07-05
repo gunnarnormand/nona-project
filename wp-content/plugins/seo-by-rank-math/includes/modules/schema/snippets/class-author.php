@@ -11,8 +11,6 @@
 namespace RankMath\Schema;
 
 use RankMath\Helper;
-use RankMath\User;
-use RankMath\Paper\Paper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,9 +20,9 @@ defined( 'ABSPATH' ) || exit;
 class Author implements Snippet {
 
 	/**
-	 * Add Author entity in JSON-LD data.
+	 * Sets the Schema structured data for the ProfilePage.
 	 *
-	 * @link https://schema.org/Person
+	 * @link https://schema.org/ProfilePage
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld JsonLD Instance.
@@ -32,18 +30,12 @@ class Author implements Snippet {
 	 * @return array
 	 */
 	public function process( $data, $jsonld ) {
-		$is_archive_disabled = Helper::get_settings( 'titles.disable_author_archives' );
 		$author_id           = is_singular() ? $jsonld->post->post_author : get_the_author_meta( 'ID' );
-		$author_name         = get_the_author();
-		$author_url          = get_author_posts_url( $author_id );
 		$data['ProfilePage'] = [
-			'@type'       => 'Person',
-			'@id'         => $author_url,
-			'name'        => $author_name,
-			'description' => wp_strip_all_tags( stripslashes( $this->get_description( $author_id ) ), true ),
-			'url'         => $is_archive_disabled ? '' : $author_url,
+			'@type' => 'Person',
+			'@id'   => get_author_posts_url( $author_id ),
+			'name'  => get_the_author(),
 		];
-
 		$this->add_image( $data['ProfilePage'], $author_id, $jsonld );
 		$this->add_same_as( $data['ProfilePage'], $author_id );
 		$this->add_works_for( $data['ProfilePage'], $data );
@@ -58,7 +50,7 @@ class Author implements Snippet {
 	}
 
 	/**
-	 * Add sameAs property to the Person entity.
+	 * Sets the Schema structured data for the ProfilePage.
 	 *
 	 * @param array $entity    Author schema data.
 	 * @param int   $author_id Author ID.
@@ -82,7 +74,7 @@ class Author implements Snippet {
 	}
 
 	/**
-	 * Add image property to the Person entity.
+	 * Add image to Person entity.
 	 *
 	 * @param array  $entity    Author schema data.
 	 * @param int    $author_id Author ID.
@@ -91,7 +83,6 @@ class Author implements Snippet {
 	private function add_image( &$entity, $author_id, $jsonld ) {
 		$entity['image'] = [
 			'@type'   => 'ImageObject',
-			'@id'     => get_avatar_url( $author_id ),
 			'url'     => get_avatar_url( $author_id ),
 			'caption' => get_the_author(),
 		];
@@ -100,7 +91,7 @@ class Author implements Snippet {
 	}
 
 	/**
-	 * Add worksFor property referencing it to the publisher entity.
+	 * Add worksFor property.
 	 *
 	 * @param array $entity Author schema data.
 	 * @param array $data   Schema Data.
@@ -114,15 +105,5 @@ class Author implements Snippet {
 		}
 
 		$entity['worksFor'] = [ '@id' => $data['publisher']['@id'] ];
-	}
-
-	/**
-	 * Get author description.
-	 *
-	 * @param int $author_id Author ID.
-	 */
-	private function get_description( $author_id ) {
-		$description = User::get_meta( 'description', $author_id );
-		return $description ? $description : Paper::get_from_options( 'author_archive_description' );
 	}
 }

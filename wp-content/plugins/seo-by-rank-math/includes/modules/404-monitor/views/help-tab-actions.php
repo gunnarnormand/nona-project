@@ -1,6 +1,6 @@
 <?php
 /**
- * 404 Monitor inline help: "Available Actions" tab.
+ * 404 Monitor inline help.
  *
  * @package    RankMath
  * @subpackage RankMath\Monitor

@@ -1,10 +1,10 @@
 <?php
 /**
- * The admin-side functionality of the Image SEO module.
+ * Image SEO module admin.
  *
  * @since      1.0
  * @package    RankMath
- * @subpackage RankMath\Image_Seo
+ * @subpackage RankMath\Admin
  * @author     Rank Math <support@rankmath.com>
  */
 
@@ -15,6 +15,7 @@ use RankMath\Traits\Hooker;
 use MyThemeShop\Helpers\Arr;
 
 defined( 'ABSPATH' ) || exit;
+
 
 /**
  * Admin class.

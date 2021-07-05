@@ -24,6 +24,7 @@ use MyThemeShop\Helpers\Param;
 use RankMath\Analytics\Workflow\Jobs;
 use RankMath\Analytics\Workflow\OAuth;
 use RankMath\Analytics\Workflow\Workflow;
+use RankMath\Schema\Admin as SchemaHelper;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -141,10 +142,11 @@ class Analytics extends Base {
 	}
 
 	/**
-	 * Add stats widget into admin dashboard.
+	 * Add stats into admin dashboard.
+	 *
+	 * @codeCoverageIgnore
 	 */
 	public function dashboard_widget() {
-		// Get stats info within last 30 days.
 		Stats::get()->set_date_range( '-30 days' );
 		$data                   = Stats::get()->get_widget();
 		$analytics              = get_option( 'rank_math_google_analytic_options' );
@@ -247,7 +249,6 @@ class Analytics extends Base {
 			$action         = current( $actions );
 			$schedule       = $action->get_schedule();
 			$next_timestamp = $schedule->get_date()->getTimestamp();
-			// phpcs:disable
 			$notification   = new \MyThemeShop\Notification(
 				/* translators: delete counter */
 				sprintf(
@@ -264,7 +265,7 @@ class Analytics extends Base {
 				]
 			);
 
-			echo $notification;
+			echo $notification; // phpcs:ignore
 		}
 	}
 
@@ -477,6 +478,16 @@ class Analytics extends Base {
 		Helper::add_json( 'lastUpdated', $updated );
 
 		Helper::add_json( 'singleImage', rank_math()->plugin_url() . 'includes/modules/analytics/assets/img/single-post-report.jpg' );
+
+		// Global Schema.
+		$post_types     = Helper::get_accessible_post_types();
+		$global_schemas = [];
+		foreach ( $post_types as $post_type ) {
+			$global_schemas[ $post_type ] = SchemaHelper::sanitize_schema_title(
+				Helper::get_default_schema_type( $post_type )
+			);
+		}
+		Helper::add_json( 'globalSchemaTypes', array_filter( $global_schemas ) );
 	}
 
 	/**
@@ -532,7 +543,7 @@ class Analytics extends Base {
 					'icon'  => 'rm-icon rm-icon-search-console',
 					'title' => esc_html__( 'Analytics', 'rank-math' ),
 					/* translators: Link to kb article */
-					'desc'  => sprintf( esc_html__( 'See your Google Search Console, Analytics and AdSense data without leaving your WP dashboard. %s.', 'rank-math' ), '<a href="' . KB::get( 'analytics-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
+					'desc'  => sprintf( esc_html__( 'See your Google Search Console, Analyitcs and AdSense data without leaving your WP dashboard. %s.', 'rank-math' ), '<a href="' . KB::get( 'analytics-settings' ) . '" target="_blank">' . esc_html__( 'Learn more', 'rank-math' ) . '</a>' ),
 					'file'  => $this->directory . '/views/options.php',
 				],
 			],

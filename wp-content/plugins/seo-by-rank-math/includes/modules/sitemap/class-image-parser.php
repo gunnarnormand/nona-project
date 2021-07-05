@@ -105,10 +105,6 @@ class Image_Parser {
 	 * @return array
 	 */
 	public function get_images( $post ) {
-		if ( ! Helper::get_settings( 'sitemap.include_images' ) ) {
-			return false;
-		}
-
 		$this->post = $post;
 		if ( ! is_object( $this->post ) ) {
 			return $this->images;
@@ -142,11 +138,8 @@ class Image_Parser {
 	 * @return array
 	 */
 	public function get_term_images( $term ) {
-		if ( ! Helper::get_settings( 'sitemap.include_images' ) ) {
-			return false;
-		}
-
 		$images = $this->parse_html_images( $term->description );
+
 		foreach ( $this->parse_galleries( $term->description ) as $attachment ) {
 			$images[] = [
 				'src'   => $this->get_absolute_url( $this->image_url( $attachment->ID ) ),

@@ -1,6 +1,6 @@
 <?php
 /**
- * The WooCommerce module's product redirection features.
+ * The WooCommerce Module
  *
  * @since      1.0.32
  * @package    RankMath
@@ -61,7 +61,7 @@ class Product_Redirection {
 		global $wp;
 
 		if ( $link = $this->get_redirection_url( $wp->request ) ) { // phpcs:ignore
-			wp_safe_redirect( $link, 301 );
+			wp_redirect( $link, 301 );
 			exit;
 		}
 	}
@@ -103,8 +103,7 @@ class Product_Redirection {
 			$new_link = preg_replace( "#{$remove}/#i", '', $new_link, 1 );
 		}
 
-		$new_link = implode( '/', array_map( 'rawurlencode', explode( '/', $new_link ) ) ); // encode everything but slashes.
-		return $new_link === $uri ? false : trailingslashit( home_url( strtolower( $new_link ) ) );
+		return $new_link === $uri ? false : trailingslashit( home_url( $new_link ) );
 	}
 
 	/**
@@ -117,7 +116,7 @@ class Product_Redirection {
 
 		if (
 			$this->do_filter( 'woocommerce/product_redirection', true ) &&
-			! isset( $_GET['elementor-preview'] ) && // phpcs:ignore
+			! isset( $_GET['elementor-preview'] ) &&
 			! isset( $wp_query->query_vars['schema-preview'] ) &&
 			( ( Helper::get_settings( 'general.wc_remove_product_base' ) && is_product() ) ||
 			( Helper::get_settings( 'general.wc_remove_category_base' ) && is_product_category() ) )

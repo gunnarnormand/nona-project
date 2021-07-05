@@ -1,6 +1,6 @@
 <?php
 /**
- * Sitemap date format class.
+ * Date format class
  *
  * @since      0.9.0
  * @package    RankMath
@@ -20,7 +20,7 @@ use DateTimeZone;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Timezone.
+ * Timezone
  */
 class Timezone {
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * The Schema Interface
+ * The Snippet Interface
  *
  * @since      1.0.13
  * @package    RankMath
@@ -13,12 +13,12 @@ namespace RankMath\Schema;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Schema interface.
+ * Snippet interface.
  */
 interface Snippet {
 
 	/**
-	 * Process schema data
+	 * Process snippet data
 	 *
 	 * @param array  $data   Array of JSON-LD data.
 	 * @param JsonLD $jsonld Instance of JsonLD.
