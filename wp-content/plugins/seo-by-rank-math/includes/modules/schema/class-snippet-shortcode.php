@@ -360,10 +360,6 @@ class Snippet_Shortcode {
 	 * @since 1.0.12
 	 */
 	public function output_schema_in_content( $content ) {
-		if ( ! is_singular() ) {
-			return $content;
-		}
-
 		$schemas = $this->get_schemas();
 		if ( empty( $schemas ) ) {
 			return $content;

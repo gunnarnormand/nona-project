@@ -173,7 +173,7 @@ class Post_Filters implements Runner {
 			'noindexed' => esc_html__( 'Articles noindexed', 'rank-math' ),
 		];
 
-		$options  = $this->do_filter( 'manage_posts/seo_filter_options', $options, $post_type );
+		$options = $this->do_filter( 'manage_posts/seo_filter_options', $options, $post_type );
 		$selected = Param::get( 'seo-filter' );
 		?>
 		<select name="seo-filter" id="rank-math-seo-filter">
@@ -279,16 +279,9 @@ class Post_Filters implements Runner {
 		if ( in_array( $filter, $seo_score_filters, true ) ) {
 			$query['relation'] = 'AND';
 			$query[]           = [
-				'relation' => 'OR',
-				[
-					'key'     => 'rank_math_robots',
-					'value'   => 'noindex',
-					'compare' => 'NOT LIKE',
-				],
-				[
-					'key'     => 'rank_math_robots',
-					'compare' => 'NOT EXISTS',
-				],
+				'key'     => 'rank_math_robots',
+				'value'   => 'noindex',
+				'compare' => 'NOT LIKE',
 			];
 			$query[]           = [
 				'key'     => 'rank_math_focus_keyword',

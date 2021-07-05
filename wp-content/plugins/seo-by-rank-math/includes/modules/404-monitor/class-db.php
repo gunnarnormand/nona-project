@@ -81,6 +81,7 @@ class DB {
 				'uri'            => '',
 				'accessed'       => current_time( 'mysql' ),
 				'times_accessed' => '1',
+				'ip'             => '',
 				'referer'        => '',
 				'user_agent'     => '',
 			]

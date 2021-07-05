@@ -54,7 +54,7 @@ $cmb->add_field(
 		'dep'        => $dep,
 		'attributes' => [
 			'class'                  => 'cmb2-textarea-small wp-exclude-emoji',
-			'data-gramm'             => 'false',
+			'data-gramm_editor'      => 'false',
 			'rows'                   => 2,
 			'data-exclude-variables' => 'seo_title,seo_description',
 		],

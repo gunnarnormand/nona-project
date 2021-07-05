@@ -107,6 +107,7 @@ class Monitor {
 		DB::add(
 			[
 				'uri'        => $uri,
+				'ip'         => Param::server( 'REMOTE_ADDR', '' ),
 				'referer'    => Param::server( 'HTTP_REFERER', '' ),
 				'user_agent' => $this->get_user_agent(),
 			]
