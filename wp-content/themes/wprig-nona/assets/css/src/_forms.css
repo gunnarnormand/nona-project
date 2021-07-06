@@ -73,6 +73,7 @@ textarea:focus {
 }
 
 select {
+	max-width: 100%;
 	display: block;
 	position: relative;
 	appearance: none;
@@ -287,6 +288,12 @@ ul.gfield_radio,
 	font-size: 1.5rem;
 	line-height: 1.4;
 	margin-bottom: 0.25rem;
+}
+
+.ginput_complex label {
+	line-height: 1.4;
+	margin: 1rem 0 0.25rem 0;
+	display: block;
 }
 
 .gform_footer input[type="submit"] {
